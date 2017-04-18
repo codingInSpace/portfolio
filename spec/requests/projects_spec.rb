@@ -50,6 +50,54 @@ RSpec.describe 'Portfolio API Projects', type: :request do
     end
   end
 
+  # Test POST /projects
+  describe 'POST /projects' do
+    # valid payload
+    let(:valid_attributes) { { title: 'Machine Learning app', short_desc: 'A great app for ML' } }
+
+    context 'when the request is valid' do
+      before { post '/projects', params: valid_attributes }
+
+      it 'creates a project' do
+        expect(json['title']).to eq('Machine Learning app')
+      end
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/projects', params: { title: 'Foobar' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: short desc can't be blank/)
+      end
+    end
+  end
+
+  # Test PUT /projects/:id
+  describe 'PUT /projects/:id' do
+    let(:valid_attributes) { { title: 'Flid sim project' } }
+
+    context 'when the record exists' do
+      before { put "/projects/#{project_id}", params: valid_attributes }
+
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+  end
+
 	# Test DELETE /projects/:id
   describe 'DELETE /projects/:id' do
     before { delete "/projects/#{project_id}" }
