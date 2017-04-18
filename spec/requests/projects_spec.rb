@@ -76,7 +76,7 @@ RSpec.describe 'Portfolio API Projects', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: short desc can't be blank/)
+          .to match(/Validation failed: Short desc can't be blank/)
       end
     end
   end
