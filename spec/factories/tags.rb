@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :tags do
+  factory :tag do
     label { Faker::Lorem.word }
   end
 end
