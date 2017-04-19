@@ -1,5 +1,22 @@
 # Portfolio
 
+## Rails Environment
+Ruby 2.4.0   
+Rails 5.0.2  
+
+## Usage
+
+### Run api
+```bash
+rails db:migrate
+rails s
+```
+
+### Run api test suite
+```bash
+bundle exec rspec
+```
+
 ## Functional specification
 A portfolio application, that serves as a personal page and a platform to showcase a person's projects. A user can be authenticated and manage projects in a CMS section. A project item consists of an image, description, relevant links, tags etc. Blog/news posts may be added to fill out more content.
 
@@ -12,7 +29,3 @@ A portfolio application, that serves as a personal page and a platform to showca
 
 *Deployment*: Heroku
 
-## Local Environment
-Ruby 2.4.0   
-Rails 5.0.2  
-Yarn 0.21.3  
