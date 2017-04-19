@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418150253) do
-
-  create_table "project_tags", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20170419085712) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -33,9 +26,10 @@ ActiveRecord::Schema.define(version: 20170418150253) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "label"
-    t.string   "hexcolor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_tags_on_project_id"
   end
 
 end

@@ -83,7 +83,7 @@ RSpec.describe 'Portfolio API Projects', type: :request do
 
   # Test PUT /projects/:id
   describe 'PUT /projects/:id' do
-    let(:valid_attributes) { { title: 'Flid sim project' } }
+    let(:valid_attributes) { { title: 'Fluid sim project' } }
 
     context 'when the record exists' do
       before { put "/projects/#{project_id}", params: valid_attributes }

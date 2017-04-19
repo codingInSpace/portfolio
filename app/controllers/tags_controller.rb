@@ -14,8 +14,8 @@ class TagsController < ApplicationController
 
 	# POST /projects/:project_id/tags
 	def create
-		#@project.tags.create!(tag_params)
-    #json_response(@project, :created)
+		@project.tags.create!(tag_params)
+    json_response(@project, :created)
 	end
 
 	# PUT /projects/:project_id/tags/:id
@@ -32,13 +32,8 @@ class TagsController < ApplicationController
 
   private
 
-	def item_params
-    params.permit(:label, :hexcolor)
-	end
-
-	# Get projects that include this tag
-	def get_including_projects
-		@jointable = ProjectTag.find(tag_id: params[:id])
+	def tag_params
+    params.permit(:label)
 	end
 
 	def set_project
