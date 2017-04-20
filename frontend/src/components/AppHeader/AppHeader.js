@@ -10,9 +10,12 @@ import Box from 'grommet/components/Box'
 const AppHeader = (props) => (
 	<Header size="medium"
 					fixed={true}
+					colorIndex="neutral-2"
 					justify="between"
 					pad={{horizontal: 'medium', vertical: 'none'}}>
-		<Title>Jonathan</Title>
+			<Title>
+				<Anchor path="/" label="JG"/>
+			</Title>
 		<Box pad={{horizontal: 'small', vertical: 'none'}}>
 			<Menu inline={true}
 						responsive={true}

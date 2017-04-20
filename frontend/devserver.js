@@ -1,9 +1,13 @@
 import express from 'express'
 import { Server } from 'http'
+import path from 'path'
 import webpack from 'webpack'
-import WebpackHotMiddleware from 'webpack-hot-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import cors from 'cors'
 
 const app = express()
+app.use(cors())
 
 const developing = process.env.NODE_ENV !== 'production'
 const port =  process.env.PORT || 8080
@@ -11,12 +15,21 @@ const port =  process.env.PORT || 8080
 const config = require('./webpack.config.dev.js')
 const compiler = webpack(config)
 
-app.use(require("webpack-dev-middleware")(compiler, {
-	noInfo: true, publicPath: config.output.publicPath
+app.use(webpackDevMiddleware(compiler, {
+	lazy: false,
+	noInfo: true, 
+	publicPath: config.output.publicPath,
+	stats: {colors: true}
 }))
 
-app.use(require("webpack-hot-middleware")(compiler, {
-	log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
+// static files
+app.use(express.static(__dirname + "/public/"))
+console.log(__dirname + "/public/")
+
+app.use(webpackHotMiddleware(compiler, {
+	log: console.log, 
+	path: '/__webpack_hmr', 
+	heartbeat: 10 * 1000
 }))
 
 app.get("*", function(req, res) {

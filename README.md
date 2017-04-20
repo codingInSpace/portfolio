@@ -6,6 +6,12 @@ Rails 5.0.2
 
 ## Usage
 
+### Develop frontend
+```bash
+cd frontend  
+yarn start
+```
+
 ### Run api
 ```bash
 rails db:migrate
