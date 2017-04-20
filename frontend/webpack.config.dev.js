@@ -24,8 +24,9 @@ module.exports = {
 	devtool: 'source-map',
 	entry: [
     'react-hot-loader/patch',
-		'webpack-dev-server/client?http://localhost:1337',
-		'webpack/hot/dev-server',
+	//	'webpack-dev-server/client?http://localhost:1337',
+	//	'webpack/hot/dev-server',
+		'webpack-hot-middleware/client',
     'babel-polyfill',
 		path.resolve(ROOT_PATH, 'src/index')
 	],

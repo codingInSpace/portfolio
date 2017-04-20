@@ -13,13 +13,13 @@ ReactDOM.render(
   document.getElementById('app')
 );
 
-//if (module.hot) {
-//  module.hot.accept('./routes', () => {
-//    ReactDOM.render(
-//      <AppContainer>
-//				<AppComponent/>
-//      </AppContainer>,
-//      document.getElementById('app')
-//    );
-//  });
-//}
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    ReactDOM.render(
+      <AppContainer>
+				<AppComponent/>
+      </AppContainer>,
+      document.getElementById('app')
+    );
+  });
+}
