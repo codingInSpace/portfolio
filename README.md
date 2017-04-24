@@ -3,16 +3,29 @@
 ## Rails Environment
 Ruby 2.4.0   
 Rails 5.0.2  
+postgresql 9.6.1-3  
 
-## Usage
+## Usage and development
 
-### Develop frontend
+### Setup PosgresQL
+Following the details in database.yml  
+```bash
+# psql
+CREATE DATABASE portfolio_development;  
+CREATE DATABASE portfolio_test;   
+CREATE USER portfolio;  
+ALTER USER portfolio WITH PASSWORD 'hacking-nasa123';  
+ALTER DATABASE portfolio_development OWNER TO portfolio;  
+ALTER DATABASE portfolio_test OWNER TO portfolio;   
+```
+
+### Develop frontend separately
 ```bash
 cd frontend  
 yarn start
 ```
 
-### Run api
+### Run api separately
 ```bash
 rails db:migrate
 rails s
