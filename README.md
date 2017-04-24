@@ -22,6 +22,7 @@ ALTER DATABASE portfolio_test OWNER TO portfolio;
 ### Develop frontend separately
 ```bash
 cd frontend  
+cp .env.example .env # and make any changes  
 yarn start
 ```
 
