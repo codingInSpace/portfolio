@@ -8,8 +8,8 @@ const AppFooter = (props) => (
 	<Footer size="medium"
 					justify="between"
 					align="end"
-					pad={{horizontal: 'medium', vertical: 'none'}}>
-		<Box>jonathan.grangien [at] gmail.com</Box>
+					pad={{horizontal: 'medium', vertical: 'small'}}>
+		<Box>jonathan.grangien@gmail.com</Box>
 	</Footer>
 )
 

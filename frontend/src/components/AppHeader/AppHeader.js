@@ -22,7 +22,6 @@ const AppHeader = (props) => (
 						direction="row">
 				<Anchor path="/" label="ABOUT"/>
 				<Anchor path="/projects" label="PROJECTS"/>
-				<Anchor path="/contact" label="CONTACT"/>
 			</Menu>
 		</Box>
 	</Header>

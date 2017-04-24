@@ -24,7 +24,6 @@ const AppComponent = (props) => (
 				<Switch>
 					<Route exact path="/" component={About}/>
 					<Route path="/projects" component={Portfolio}/>
-					<Route path="/contact" component={Contact}/>
 				</Switch>
 			</div>
 			<AppFooter/>
