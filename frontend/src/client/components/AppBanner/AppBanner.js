@@ -23,14 +23,14 @@ const AppBanner = (props) => {
                  caption={primary || 'Jonathan Grangien'}
                  alt="jonathan" />
 				</div>
-					) : (
-						<Box pad={large ? 'large' : 'medium'}>
-							<Headline>{primary}</Headline>
-						</Box>
-					) }
+      ) : (
+        <Box pad={large ? 'large' : 'medium'}>
+          <Headline>{primary}</Headline>
+        </Box>
+      ) }
 			<Box pad={large ? 'large' : 'medium'}>
 				{ secondary.map(text => (
-					<div key={text.length().toString()}><Label margin="none">{text}</Label><br /></div>
+					<div key={text.length.toString()}><Label margin="none">{text}</Label><br /></div>
         )) }
 			</Box>
 		</Box>
