@@ -4,6 +4,14 @@
     "import/resolver": "webpack"
   },
   "rules": {
-
+  	"import/no-unresolved": 1,
+  	"import/extensions": 1,
+		"semi": 0,
+		"no-tabs": 0,
+		"react/jsx-filename-extension": 0,
+		'react/jsx-closing-bracket-location': [1, {selfClosing: 'after-props', nonEmpty: 'after-props'}],
+		"react/jsx-first-prop-new-line": 0,
+		"react/jsx-indent": [2, 'tab'],
+		"react/jsx-indent-props": 0
   }
 }
