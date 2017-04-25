@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development env-cmd .env node_modules/.bin/babel-node --presets 'react,es2015,stage-0' devserver.js"
+    "start": "cross-env NODE_ENV=development env-cmd .env node_modules/.bin/babel-node --presets 'react,es2015,stage-0' devserver.js",
+    "eslint": "./node_modules/.bin/eslint src/**",
+    "eslint:fix": "./node_modules/.bin/eslint --fix src/** "
   },
   "author": "Jonathan Grangien <jonathan.grangien@gmail.com>",
   "license": "ISC",
@@ -45,6 +47,12 @@
   },
   "devDependencies": {
     "env-cmd": "^5.1.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "express": "^4.15.2"
   }
 }
