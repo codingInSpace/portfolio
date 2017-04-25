@@ -8,13 +8,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styles from './app.module.scss';
 import cssModules from 'react-css-modules';
 
-import Message from './Message'
-import AppHeader from './components/AppHeader'
-import AppFooter from './components/AppFooter'
+import AppHeader from './shared/components/AppHeader'
+import AppFooter from './shared/components/AppFooter'
 
-import About from './components/About'
-import Portfolio from './components/Portfolio'
-import Contact from './components/Contact'
+import About from './client/components/About'
+import Portfolio from './client/components/Portfolio'
+import Contact from './client/components/Contact'
 
 const AppComponent = (props) => (
 	<BrowserRouter>
