@@ -6,21 +6,21 @@ import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 import Box from 'grommet/components/Box'
 
-const AppHeader = (props) => (
+const AppHeader = () => (
 	<Header size="medium"
-					fixed={true}
+					fixed
 					colorIndex="neutral-2"
 					justify="between"
-					pad={{horizontal: 'medium', vertical: 'none'}}>
-			<Title>
-				<Anchor path="/" label="JG"/>
-			</Title>
-		<Box pad={{horizontal: 'small', vertical: 'none'}}>
-			<Menu inline={true}
-						responsive={true}
+					pad={{ horizontal: 'medium', vertical: 'none' }}>
+		<Title>
+			<Anchor path="/" label="JG" />
+		</Title>
+		<Box pad={{ horizontal: 'small', vertical: 'none' }}>
+			<Menu inline
+						responsive
 						direction="row">
-				<Anchor path="/" label="ABOUT"/>
-				<Anchor path="/projects" label="PROJECTS"/>
+				<Anchor path="/" label="ABOUT" />
+				<Anchor path="/projects" label="PROJECTS" />
 			</Menu>
 		</Box>
 	</Header>

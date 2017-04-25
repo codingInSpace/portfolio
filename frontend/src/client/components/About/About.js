@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Box from 'grommet/components/Box'
 import Paragraph from 'grommet/components/Paragraph'
@@ -9,20 +8,20 @@ import Anchor from 'grommet/components/Anchor'
 import LinkNext from 'grommet/components/icons/base/LinkNext'
 
 import AppBanner from '../AppBanner'
-import * as text from './text'
+import descMain from './text'
 
-const About = props => (
+const About = () => (
 	<div>
-		<AppBanner large={true}/>
+		<AppBanner large />
 		<Box pad="large" align="center" textAlign="center">
-			<Paragraph size="large">{text.descMain}</Paragraph>
+			<Paragraph size="large">{descMain}</Paragraph>
 		</Box>
 		<Box pad="large" align="center">
 			<Heading tag="h2" margin="none">Recent Work</Heading>
 			<Box pad="small">
-				<Anchor icon={<LinkNext/>}
-								label='Projects'
-								path='/projects'/>
+				<Anchor icon={<LinkNext />}
+								label="Projects"
+								path="/projects" />
 			</Box>
 		</Box>
 		<Box pad="large" align="center" textAlign="center">
