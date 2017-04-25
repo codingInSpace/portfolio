@@ -1,57 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Header from 'grommet/components/Header'
-import Title from 'grommet/components/Title'
-import Menu from 'grommet/components/Menu'
-import Anchor from 'grommet/components/Anchor'
 import Box from 'grommet/components/Box'
 import Image from 'grommet/components/Image'
 import Label from 'grommet/components/Label'
 import Headline from 'grommet/components/Headline'
 
-import styles from './index.module.scss';
-import cssModules from 'react-css-modules';
+import cssModules from 'react-css-modules'
+import styles from './index.module.scss'
 
-class AppBanner extends React.Component {
-	static propTypes = {
-		primary: PropTypes.string,
-		secondary: PropTypes.array,
-		large: PropTypes.bool,
-	}
-
-	render() {
-		let { primary, secondary, large } = this.props
-
-		primary = primary || 'Jonathan Grangien'
-		secondary = secondary || ['Developer', 'Web fullstack-er', 'Comp graphics enthusiast', 'MSc engineering student']
-
-		return (
-			<Box pad={large ? "large" : "small"}
-					colorIndex="neutral-2"
-					align="center">
-					<Box direction="row" align="center" pad={{horizontal: "large", vertical: "none"}}>
-					{ large ? (
-						<div className={styles.image}>
-							<Image src="assets/jonathan1.jpg" 
-										size="small" 
-										caption={primary || 'Jonathan Grangien'} 
-										alt="jonathan"/>
-						</div>
+const AppBanner = (props) => {
+  const { primary, secondary, large } = props
+  return (
+	<Box pad={large ? 'large' : 'small'}
+       colorIndex="neutral-2"
+       align="center">
+		<Box direction="row" align="center" pad={{ horizontal: 'large', vertical: 'none' }}>
+			{ large ? (
+				<div className={styles.image}>
+					<Image src="assets/jonathan1.jpg"
+                 size="small"
+                 caption={primary || 'Jonathan Grangien'}
+                 alt="jonathan" />
+				</div>
 					) : (
-						<Box pad={large ? "large" : "medium"}>
+						<Box pad={large ? 'large' : 'medium'}>
 							<Headline>{primary}</Headline>
 						</Box>
 					) }
-					<Box pad={large ? "large" : "medium"}>
-					{ secondary.map((text, i) => (
-						<div key={i}><Label margin="none">{text}</Label><br/></div>
-					 )) }
-					</Box>
-				</Box>
+			<Box pad={large ? 'large' : 'medium'}>
+				{ secondary.map(text => (
+					<div key={text.length().toString()}><Label margin="none">{text}</Label><br /></div>
+        )) }
 			</Box>
-		)
-	}
+		</Box>
+	</Box>
+  )
+}
+
+AppBanner.propTypes = {
+  primary: PropTypes.string,
+  secondary: PropTypes.arrayOf(PropTypes.string),
+  large: PropTypes.bool,
+}
+
+AppBanner.defaultProps = {
+  primary: 'Jonathan Grangien',
+  secondary: ['Developer', 'Web fullstack-er', 'Comp graphics enthusiast', 'MSc engineering student'],
+  large: false,
 }
 
 export default cssModules(AppBanner, styles)
