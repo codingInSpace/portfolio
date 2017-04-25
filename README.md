@@ -26,6 +26,16 @@ cp .env.example .env # and make any changes
 yarn start
 ```
 
+run eslint
+```bash
+yarn eslint
+```
+
+run eslint and fix fixable issues
+```bash
+yarn eslint:fix
+```
+
 ### Run api separately
 ```bash
 rails db:migrate
