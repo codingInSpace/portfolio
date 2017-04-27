@@ -1,5 +1,6 @@
 import * as actions from './actions'
 import axios from 'axios'
+import { normalize, schema } from 'normalizr'
 
 export function getAllProjects() {
   return (dispatch) => {
@@ -10,9 +11,21 @@ export function getAllProjects() {
       axios.get(url)
         .then(response => {
           const { data } = response
+
+          //const project = new schema.Entity('projects');
+          //tags...
+          //const normalizedData = normalize(data, project)
+
+          const results = {}
+
+          for (let i in data) {
+            const { id } = data[i]
+            results[id] = data[i]
+          }
+
           dispatch({
             type: actions.RECEIVE_ALL_PROJECTS,
-            payload: data
+            payload: results
           })
         })
     } catch(e) {

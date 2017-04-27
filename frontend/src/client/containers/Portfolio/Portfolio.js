@@ -28,8 +28,8 @@ class Portfolio extends React.Component {
 		<Box pad="medium" align="center" textAlign="center">
 			<Heading tag="h1" margin="none">Projects</Heading>
 		</Box>
-		{ projects.length > 0 ?
-					projects.map(project => (
+		{ Object.values(projects).length > 0 ?
+					Object.values(projects).map(project => (
 						<Box key={project.id} pad="small">
 							<Heading tag="h3" margin="none">{project.title}</Heading>
 							<Label margin="none">{project.short_desc}</Label>
