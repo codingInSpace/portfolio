@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { adminHeaderActions } from '../containers/AppHeader'
 
 const setAdminColor = (BaseComponent, status) => {
 	class ComponentInColoredView extends React.Component {
@@ -20,8 +21,8 @@ const setAdminColor = (BaseComponent, status) => {
 	}
 
 	const mapDispatch = dispatch => ({
-		setAdminView: () => dispatch({type: 'SET_ADMIN_HEADER_COLOR'}),
-		setNormalView: () => dispatch({type: 'SET_NORMAL_HEADER_COLOR'}),
+		setAdminView: () => dispatch({type: adminHeaderActions.SET_ADMIN_HEADER_COLOR}),
+		setNormalView: () => dispatch({type: adminHeaderActions.SET_NORMAL_HEADER_COLOR}),
 	})
 
 	return connect(null, mapDispatch)(ComponentInColoredView)

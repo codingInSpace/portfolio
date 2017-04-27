@@ -13,7 +13,7 @@ import AppFooter from './shared/components/AppFooter'
 
 import setAdminColor from './shared/HOC/setAdminColor'
 
-import NewProject from './cms/components/NewProject'
+import { NewProject } from './cms/containers/NewProject'
 import ManageProjects from './cms/components/ManageProjects'
 
 import About from './client/components/About'

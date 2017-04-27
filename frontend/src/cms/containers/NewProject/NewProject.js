@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Section from 'grommet/components/Section'
 import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
@@ -8,16 +9,30 @@ import TextInput from 'grommet/components/TextInput'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 
+import { submitNewProject } from './ducks/thunks'
+import { FINISH_CLEAR_NEW_PROJECT_FORM } from './ducks/actions'
+
 class NewProject extends React.Component {
-  state = {
-    title: '',
-    shortDesc: '',
-    longDesc: '',
-    srcUrl: '',
-    appDemoUrl: '',
-    appDemoLabel: '',
-    projectTeamDesc: '',
-    tagsString: '',
+  constructor(props) {
+    super(props)
+    this.defaultState = {
+      title: '',
+      shortDesc: '',
+      longDesc: '',
+      srcUrl: '',
+      appDemoUrl: '',
+      appDemoLabel: '',
+      projectTeamDesc: '',
+      tagsString: '',
+    }
+
+    this.state = {...this.defaultState}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.formToBeCleared) {
+      this.clearForm()
+    }
   }
 
   updateText(value, attribute) {
@@ -54,7 +69,13 @@ class NewProject extends React.Component {
 
   submit() {
     // send data
-    console.log(this.state)
+    this.props.submitData(this.state)
+  }
+
+  clearForm() {
+    console.log(this.defaultState)
+    this.setState(this.defaultState)
+    this.props.doneClearing()
   }
 
   render() {
@@ -70,31 +91,39 @@ class NewProject extends React.Component {
           <Form>
             <FormField label="Title">
               <TextInput placeHolder="Nice project"
-                         onDOMChange={e => this.updateText(e.target.value, 'title')} />
+                         onDOMChange={e => this.updateText(e.target.value, 'title')}
+                         value={title} />
             </FormField>
             <FormField label="Short description">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'shortDesc')} />
+              <TextInput onDOMChange={e => this.updateText(e.target.value, 'shortDesc')}
+                         value={shortDesc} />
             </FormField>
             <FormField label="Long description">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'longDesc')} />
+              <TextInput onDOMChange={e => this.updateText(e.target.value, 'longDesc')}
+                         value={longDesc} />
             </FormField>
             <FormField label="Source url">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')} />
+              <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')}
+                         value={srcUrl} />
             </FormField>
             <FormField label="App demo url">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'appDemoUrl')} />
+              <TextInput onDOMChange={e => this.updateText(e.target.value, 'appDemoUrl')}
+                         value={appDemoUrl} />
             </FormField>
             <FormField label="Label for app demo url">
               <TextInput placeHolder="Try it!"
-                         onDOMChange={e => this.updateText(e.target.value, 'appDemoLabel')} />
+                         onDOMChange={e => this.updateText(e.target.value, 'appDemoLabel')}
+                         value={appDemoLabel} />
             </FormField>
             <FormField label="Project team description">
               <TextInput placeHolder="Solo project"
-                         onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')} />
+                         onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
+                         value={projectTeamDesc} />
             </FormField>
             <FormField label="Tags">
               <TextInput placeHolder="AI, Machine Learning"
-                         onDOMChange={e => this.updateText(e.target.value, 'tagsString')} />
+                         onDOMChange={e => this.updateText(e.target.value, 'tagsString')}
+                         value={tagsString} />
             </FormField>
             <Footer pad={{horizontal: 'none', vertical: 'medium'}}>
               <Button primary={true}
@@ -109,5 +138,14 @@ class NewProject extends React.Component {
   }
 }
 
-export default NewProject
+const mapState = state => ({
+  formToBeCleared: state.newProjectFormToBeCleared
+})
+
+const mapDispatch = dispatch => ({
+  submitData: data => dispatch(submitNewProject(data)),
+  doneClearing: () => dispatch({type: FINISH_CLEAR_NEW_PROJECT_FORM})
+})
+
+export default connect(mapState, mapDispatch)(NewProject)
 
