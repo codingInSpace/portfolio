@@ -12,17 +12,18 @@ ReactDOM.render(
 	<div>
 		<AppContainer>
 			<AppComponent />
-		</AppContainer></div>,
+		</AppContainer>
+	</div>,
   document.getElementById('app'),
-);
+)
 
 if (module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(
-	<AppContainer>
-		<AppComponent />
-	</AppContainer>,
+      <AppContainer>
+        <AppComponent />
+      </AppContainer>,
       document.getElementById('app'),
-    );
-  });
+    )
+  })
 }
