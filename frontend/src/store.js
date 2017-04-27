@@ -5,6 +5,7 @@ import ReduxThunk from 'redux-thunk'
 const initialState = {
 	appHeaderAdminView: false,
 	newProjectFormToBeCleared: false,
+	projectsById: [],
 }
 
 const prod = process.env.NODE_ENV === 'production'

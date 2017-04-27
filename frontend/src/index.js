@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import 'grommet/scss/hpe/index'
 
-// import { Provider } from 'react-redux'
-// import { createStore, applyMiddleware } from 'redux';
-
 import AppComponent from './App'
 
 ReactDOM.render(

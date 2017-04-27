@@ -14,10 +14,10 @@ import AppFooter from './shared/components/AppFooter'
 import setAdminColor from './shared/HOC/setAdminColor'
 
 import { NewProject } from './cms/containers/NewProject'
-import ManageProjects from './cms/components/ManageProjects'
+import ManageProjects from './cms/containers/ManageProjects'
 
 import About from './client/components/About'
-import Portfolio from './client/components/Portfolio'
+import Portfolio from './client/containers/Portfolio'
 
 const AppComponent = () => (
 	<Provider store={store}>

@@ -1,27 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
 import Label from 'grommet/components/Label'
 
-import axios from 'axios'
-import AppBanner from '../AppBanner'
+import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import AppBanner from '../../components/AppBanner'
 
 class Portfolio extends React.Component {
-  state = {
-    projects: [],
+  componentWillMount() {
+    this.props.getProjects()
   }
 
-  componentWillMount() {
-    axios.get(`${process.env.API_HOST}/projects`)
-		.then((response) => {
-  this.setState({ projects: response.data })
-})
-		.catch(error => console.log(error))
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.projectsById !== this.props.projectsById) {
+      this.setState({projects: nextProps.projectsById})
+    }
   }
 
   render() {
-    const { projects } = this.state
+    const { projects } = this.props
 
     return (
 	<Box>
@@ -46,5 +45,13 @@ class Portfolio extends React.Component {
   }
 }
 
-export default Portfolio
+const mapState = state => ({
+  projects: state.projectsById
+})
+
+const mapDispatch = dispatch => ({
+  getProjects: () => dispatch(projectsEntityThunks.getAllProjects())
+})
+
+export default connect(mapState, mapDispatch)(Portfolio)
 
