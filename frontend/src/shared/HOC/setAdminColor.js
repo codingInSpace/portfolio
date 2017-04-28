@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { adminHeaderActions } from '../containers/AppHeader'
 
-const setAdminColor = (BaseComponent, status) => {
+const setAdminColor = (BaseComponent, status, higherProps) => {
 	class ComponentInColoredView extends React.Component {
 		constructor(props) {
 			super(props)
@@ -16,7 +16,7 @@ const setAdminColor = (BaseComponent, status) => {
 		}
 
 		render() {
-			return <BaseComponent />
+			return <BaseComponent {...higherProps} {...this.props}/>
 		}
 	}
 

@@ -3,8 +3,15 @@ import rootReducer from './rootReducer';
 import ReduxThunk from 'redux-thunk'
 
 const initialState = {
+
+	// views
 	appHeaderAdminView: false,
 	newProjectFormToBeCleared: false,
+
+	// config
+	appBannerOffset: 0,
+
+	// data
 	projectsById: [],
 }
 
