@@ -8,15 +8,19 @@ import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 import Box from 'grommet/components/Box'
 
-const AppHeader = (props) => {
+import cssModules from 'react-css-modules'
+import * as styles from './index.module.scss'
+
+let AppHeader = (props) => {
   console.log(props)
 	const label = props.adminView ? 'JG ADMIN' : 'JG'
-  const cIndex = props.adminView ? 'neutral-1' : 'neutral-2'
+  const cIndex = props.adminView ? 'neutral-1' : 'grey-1'
 
   return (
 	<Header size="medium"
 					fixed
 					colorIndex={cIndex}
+					className={styles.header}
 					justify="between"
 					pad={{ horizontal: 'medium', vertical: 'none' }}>
 		<Title>
@@ -52,4 +56,5 @@ const mapState = state => ({
 	adminView: state.appHeaderAdminView
 })
 
+AppHeader = cssModules(AppHeader, styles)
 export default connect(mapState, null)(AppHeader)

@@ -1,6 +1,21 @@
-.image {
+.presentation {
 	img {
 		border-radius: 100%;
 		border: 1px solid #000;
 	}
+}
+
+.text {
+	color: #fff;
+}
+
+.bannerSmall {
+	background-color: #000;
+}
+
+.bannerLarge {
+  position: absolute;
+	top: 72px;
+	z-index: 20;
+	left: 10%;
 }

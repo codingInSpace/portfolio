@@ -8,18 +8,24 @@ import 'grommet/scss/hpe/index'
 
 import { AppComponent } from './app'
 
-const Content = () => (
+ReactDOM.render(
   <Provider store={store}>
     <AppContainer>
       <AppComponent />
     </AppContainer>
-  </Provider>
+  </Provider>,
+  document.getElementById('app')
 )
-
-ReactDOM.render( <Content />, document.getElementById('app') )
 
 if (module.hot) {
   module.hot.accept('./app/App', () => {
-    ReactDOM.render( <Content />, document.getElementById('app') )
+    ReactDOM.render(
+      <Provider store={store}>
+        <AppContainer>
+          <AppComponent />
+        </AppContainer>
+      </Provider>,
+      document.getElementById('app')
+    )
   })
 }

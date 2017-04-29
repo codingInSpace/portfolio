@@ -7,64 +7,69 @@ import Image from 'grommet/components/Image'
 import Label from 'grommet/components/Label'
 import Headline from 'grommet/components/Headline'
 
+// I made this https://github.com/codingInSpace/violet-sine-rose
+import rose from 'violet-sine-rose'
+
 import cssModules from 'react-css-modules'
 import styles from './index.module.scss'
 
 import { mainActions } from '../../../app'
-import rose from '../../../../public/violetrose'
 
 class AppBanner extends React.Component {
   constructor(props) {
     super(props)
-    this.mainRef = ''
+    this.canvasParentRef = ''
     this.contentRef = ''
   }
 
   componentDidMount() {
     if (this.props.large) {
       const width = window.innerWidth
-      //const height = this.contentRef.offsetHeight
       const height = 700
-      console.log(width, height)
-
-      this.mainRef.appendChild(rose(width, height))
+      this.canvasParentRef.appendChild(rose(width, height, true))
       this.props.setBannerOffset(height)
     }
   }
 
   componentWillUnmount() {
-    this.mainRef = null
+    this.canvasParentRef = null
   }
 
   render() {
     const {primary, secondary, large} = this.props
+
+    const HeadLine = () => (
+      <Box pad='medium'>
+        <Headline size="small" className={styles.text}>{primary}</Headline>
+      </Box>
+    )
+
     return (
-      <div style={{width: window.innerWidth}}>
-        <div style={{position: 'absolute', top: '72px', zIndex: 0, }} ref={el => this.mainRef = el}></div>
+      <div>
+        { large ? <div style={{position: 'absolute', top: '72px', zIndex: 0, }} ref={el => this.canvasParentRef = el}></div> : null }
         <Box pad={large ? 'large' : 'small'}
-             style={{position: 'absolute', top: '72px', zIndex: 20}}
+             className={ large ? styles.bannerLarge : styles.bannerSmall }
              align="center">
-          <div ref={el => this.contentRef = el}>
-          <Box direction="row" align="center" pad={{horizontal: 'large', vertical: 'none'}}>
+          <Box direction="row"
+               align="center"
+               pad="large">
             { large ? (
-                <div className={styles.image}>
+                <Box className={styles.presentation}
+                     align="center">
                   <Image src="assets/jonathan1.jpg"
                          size="small"
-                         caption={primary || 'Jonathan Grangien'}
                          alt="jonathan"/>
-                </div>
-              ) : (
-                <Box pad={large ? 'large' : 'medium'}>
-                  <Headline>{primary}</Headline>
+                  <HeadLine />
                 </Box>
+              ) : (
+                <HeadLine />
               ) }
-            <Box pad={large ? 'large' : 'medium'}>
+            <Box pad={large ? 'large' : 'medium'} className={styles.text}>
               { secondary.map(text => (
                 <div key={text.length.toString()}><Label margin="none">{text}</Label><br /></div>
               )) }
             </Box>
           </Box>
-          </div>
         </Box>
       </div>
     )

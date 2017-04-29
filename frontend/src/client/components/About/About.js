@@ -16,8 +16,7 @@ const About = (props) => {
 	const isOffset = props.bannerOffset > 0
 
 	const offsetStyle = {
-		position: 'absolute',
-		top: props.bannerOffset
+		paddingTop: props.bannerOffset
 	}
 
 	return (
