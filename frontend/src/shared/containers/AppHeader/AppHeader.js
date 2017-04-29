@@ -12,7 +12,6 @@ import cssModules from 'react-css-modules'
 import * as styles from './index.module.scss'
 
 let AppHeader = (props) => {
-  console.log(props)
 	const label = props.adminView ? 'JG ADMIN' : 'JG'
   const cIndex = props.adminView ? 'neutral-1' : 'grey-1'
 

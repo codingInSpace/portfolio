@@ -73,7 +73,6 @@ class NewProject extends React.Component {
   }
 
   clearForm() {
-    console.log(this.defaultState)
     this.setState(this.defaultState)
     this.props.doneClearing()
   }

@@ -14,18 +14,11 @@ import AppBanner from '../AppBanner'
 import descMain from './text'
 
 const About = (props) => {
-	console.log(props)
-
 	const isOffset = props.bannerOffset > 0
 
 	const offsetStyle = {
 		paddingTop: props.bannerOffset
 	}
-
-  const standardPadding = {
-    horizontal: 'large',
-    vertical: 'medium'
-  }
 
 	return (
 		<div>
