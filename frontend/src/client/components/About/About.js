@@ -10,7 +10,7 @@ import LinkNext from 'grommet/components/icons/base/LinkNext'
 import LinkedInIcon from 'grommet/components/icons/base/SocialLinkedinOption'
 import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 
-import AppBanner from '../AppBanner'
+import AppBanner from '../../containers/AppBanner'
 import descMain from './text'
 
 const About = (props) => {

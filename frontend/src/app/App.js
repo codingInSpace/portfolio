@@ -16,6 +16,7 @@ import ManageProjects from '../cms/containers/ManageProjects'
 
 import About from '../client/components/About'
 import Portfolio from '../client/containers/Portfolio'
+import { ProjectView } from '../client/containers/ProjectView'
 
 let AppComponent = (props) => {
   const { bannerOffset } = props
@@ -27,9 +28,10 @@ let AppComponent = (props) => {
         <div className={styles.container}>
           <Switch>
             <Route exact path="/" component={setAdminColor(About, false, {bannerOffset})}/>
-            <Route path="/projects" component={setAdminColor(Portfolio, false, {bannerOffset})}/>
-            <Route path="/admin/newproject" component={setAdminColor(NewProject, true, {bannerOffset})}/>
-            <Route path="/admin/manageprojects" component={setAdminColor(ManageProjects, true, {bannerOffset})}/>
+            <Route path="/projects" component={setAdminColor(Portfolio, false)}/>
+            <Route path="/projects/:id" component={setAdminColor(ProjectView, false)}/>
+            <Route path="/admin/newproject" component={setAdminColor(NewProject, true)}/>
+            <Route path="/admin/manageprojects" component={setAdminColor(ManageProjects, true)}/>
           </Switch>
         </div>
         <AppFooter />
