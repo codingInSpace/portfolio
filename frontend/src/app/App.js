@@ -28,8 +28,8 @@ let AppComponent = (props) => {
         <div className={styles.container}>
           <Switch>
             <Route exact path="/" component={setAdminColor(About, false, {bannerOffset})}/>
-            <Route path="/projects" component={setAdminColor(Portfolio, false)}/>
-            <Route path="/projects/:id" component={setAdminColor(ProjectView, false)}/>
+            <Route exact path="/projects" component={setAdminColor(Portfolio, false)}/>
+            <Route exact path="/projects/:id" component={setAdminColor(ProjectView, false)}/>
             <Route path="/admin/newproject" component={setAdminColor(NewProject, true)}/>
             <Route path="/admin/manageprojects" component={setAdminColor(ManageProjects, true)}/>
           </Switch>

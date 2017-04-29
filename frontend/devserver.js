@@ -25,7 +25,6 @@ app.use(webpackDevMiddleware(compiler, {
 
 // static files
 app.use(express.static(__dirname + "/public/"))
-console.log(__dirname + "/public/")
 
 app.use(webpackHotMiddleware(compiler, {
 	log: console.log, 
@@ -33,9 +32,7 @@ app.use(webpackHotMiddleware(compiler, {
 	heartbeat: 10 * 1000
 }))
 
-app.get("*", function(req, res) {
-  res.sendFile(__dirname + '/public/index.html')
-})
+app.get("*", (req, res) => res.sendFile(path.resolve(config.output.path, 'index.html') ))
 
 const server = new Server(app)
 server.listen(process.env.PORT || 1337, () => {

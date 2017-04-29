@@ -38,6 +38,9 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/'
 	},
+  devServer: {
+    historyApiFallback: true,
+  },
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
