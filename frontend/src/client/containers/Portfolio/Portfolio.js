@@ -25,7 +25,12 @@ class Portfolio extends React.Component {
     }
   }
 
-  goToProject(id) {
+  goToProject(seriesIdx) {
+    // Get corresponding project id
+    const { projects } = this.props
+    const id = Object.values(projects)[seriesIdx].id
+
+    // Redirect
     this.props.history.push(`/projects/${id}`)
   }
 
@@ -40,13 +45,12 @@ class Portfolio extends React.Component {
 		</Box>
 		{ Object.values(projects).length > 0 ? (
 		  <Section pad="large" margin="large">
-        <Tiles selectable={true} onSelect={ idx => this.goToProject(idx+1) }>
+        <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) }>
           { Object.values(projects).map(project => (
             <Tile key={project.id} pad="medium" >
               <Box pad="medium">
                 <Heading tag="h2" margin="none">{project.title}</Heading>
                 <Label margin="none">{project.short_desc}</Label>
-                <Anchor path={`/projects/${project.id}`}> Read more </Anchor>
               </Box>
             </Tile>
             )) }
