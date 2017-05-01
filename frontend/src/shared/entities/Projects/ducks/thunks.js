@@ -1,6 +1,5 @@
 import * as actions from './actions'
 import axios from 'axios'
-import { normalize, schema } from 'normalizr'
 
 export function getAllProjects() {
   return (dispatch) => {
@@ -33,3 +32,26 @@ export function getAllProjects() {
     }
   }
 }
+
+export function getOneProject(id) {
+  return (dispatch) => {
+    dispatch({type: actions.GET_ONE_PROJECT})
+    const url = `${process.env.API_HOST}/projects/${id}`
+
+    try {
+      axios.get(url)
+        .then(response => {
+          const {data} = response
+          console.log(data)
+
+          dispatch({
+            type: actions.RECEIVE_ONE_PROJECT,
+            payload: data
+          })
+        })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}
+

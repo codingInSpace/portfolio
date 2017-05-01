@@ -12,7 +12,7 @@ const initialState = {
 	appBannerOffset: 0,
 
 	// data
-	projectsById: [],
+	projectsById: {},
 }
 
 const prod = process.env.NODE_ENV === 'production'

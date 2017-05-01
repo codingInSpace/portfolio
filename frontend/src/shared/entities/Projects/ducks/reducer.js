@@ -5,6 +5,10 @@ const projectsEntityReducer = (state = [], action) => {
     case actions.RECEIVE_ALL_PROJECTS:
       state = action.payload
       break;
+    case actions.RECEIVE_ONE_PROJECT:
+      state = {...state}
+      state[action.payload.id] = action.payload
+      break;
   }
 
   return state
