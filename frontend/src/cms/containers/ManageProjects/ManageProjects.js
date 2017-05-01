@@ -9,11 +9,16 @@ import TrashIcon from 'grommet/components/icons/base/Trash'
 import EditIcon from 'grommet/components/icons/base/Edit'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { deleteProject } from './ducks/thunks'
 import setAdminColor from '../../../shared/HOC/setAdminColor'
 
 class ManageProjects extends React.Component {
   componentWillMount() {
     this.props.getProjects()
+  }
+
+  deleteProject(id) {
+    this.props.delete(id)
   }
 
   render () {
@@ -53,6 +58,7 @@ class ManageProjects extends React.Component {
                 <Box pad={smallHorizontal}>
                   <Button critical={true}
                           icon={<TrashIcon />}
+                          onClick={() => this.deleteProject(project.id)}
                           label="Delete" />
                 </Box>
               </Box>
@@ -63,12 +69,14 @@ class ManageProjects extends React.Component {
     )
   }
 }
+
 const mapState = state => ({
   projects: state.projectsById
 })
 
 const mapDispatch = dispatch => ({
-  getProjects: id => dispatch(projectsEntityThunks.getAllProjects())
+  getProjects: id => dispatch(projectsEntityThunks.getAllProjects()),
+  delete: id => dispatch(deleteProject(id))
 })
 
 export default connect(mapState, mapDispatch)(setAdminColor(ManageProjects, true))
