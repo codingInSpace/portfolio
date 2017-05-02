@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Heading from 'grommet/components/Heading'
 import Section from 'grommet/components/Section'
 import Anchor from 'grommet/components/Anchor'
+import Paragraph from 'grommet/components/Paragraph'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
 import AppBanner from '../../containers/AppBanner'
@@ -39,7 +40,9 @@ class ProjectView extends React.Component {
           { project ? project.projectteam : null }
         </Section>
         <Section pad="large" align="center">
+          <Paragraph size="large">
           { project ? project.long_desc : null }
+          </Paragraph>
         </Section>
       </div>
     )
