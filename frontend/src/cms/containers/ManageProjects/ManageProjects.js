@@ -10,7 +10,7 @@ import EditIcon from 'grommet/components/icons/base/Edit'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 import { deleteProject } from './ducks/thunks'
-import setAdminColor from '../../../shared/HOC/setAdminColor'
+import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 class ManageProjects extends React.Component {
   componentWillMount() {
@@ -79,4 +79,4 @@ const mapDispatch = dispatch => ({
   delete: id => dispatch(deleteProject(id))
 })
 
-export default connect(mapState, mapDispatch)(setAdminColor(ManageProjects, true))
+export default connect(mapState, mapDispatch)(setHeaderView(ManageProjects, true))

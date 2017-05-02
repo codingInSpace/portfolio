@@ -9,8 +9,6 @@ import styles from './app.module.scss';
 import { AppHeader } from '../shared/containers/AppHeader'
 import AppFooter from '../shared/components/AppFooter'
 
-import setAdminColor from '../shared/HOC/setAdminColor'
-
 import { NewProject } from '../cms/containers/NewProject'
 import ManageProjects from '../cms/containers/ManageProjects'
 
@@ -27,11 +25,11 @@ let AppComponent = (props) => {
         <AppHeader />
         <div className={styles.container}>
           <Switch>
-            <Route exact path="/" component={setAdminColor(About, false, {bannerOffset})}/>
-            <Route exact path="/projects" component={setAdminColor(Portfolio, false)}/>
-            <Route exact path="/projects/:id" component={setAdminColor(ProjectView, false)}/>
-            <Route path="/admin/newproject" component={setAdminColor(NewProject, true)}/>
-            <Route path="/admin/manageprojects" component={setAdminColor(ManageProjects, true)}/>
+            <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />
+            <Route exact path="/projects" component={Portfolio}/>
+            <Route exact path="/projects/:id" component={ProjectView}/>
+            <Route path="/admin/newproject" component={NewProject}/>
+            <Route path="/admin/manageprojects" component={ManageProjects}/>
           </Switch>
         </div>
         <AppFooter />

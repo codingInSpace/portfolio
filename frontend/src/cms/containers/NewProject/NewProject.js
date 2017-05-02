@@ -9,6 +9,8 @@ import TextInput from 'grommet/components/TextInput'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 
+import setHeaderView from '../../../shared/HOC/setHeaderView'
+
 import { submitNewProject } from './ducks/thunks'
 import { FINISH_CLEAR_NEW_PROJECT_FORM } from './ducks/actions'
 
@@ -146,5 +148,5 @@ const mapDispatch = dispatch => ({
   doneClearing: () => dispatch({type: FINISH_CLEAR_NEW_PROJECT_FORM})
 })
 
-export default connect(mapState, mapDispatch)(NewProject)
+export default connect(mapState, mapDispatch)(setHeaderView(NewProject, true))
 

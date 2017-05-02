@@ -8,9 +8,6 @@ const headerColorReducer = (state = false, action) => {
     case actions.SET_NORMAL_HEADER_COLOR:
       state = false
       break;
-    default:
-			state = false
-			break;
   }
 
   return state;

@@ -8,6 +8,7 @@ import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
 import AppBanner from '../../containers/AppBanner'
 
+import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 
 class ProjectView extends React.Component {
@@ -53,4 +54,4 @@ const mapDispatch = dispatch => ({
   getProject: id => dispatch(projectsEntityThunks.getOneProject(id))
 })
 
-export default connect(mapState, mapDispatch)(ProjectView)
+export default connect(mapState, mapDispatch)(setHeaderView(ProjectView, false))

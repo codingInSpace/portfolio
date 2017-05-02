@@ -13,37 +13,38 @@ import cssModules from 'react-css-modules'
 import * as styles from './index.module.scss'
 
 let AppHeader = (props) => {
-	const label = props.adminView ? 'JG ADMIN' : 'JG'
-  const cIndex = props.adminView ? 'neutral-1' : 'grey-1'
-	const icon = props.adminView ? <DashboardIcon /> : undefined
-  const titlePath = props.adminView ? '/admin/newproject' : '/'
+  const { adminView } = props
+  const label = adminView ? 'JG ADMIN' : 'JG'
+  const cIndex = adminView ? 'neutral-1' : 'grey-1'
+  const icon = adminView ? <DashboardIcon /> : undefined
+  const titlePath = adminView ? '/admin/newproject' : '/'
 
   return (
-	<Header size="medium"
-					fixed
-					colorIndex={cIndex}
-					className={styles.header}
-					justify="between"
-					pad={{ horizontal: 'medium', vertical: 'none' }}>
-		<Title>
-			<Anchor icon={icon} path={titlePath} label={label} />
-		</Title>
-		<Box pad={{ horizontal: 'small', vertical: 'none' }}>
-			<Menu inline
-						responsive
-						direction="row">
-				<Anchor path="/" label="ABOUT" />
-				<Anchor path="/projects" label="PROJECTS" />
-				<Menu inline={false}
-							label="ADMIN"
-							responsive>
-          <Anchor path="/admin/newproject" label="ADD PROJECT" />
-					<Anchor path="/admin/manageprojects" label="MANAGE PROJECTS" />
-				</Menu>
-			</Menu>
-		</Box>
-	</Header>
-	)
+    <Header size="medium"
+            fixed
+            colorIndex={cIndex}
+            className={styles.header}
+            justify="between"
+            pad={{horizontal: 'medium', vertical: 'none'}}>
+      <Title>
+        <Anchor icon={icon} path={titlePath} label={label}/>
+      </Title>
+      <Box pad={{horizontal: 'small', vertical: 'none'}}>
+        <Menu inline
+              responsive
+              direction="row">
+          <Anchor path="/" label="ABOUT"/>
+          <Anchor path="/projects" label="PROJECTS"/>
+          <Menu inline={false}
+                label="ADMIN"
+                responsive>
+            <Anchor path="/admin/newproject" label="ADD PROJECT"/>
+            <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
+          </Menu>
+        </Menu>
+      </Box>
+    </Header>
+  )
 }
 
 AppHeader.propTypes = {

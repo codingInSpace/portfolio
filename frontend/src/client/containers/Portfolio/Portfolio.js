@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
 import Label from 'grommet/components/Label'
-import Anchor from 'grommet/components/Anchor'
 import Tiles from 'grommet/components/Tiles'
 import Tile from 'grommet/components/Tile'
 import Section from 'grommet/components/Section'
@@ -12,6 +11,8 @@ import Section from 'grommet/components/Section'
 import { withRouter } from 'react-router-dom'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import setHeaderView from '../../../shared/HOC/setHeaderView'
+
 import AppBanner from '../../containers/AppBanner'
 
 class Portfolio extends React.Component {
@@ -40,11 +41,11 @@ class Portfolio extends React.Component {
     return (
 	<Box>
 		<AppBanner large={false} />
-		<Box pad="medium" align="center" textAlign="center">
+		<Section pad="large" align="center" textAlign="center">
 			<Heading tag="h1" margin="none">Projects</Heading>
-		</Box>
+		</Section>
 		{ Object.values(projects).length > 0 ? (
-		  <Section pad="large" margin="large">
+		  <Section pad="medium">
         <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) }>
           { Object.values(projects).map(project => (
             <Tile key={project.id} pad="medium" >
@@ -74,5 +75,5 @@ const mapDispatch = dispatch => ({
   getProjects: () => dispatch(projectsEntityThunks.getAllProjects())
 })
 
-export default connect(mapState, mapDispatch)(withRouter(Portfolio))
+export default connect(mapState, mapDispatch)(setHeaderView(withRouter(Portfolio), false))
 
