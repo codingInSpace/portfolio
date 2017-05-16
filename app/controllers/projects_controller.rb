@@ -27,6 +27,13 @@ class ProjectsController < ApplicationController
   # PUT /projects/:id
   def update
     @project.update(project_params)
+
+    @project.tags.destroy_all
+		@tags = params[:tags]
+		@tags.each do |tag|
+			@project.tags.create(:label => tag)
+		end
+
     head :no_content
   end
 

@@ -8,6 +8,10 @@ export function updateProject(data) {
     dispatch({type: actions.UPDATE_PROJECT_DATA})
     const url = `${process.env.API_HOST}/projects/${data.id}`
 
+    let tags = data.tagsString.split(',')
+    for (let i in tags)
+      tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
+
     const payload = {
       title: data.title,
       short_desc: data.shortDesc,
@@ -15,7 +19,8 @@ export function updateProject(data) {
       src_url: data.srcUrl,
       app_url: data.appDemoUrl,
       app_link_label: data.appDemoLabel,
-      projectteam: data.projectTeamDesc
+      projectteam: data.projectTeamDesc,
+      tags
     }
 
     try {
@@ -25,6 +30,7 @@ export function updateProject(data) {
         data: payload
       })
         .then(response => {
+          console.log(response)
           if (response.status === 204) {
             // dispatch notification
           }

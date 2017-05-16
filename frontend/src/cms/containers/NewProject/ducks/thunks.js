@@ -7,7 +7,6 @@ export function submitNewProject(data) {
     const url = `${process.env.API_HOST}/projects`
 
     let tags = data.tagsString.split(',')
-
     for (let i in tags)
       tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
 
