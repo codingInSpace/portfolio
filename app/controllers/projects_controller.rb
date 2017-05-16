@@ -10,6 +10,12 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.create!(project_params)
+
+		@tags = params[:tags]
+		@tags.each do |tag|
+			@project.tags.create(:label => tag)
+		end
+
     json_response(@project, :created)
   end
 

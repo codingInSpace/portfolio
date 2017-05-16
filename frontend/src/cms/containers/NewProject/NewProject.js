@@ -121,7 +121,7 @@ class NewProject extends React.Component {
                          onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
                          value={projectTeamDesc} />
             </FormField>
-            <FormField label="Tags">
+            <FormField label="Tags" help="Separate by commas">
               <TextInput placeHolder="AI, Machine Learning"
                          onDOMChange={e => this.updateText(e.target.value, 'tagsString')}
                          value={tagsString} />

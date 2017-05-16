@@ -6,6 +6,11 @@ export function submitNewProject(data) {
     dispatch({type: actions.SUBMIT_NEW_PROJECT_DATA})
     const url = `${process.env.API_HOST}/projects`
 
+    let tags = data.tagsString.split(',')
+
+    for (let i in tags)
+      tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
+
     const postPayload = {
       title: data.title,
       short_desc: data.shortDesc,
@@ -13,13 +18,15 @@ export function submitNewProject(data) {
       src_url: data.srcUrl,
       app_url: data.appDemoUrl,
       app_link_label: data.appDemoLabel,
-      projectteam: data.projectTeamDesc
+      projectteam: data.projectTeamDesc,
+      tags
     }
 
     try {
       axios.post(url, postPayload)
         .then(response => {
           console.log(response)
+
           dispatch({type: actions.SUCCEED_SUBMITTING_NEW_PROJECT_DATA})
           dispatch({type: actions.CLEAR_NEW_PROJECT_FORM})
         })
