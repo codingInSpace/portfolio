@@ -5414,8 +5414,8 @@ vfile@^2.0.0:
     x-is-string "^0.1.0"
 
 "violet-sine-rose@git://github.com/codingInSpace/violet-sine-rose.git":
-  version "1.0.3"
-  resolved "git://github.com/codingInSpace/violet-sine-rose.git#01626294b32caf57e43ff7fd78c66d207298951b"
+  version "1.0.5"
+  resolved "git://github.com/codingInSpace/violet-sine-rose.git#be0fdae3c6048b78a87ed24f5ed9d4d79a36b959"
 
 vm-browserify@0.0.4:
   version "0.0.4"

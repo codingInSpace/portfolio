@@ -11,6 +11,7 @@ import AppFooter from '../shared/components/AppFooter'
 
 import { NewProject } from '../cms/containers/NewProject'
 import ManageProjects from '../cms/containers/ManageProjects'
+import EditProject from '../cms/containers/EditProject'
 
 import About from '../client/components/About'
 import Portfolio from '../client/containers/Portfolio'
@@ -28,8 +29,9 @@ let AppComponent = (props) => {
             <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />
             <Route exact path="/projects" component={Portfolio}/>
             <Route exact path="/projects/:id" component={ProjectView}/>
-            <Route path="/admin/newproject" component={NewProject}/>
-            <Route path="/admin/manageprojects" component={ManageProjects}/>
+            <Route exact path="/admin/newproject" component={NewProject}/>
+            <Route exact path="/admin/manageprojects" component={ManageProjects}/>
+            <Route exact path="/admin/manageprojects/:id" component={EditProject}/>
           </Switch>
         </div>
         <AppFooter />

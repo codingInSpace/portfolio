@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Section from 'grommet/components/Section'
 import Heading from 'grommet/components/Heading'
+import Label from 'grommet/components/Label'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import TrashIcon from 'grommet/components/icons/base/Trash'
@@ -35,16 +36,16 @@ class ManageProjects extends React.Component {
           <Heading tag="h2" margin="none">Manage Projects</Heading>
         </Section>
         <Section pad="large">
-          { projects && Object.values(projects).map(project => (
+          { projects && Object.values(projects).map((project, i) => (
             <Box key={project.id}
-                 colorIndex={project.id % 2 === 0 ? "light-1" : "light-2"}
+                 colorIndex={i % 2 === 0 ? "light-1" : "light-2"}
                  direction="row"
                  justify="between"
                  full="horizontal"
                  pad="large">
               <Box size="medium" direction="column">
                 <Heading tag="h3" margin="none">{project.title}</Heading>
-                {project.short_desc}
+                <Label margin="none">{project.short_desc}</Label>
               </Box>
               <Box pad="small" direction="column" justify="center">
                 (tags)
@@ -53,6 +54,7 @@ class ManageProjects extends React.Component {
                 <Box pad={smallHorizontal}>
                   <Button accent={true}
                           icon={<EditIcon />}
+                          path={`/admin/manageprojects/${project.id}`}
                           label="Edit" />
                 </Box>
                 <Box pad={smallHorizontal}>
