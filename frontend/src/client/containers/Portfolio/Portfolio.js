@@ -11,6 +11,7 @@ import Section from 'grommet/components/Section'
 import { withRouter } from 'react-router-dom'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 import AppBanner from '../../containers/AppBanner'
@@ -18,6 +19,7 @@ import AppBanner from '../../containers/AppBanner'
 class Portfolio extends React.Component {
   componentWillMount() {
     this.props.getProjects()
+    this.props.getTags()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,7 +74,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getProjects: () => dispatch(projectsEntityThunks.getAllProjects())
+  getProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
+  getTags: () => dispatch(tagsEntityThunks.getAllTags())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(withRouter(Portfolio), false))

@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 		resources :projects do
 			resources :tags
 		end
+
+		resources :tags, only: [:index]
 	end
 end

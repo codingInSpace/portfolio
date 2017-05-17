@@ -3,8 +3,13 @@ class TagsController < ApplicationController
 	before_action :set_project_tag, only: [:show, :update, :destroy]
 
 	# GET /projects/:project_id/tags
+	# GET /tags
   def index
-    json_response(@project.tags)
+		if @project
+			json_response(@project.tags)
+		else
+			json_response(Tag.all)
+		end
   end
 
 	# GET /projects/:project_id/tags/:id
@@ -37,7 +42,9 @@ class TagsController < ApplicationController
 	end
 
 	def set_project
-		@project = Project.find(params[:project_id])
+		if params[:project_id]
+			@project = Project.find(params[:project_id])
+		end
 	end
 
 	def set_project_tag
