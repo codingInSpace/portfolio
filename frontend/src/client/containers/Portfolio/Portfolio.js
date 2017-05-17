@@ -15,7 +15,7 @@ import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 import AppBanner from '../../containers/AppBanner'
-import Tag from './components/Tag'
+import Tag from '../../components/Tag'
 
 class Portfolio extends React.Component {
   componentWillMount() {

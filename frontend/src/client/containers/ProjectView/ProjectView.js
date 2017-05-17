@@ -3,25 +3,34 @@ import { connect } from 'react-redux'
 
 import Heading from 'grommet/components/Heading'
 import Section from 'grommet/components/Section'
+import Box from 'grommet/components/Box'
 import Anchor from 'grommet/components/Anchor'
 import Paragraph from 'grommet/components/Paragraph'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
 import AppBanner from '../../containers/AppBanner'
+import Tag from '../../components/Tag'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../shared/entities/Tags'
 
 class ProjectView extends React.Component {
 
   componentDidMount() {
     if (Object.keys(this.props.allProjects).length === 0)
       this.props.getProject(this.props.match.params.id)
+
+    if (!this.props.tagsByProjectId[this.props.match.params.id])
+      this.props.getTags()
   }
 
   render() {
     const id = this.props.match.params.id
     const project = this.props.allProjects[id]
+    const { tagsByProjectId } = this.props
+
+    const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
 
     return (
       <div>
@@ -31,7 +40,12 @@ class ProjectView extends React.Component {
                   icon={<BackIcon />} />
         </Section>
         <Section pad="none" align="center" textAlign="center">
-          <Heading tag="h1"> { project ? project.title : '???' } </Heading>
+          <Heading tag="h1" margin="none"> { project ? project.title : '???' } </Heading>
+          <Box pad="small" direction="row">
+            { project && hasTags(project.id) && tagsByProjectId[project.id].map(tag => (
+              <Tag key={tag.id} label={tag.label} />
+            ))}
+          </Box>
         </Section>
         <Section pad="large" align="center">
           (image)
@@ -50,11 +64,13 @@ class ProjectView extends React.Component {
 }
 
 const mapState = state => ({
-  allProjects: state.projectsById
+  allProjects: state.projectsById,
+  tagsByProjectId: state.tagsByProjectId
 })
 
 const mapDispatch = dispatch => ({
-  getProject: id => dispatch(projectsEntityThunks.getOneProject(id))
+  getProject: id => dispatch(projectsEntityThunks.getOneProject(id)),
+  getTags: id => dispatch(tagsEntityThunks.getAllTags())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(ProjectView, false))
