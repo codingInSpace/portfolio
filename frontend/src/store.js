@@ -13,7 +13,7 @@ const initialState = {
 
 	// data
 	projectsById: {},
-  tagsById: {},
+  tagsByProjectId: {},
 }
 
 const prod = process.env.NODE_ENV === 'production'

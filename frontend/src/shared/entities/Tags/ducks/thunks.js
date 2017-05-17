@@ -10,13 +10,14 @@ export function getAllTags() {
       axios.get(url)
         .then(response => {
           const { data } = response
-          console.log(data)
-
           const results = {}
 
           for (let i in data) {
-            const { id } = data[i]
-            results[id] = data[i]
+            const { project_id } = data[i]
+            if (!results[project_id])
+              results[project_id] = []
+
+            results[project_id].push(data[i])
           }
 
           dispatch({

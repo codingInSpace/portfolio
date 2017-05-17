@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 	appHeaderAdminView: headerColorReducer,
   newProjectFormToBeCleared: newProjectClearFormReducer,
   projectsById: projectsEntityReducer,
-  tagsById: tagsEntityReducer,
+  tagsByProjectId: tagsEntityReducer,
   appBannerOffset: bannerOffsetReducer
 })
 

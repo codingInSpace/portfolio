@@ -7,7 +7,8 @@ const tagsEntityReducer = (state = {}, action) => {
       break;
     case actions.RECEIVE_ONE_TAG:
       state = {...state}
-      state[action.payload.id] = action.payload
+      if (!state[action.payload.project_id]) state[action.payload.project_id] = []
+      state[action.payload.project_id].push(action.payload)
       break;
   }
 

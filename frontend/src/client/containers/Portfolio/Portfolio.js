@@ -15,6 +15,7 @@ import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 import AppBanner from '../../containers/AppBanner'
+import Tag from './components/Tag'
 
 class Portfolio extends React.Component {
   componentWillMount() {
@@ -38,7 +39,10 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    const { projects } = this.props
+    const { projects, tagsByProjectId } = this.props
+
+    const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
+    const smallVertPadding = {horizontal: 'none', vertical: 'small'}
 
     return (
 	<Box>
@@ -54,6 +58,11 @@ class Portfolio extends React.Component {
               <Box pad="medium">
                 <Heading tag="h2" margin="none">{project.title}</Heading>
                 <Label margin="none">{project.short_desc}</Label>
+                <Box pad={smallVertPadding} direction="row">
+                  { hasTags(project.id) && tagsByProjectId[project.id].map(tag => (
+                    <Tag key={tag.id} label={tag.label} />
+                  ))}
+                </Box>
               </Box>
             </Tile>
             )) }
@@ -70,7 +79,8 @@ class Portfolio extends React.Component {
 }
 
 const mapState = state => ({
-  projects: state.projectsById
+  projects: state.projectsById,
+  tagsByProjectId: state.tagsByProjectId
 })
 
 const mapDispatch = dispatch => ({
