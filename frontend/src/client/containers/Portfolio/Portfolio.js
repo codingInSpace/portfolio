@@ -15,7 +15,7 @@ import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 import AppBanner from '../../containers/AppBanner'
-import Tag from '../../components/Tag'
+import Project from './components/Project'
 
 class Portfolio extends React.Component {
   componentWillMount() {
@@ -42,7 +42,7 @@ class Portfolio extends React.Component {
     const { projects, tagsByProjectId } = this.props
 
     const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
-    const smallVertPadding = {horizontal: 'none', vertical: 'small'}
+    const largeHorPadding = {horizontal: 'large', vertical: 'none'}
 
     return (
 	<Box>
@@ -51,19 +51,14 @@ class Portfolio extends React.Component {
 			<Heading tag="h1" margin="none">Projects</Heading>
 		</Section>
 		{ Object.values(projects).length > 0 ? (
-		  <Section pad="medium">
-        <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) }>
+		  <Section pad={largeHorPadding} margin={largeHorPadding} align="center" alignContent="center">
+        <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) } fill={true}>
           { Object.values(projects).map(project => (
-            <Tile key={project.id} pad="medium" >
-              <Box pad="medium">
-                <Heading tag="h2" margin="none">{project.title}</Heading>
-                <Label margin="none">{project.short_desc}</Label>
-                <Box pad={smallVertPadding} direction="row">
-                  { hasTags(project.id) && tagsByProjectId[project.id].map(tag => (
-                    <Tag key={tag.id} label={tag.label} />
-                  ))}
-                </Box>
-              </Box>
+            <Tile key={project.id} pad="small">
+              <Project img={'assets/data.jpg'}
+                       heading={project.title}
+                       shortText={project.short_desc}
+                       tags={ hasTags(project.id) ? tagsByProjectId[project.id] : [] } />
             </Tile>
             )) }
         </Tiles>
