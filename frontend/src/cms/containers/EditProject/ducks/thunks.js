@@ -1,5 +1,6 @@
 import * as actions from './actions'
 import axios from 'axios'
+import { toastThunks } from '../../../../shared/containers/AppToast'
 
 import { projectsEntityThunks } from '../../../../shared/entities/Projects'
 
@@ -37,9 +38,11 @@ export function updateProject(data) {
           }
 
           dispatch(projectsEntityThunks.getAllProjects())
+          dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
         })
     } catch(e) {
       console.error(e)
+      dispatch(toastThunks.showToast({msg: `Failed to update project ${payload.title}, ${e.toString()}`, status: 'critical'}))
     }
   }
 }

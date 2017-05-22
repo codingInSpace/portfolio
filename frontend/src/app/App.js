@@ -8,6 +8,7 @@ import styles from './app.module.scss';
 
 import { AppHeader } from '../shared/containers/AppHeader'
 import AppFooter from '../shared/components/AppFooter'
+import { AppToast } from '../shared/containers/AppToast'
 
 import { NewProject } from '../cms/containers/NewProject'
 import ManageProjects from '../cms/containers/ManageProjects'
@@ -25,6 +26,7 @@ let AppComponent = (props) => {
     <BrowserRouter>
       <App centered={false}>
         <AppHeader />
+        <AppToast />
         <div className={styles.container}>
           <Switch>
             <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />

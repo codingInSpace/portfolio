@@ -5,6 +5,7 @@ import { projectsEntityReducer } from './shared/entities/Projects'
 import { tagsEntityReducer } from './shared/entities/Tags'
 import { imagesEntityReducer } from './shared/entities/Images'
 import { bannerOffsetReducer } from './app'
+import { toastReducer } from './shared/containers/AppToast'
 
 const rootReducer = combineReducers({
 	appHeaderAdminView: headerColorReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   projectsById: projectsEntityReducer,
   tagsByProjectId: tagsEntityReducer,
   imagesById: imagesEntityReducer,
-  appBannerOffset: bannerOffsetReducer
+  appBannerOffset: bannerOffsetReducer,
+  appToast: toastReducer
 })
 
 export default rootReducer

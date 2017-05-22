@@ -7,8 +7,12 @@ const initialState = {
 	// views
 	appHeaderAdminView: false,
 	newProjectFormToBeCleared: false,
+  appToast: {
+    msg: '',
+    status: ''
+  },
 
-	// config
+  // config
 	appBannerOffset: 0,
 
 	// data
