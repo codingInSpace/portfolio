@@ -10,12 +10,14 @@ import TrashIcon from 'grommet/components/icons/base/Trash'
 import EditIcon from 'grommet/components/icons/base/Edit'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { deleteProject } from './ducks/thunks'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 class ManageProjects extends React.Component {
   componentWillMount() {
     this.props.getProjects()
+    this.props.getTags()
   }
 
   deleteProject(id) {
@@ -23,7 +25,7 @@ class ManageProjects extends React.Component {
   }
 
   render () {
-    const { projects } = this.props
+    const { projects, tags } = this.props
 
     const smallHorizontal = {
       horizontal: 'small',
@@ -48,7 +50,7 @@ class ManageProjects extends React.Component {
                 <Label margin="none">{project.short_desc}</Label>
               </Box>
               <Box pad="small" direction="column" justify="center">
-                (tags)
+                { tags[project.id] && Object.values(tags[project.id]).map(tag => tag.label + ', ') }
               </Box>
               <Box direction="row" align="center">
                 <Box pad={smallHorizontal}>
@@ -73,11 +75,13 @@ class ManageProjects extends React.Component {
 }
 
 const mapState = state => ({
-  projects: state.projectsById
+  projects: state.projectsById,
+  tags: state.tagsByProjectId
 })
 
 const mapDispatch = dispatch => ({
   getProjects: id => dispatch(projectsEntityThunks.getAllProjects()),
+  getTags: id => dispatch(tagsEntityThunks.getAllTags()),
   delete: id => dispatch(deleteProject(id))
 })
 
