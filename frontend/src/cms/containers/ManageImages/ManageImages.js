@@ -33,10 +33,8 @@ class ManageImages extends React.Component {
             <Tiles selectable={false} fill={true}>
             { thereAreImages && Object.values(imagesById).map(img => (
               <Tile key={img.id} pad="small">
-                <Image src={img.link} alt={img.id} caption={img.title || undefined}/>
-                <Box pad="small">
-                  <TextInput value={img.id} />
-                </Box>
+                <Image src={img.link} alt={img.id} caption={img.description || undefined}/>
+                <TextInput value={img.id} />
               </Tile>
             ))}
             </Tiles>
