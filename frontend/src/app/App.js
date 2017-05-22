@@ -12,6 +12,7 @@ import AppFooter from '../shared/components/AppFooter'
 import { NewProject } from '../cms/containers/NewProject'
 import ManageProjects from '../cms/containers/ManageProjects'
 import EditProject from '../cms/containers/EditProject'
+import ManageImages from '../cms/containers/ManageImages'
 
 import About from '../client/components/About'
 import Portfolio from '../client/containers/Portfolio'
@@ -32,6 +33,7 @@ let AppComponent = (props) => {
             <Route exact path="/admin/newproject" component={NewProject}/>
             <Route exact path="/admin/manageprojects" component={ManageProjects}/>
             <Route exact path="/admin/manageprojects/:id" component={EditProject}/>
+            <Route exact path="/admin/images" component={ManageImages}/>
           </Switch>
         </div>
         <AppFooter />

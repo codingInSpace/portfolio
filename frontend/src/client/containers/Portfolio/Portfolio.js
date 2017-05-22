@@ -22,7 +22,7 @@ class Portfolio extends React.Component {
   componentWillMount() {
     this.getData()
   }
-  
+
   getData() {
     this.props.getProjects()
     this.props.getTags()

@@ -40,6 +40,7 @@ let AppHeader = (props) => {
                 responsive>
             <Anchor path="/admin/newproject" label="ADD PROJECT"/>
             <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
+            <Anchor path="/admin/images" label="IMAGES"/>
           </Menu>
         </Menu>
       </Box>
