@@ -45,7 +45,7 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    const { projects, tagsByProjectId } = this.props
+    const { projects, tagsByProjectId, imagesById } = this.props
 
     const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
     const largeHorPadding = {horizontal: 'large', vertical: 'none'}
@@ -61,7 +61,7 @@ class Portfolio extends React.Component {
         <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) } fill={true}>
           { Object.values(projects).map(project => (
             <Tile key={project.id} pad="small">
-              <Project img={'assets/data.jpg'}
+              <Project img={imagesById[project.primary_image_id] ? imagesById[project.primary_image_id].link : undefined}
                        heading={project.title}
                        shortText={project.short_desc}
                        tags={ hasTags(project.id) ? tagsByProjectId[project.id] : [] } />
@@ -82,7 +82,7 @@ class Portfolio extends React.Component {
 const mapState = state => ({
   projects: state.projectsById,
   tagsByProjectId: state.tagsByProjectId,
-  imagesById: state.tagsByProjectId,
+  imagesById: state.imagesById,
 })
 
 const mapDispatch = dispatch => ({
