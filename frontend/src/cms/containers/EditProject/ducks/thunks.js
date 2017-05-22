@@ -20,6 +20,7 @@ export function updateProject(data) {
       app_url: data.appDemoUrl,
       app_link_label: data.appDemoLabel,
       projectteam: data.projectTeamDesc,
+      primary_image_id: data.primaryImageId,
       tags
     }
 

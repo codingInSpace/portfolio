@@ -25,6 +25,7 @@ class NewProject extends React.Component {
       appDemoUrl: '',
       appDemoLabel: '',
       projectTeamDesc: '',
+      primaryImageId: '',
       tagsString: '',
     }
 
@@ -63,6 +64,9 @@ class NewProject extends React.Component {
       case 'tagsString':
         this.setState({...this.state, tagsString: value})
         break;
+      case 'primaryImageId':
+        this.setState({...this.state, primaryImageId: value})
+        break;
       default:
         break;
 
@@ -80,7 +84,7 @@ class NewProject extends React.Component {
   }
 
   render() {
-    const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, tagsString } = this.state
+    const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, tagsString } = this.state
 
     const shouldDisableButton = !title || !shortDesc || !tagsString
     const buttonHandler = shouldDisableButton ? undefined : () => this.submit()
@@ -120,6 +124,11 @@ class NewProject extends React.Component {
               <TextInput placeHolder="Solo project"
                          onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
                          value={projectTeamDesc} />
+            </FormField>
+            <FormField label="Primary Image">
+              <TextInput placeHolder="img id"
+                         onDOMChange={e => this.updateText(e.target.value, 'primaryImageId')}
+                         value={primaryImageId} />
             </FormField>
             <FormField label="Tags" help="Separate by commas">
               <TextInput placeHolder="AI, Machine Learning"

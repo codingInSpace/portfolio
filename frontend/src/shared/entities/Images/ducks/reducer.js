@@ -1,11 +1,11 @@
 import * as actions from './actions'
 
-const projectsEntityReducer = (state = {}, action) => {
+const imagesEntityReducer = (state = {}, action) => {
   switch(action.type) {
-    case actions.RECEIVE_ALL_PROJECTS:
+    case actions.RECEIVE_ALL_IMAGES:
       state = action.payload
       break;
-    case actions.RECEIVE_ONE_PROJECT:
+    case actions.RECEIVE_ONE_IMAGE:
       state = {...state}
       state[action.payload.id] = action.payload
       break;
@@ -14,4 +14,4 @@ const projectsEntityReducer = (state = {}, action) => {
   return state
 }
 
-export default projectsEntityReducer
+export default imagesEntityReducer

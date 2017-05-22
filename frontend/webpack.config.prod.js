@@ -38,8 +38,12 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
-			'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env':{
+        'API_HOST': JSON.stringify(process.env.API_HOST),
+        'IMGUR_API_GET_ALBUM_URL': JSON.stringify(process.env.IMGUR_API_GET_ALBUM_URL),
+        'IMGUR_API_CLIENT_ID': JSON.stringify(process.env.IMGUR_API_CLIENT_ID),
+        'NODE_ENV': JSON.stringify('production')
+      }
 		}),
     new ExtractTextPlugin({
       filename: 'styles.css',

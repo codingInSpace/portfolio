@@ -25,6 +25,7 @@ class EditProject extends React.Component {
     appDemoUrl: '',
     appDemoLabel: '',
     projectTeamDesc: '',
+    primaryImageId: '',
     tagsString: '',
   }
 
@@ -87,6 +88,9 @@ class EditProject extends React.Component {
       case 'projectTeamDesc':
         this.setState({...this.state, projectTeamDesc: value})
         break;
+      case 'primaryImageId':
+        this.setState({...this.state, primaryImageId: value})
+        break;
       case 'tagsString':
         this.setState({...this.state, tagsString: value})
         break;
@@ -98,7 +102,7 @@ class EditProject extends React.Component {
   }
 
   render() {
-    const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, tagsString } = this.state
+    const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, tagsString } = this.state
 
     const shouldDisableButton = !title || !shortDesc || !tagsString
     const buttonHandler = shouldDisableButton ? undefined : () => this.submit()
@@ -144,6 +148,11 @@ class EditProject extends React.Component {
               <TextInput placeHolder="Solo project"
                          onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
                          value={projectTeamDesc} />
+            </FormField>
+            <FormField label="Primary image">
+              <TextInput placeHolder="img id"
+                         onDOMChange={e => this.updateText(e.target.value, 'primaryImageId')}
+                         value={primaryImageId} />
             </FormField>
             <FormField label="Tags" help="Separate by commas. Current tags overridden.">
               <TextInput placeHolder="AI, Machine Learning"
