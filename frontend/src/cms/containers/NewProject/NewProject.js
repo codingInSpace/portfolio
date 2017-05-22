@@ -11,6 +11,9 @@ import Button from 'grommet/components/Button'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
+import { imagesEntityThunks } from '../../../shared/entities/Images'
+import ImageIdSelector from '../../components/ImageIdSelector'
+
 import { submitNewProject } from './ducks/thunks'
 import { FINISH_CLEAR_NEW_PROJECT_FORM } from './ducks/actions'
 
@@ -30,6 +33,10 @@ class NewProject extends React.Component {
     }
 
     this.state = {...this.defaultState}
+  }
+
+  componentDidMount() {
+    this.props.getAllImages()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,6 +80,10 @@ class NewProject extends React.Component {
     }
   }
 
+  updateSelectedImageId(value) {
+    this.setState({...this.state, primaryImageId: value})
+  }
+
   submit() {
     // send data
     this.props.submitData(this.state)
@@ -85,9 +96,28 @@ class NewProject extends React.Component {
 
   render() {
     const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, tagsString } = this.state
+    const { images } = this.props
 
     const shouldDisableButton = !title || !shortDesc || !tagsString
     const buttonHandler = shouldDisableButton ? undefined : () => this.submit()
+
+    const selectableImages = []
+
+    for (let i = 0; i < Object.keys(images).length; i++) {
+      console.log('loop')
+      const id = Object.values(images)[i].id
+      const desc = Object.values(images)[i].description
+      selectableImages.push({
+        "value": id,
+        "sub": desc,
+        "label": (
+          <Box direction='row' justify='between'>
+            <span>{id}</span>
+            <span className='secondary'>{desc}</span>
+          </Box>
+        )
+      })
+    }
 
     return (
       <Section pad="large">
@@ -126,9 +156,9 @@ class NewProject extends React.Component {
                          value={projectTeamDesc} />
             </FormField>
             <FormField label="Primary Image">
-              <TextInput placeHolder="img id"
-                         onDOMChange={e => this.updateText(e.target.value, 'primaryImageId')}
-                         value={primaryImageId} />
+              <ImageIdSelector images={selectableImages}
+                               onSelect={val => this.updateSelectedImageId(val)}
+                               value={primaryImageId} />
             </FormField>
             <FormField label="Tags" help="Separate by commas">
               <TextInput placeHolder="AI, Machine Learning"
@@ -149,12 +179,14 @@ class NewProject extends React.Component {
 }
 
 const mapState = state => ({
-  formToBeCleared: state.newProjectFormToBeCleared
+  formToBeCleared: state.newProjectFormToBeCleared,
+  images: state.imagesById
 })
 
 const mapDispatch = dispatch => ({
   submitData: data => dispatch(submitNewProject(data)),
-  doneClearing: () => dispatch({type: FINISH_CLEAR_NEW_PROJECT_FORM})
+  doneClearing: () => dispatch({type: FINISH_CLEAR_NEW_PROJECT_FORM}),
+  getAllImages: () => dispatch(imagesEntityThunks.getAllImages())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(NewProject, true))

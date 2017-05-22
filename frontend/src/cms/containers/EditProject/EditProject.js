@@ -15,6 +15,9 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { updateProject } from './ducks/thunks'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
+import { imagesEntityThunks } from '../../../shared/entities/Images'
+
+import ImageIdSelector from '../../components/ImageIdSelector'
 
 class EditProject extends React.Component {
   state = {
@@ -52,6 +55,7 @@ class EditProject extends React.Component {
 
   componentDidMount() {
     const { id } = this.props.match.params
+    this.props.getAllImages()
 
     if (id && Object.keys(this.props.projects).length > 0) {
       const project = this.props.projects[id]
@@ -114,15 +118,38 @@ class EditProject extends React.Component {
     }
   }
 
+  updateSelectedImageId(value) {
+    this.setState({...this.state, primaryImageId: value})
+  }
+
   submit() {
     this.props.submitData(this.state)
   }
 
   render() {
     const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, tagsString } = this.state
+    const { images } = this.props
 
     const shouldDisableButton = !title || !shortDesc || !tagsString
     const buttonHandler = shouldDisableButton ? undefined : () => this.submit()
+
+    const selectableImages = []
+
+    for (let i = 0; i < Object.keys(images).length; i++) {
+      console.log('loop')
+      const id = Object.values(images)[i].id
+      const desc = Object.values(images)[i].description
+      selectableImages.push({
+        "value": id,
+        "sub": desc,
+        "label": (
+          <Box direction='row' justify='between'>
+            <span>{id}</span>
+            <span className='secondary'>{desc}</span>
+          </Box>
+        )
+      })
+    }
 
     return (
       <Section pad="large">
@@ -166,10 +193,10 @@ class EditProject extends React.Component {
                          onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
                          value={projectTeamDesc} />
             </FormField>
-            <FormField label="Primary image">
-              <TextInput placeHolder="img id"
-                         onDOMChange={e => this.updateText(e.target.value, 'primaryImageId')}
-                         value={primaryImageId} />
+            <FormField label="Primary image id">
+              <ImageIdSelector images={selectableImages}
+                               onSelect={val => this.updateSelectedImageId(val)}
+                               value={primaryImageId} />
             </FormField>
             <FormField label="Tags" help="Separate by commas. Current tags overridden.">
               <TextInput placeHolder="AI, Machine Learning"
@@ -191,13 +218,15 @@ class EditProject extends React.Component {
 
 const mapState = state => ({
   projects: state.projectsById,
-  tags: state.tagsByProjectId
+  tags: state.tagsByProjectId,
+  images: state.imagesById
 })
 
 const mapDispatch = dispatch => ({
   submitData: data => dispatch(updateProject(data)),
   getAllProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
-  getAllTags: () => dispatch(tagsEntityThunks.getAllTags())
+  getAllTags: () => dispatch(tagsEntityThunks.getAllTags()),
+  getAllImages: () => dispatch(imagesEntityThunks.getAllImages())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(EditProject, true))
