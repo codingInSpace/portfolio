@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toastThunks } from '../../../../shared/containers/AppToast'
 
 import { projectsEntityThunks } from '../../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../../shared/entities/Tags'
 
 export function updateProject(data) {
   return (dispatch) => {
@@ -38,6 +39,7 @@ export function updateProject(data) {
           }
 
           dispatch(projectsEntityThunks.getAllProjects())
+          dispatch(tagsEntityThunks.getAllTags())
           dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
         })
     } catch(e) {
