@@ -14,6 +14,7 @@ import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { updateProject } from './ducks/thunks'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../shared/entities/Tags'
 
 class EditProject extends React.Component {
   state = {
@@ -31,11 +32,19 @@ class EditProject extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const id = nextProps.match.params.id || this.props.params.id
+    let exit = false
 
     if (Object.keys(nextProps.projects).length === 0) {
       this.props.getAllProjects()
-      return
+      exit = true
     }
+
+    if (Object.keys(nextProps.tags).length === 0) {
+      this.props.getAllTags()
+      exit = true
+    }
+
+    if (exit) return
 
     const project = nextProps.projects[id]
     this.updateStateWithDBData(project)
@@ -51,6 +60,12 @@ class EditProject extends React.Component {
   }
 
   updateStateWithDBData(project) {
+    const projectTags = this.props.tags[project.id]
+
+    let tagsString = ''
+    for (let i in projectTags)
+      tagsString += projectTags[i].label + ', '
+
     const payload = {
       id: project.id,
       title: project.title || '',
@@ -59,7 +74,9 @@ class EditProject extends React.Component {
       srcUrl: project.src_url || '',
       appUrl: project.app_url || '',
       appDemoLabel: project.app_link_label || '',
-      projectTeamDesc: project.projectteam || ''
+      projectTeamDesc: project.projectteam || '',
+      primaryImageId: project.primary_image_id,
+      tagsString
     }
 
     this.setState({...payload})
@@ -173,12 +190,14 @@ class EditProject extends React.Component {
 }
 
 const mapState = state => ({
-  projects: state.projectsById
+  projects: state.projectsById,
+  tags: state.tagsByProjectId
 })
 
 const mapDispatch = dispatch => ({
   submitData: data => dispatch(updateProject(data)),
-  getAllProjects: () => dispatch(projectsEntityThunks.getAllProjects())
+  getAllProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
+  getAllTags: () => dispatch(tagsEntityThunks.getAllTags())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(EditProject, true))
