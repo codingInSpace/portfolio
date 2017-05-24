@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
 	before_action :set_project
 	before_action :set_project_tag, only: [:show, :update, :destroy]
+	before_action :authenticate_user!, only: [:create, :update, :destroy]
 
 	# GET /projects/:project_id/tags
 	# GET /tags
