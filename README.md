@@ -1,4 +1,12 @@
 # Portfolio
+Personal page portfolio application, some static personal details but otherwise generalized.  
+
+Stack:  
+Rails API only back-end  
+React+Redux frontend  
+
+Todo:  
+Make stuff cooler looking
 
 ## Rails Environment
 Ruby 2.4.0   
