@@ -7,7 +7,7 @@
 	},
 	"scripts": {
 		"build": "cd frontend && yarn install && yarn build && cd ..",
-		"deploy": "cp -a frontend/build/. public/",
+		"deploy": "cp frontend/public/bundle.js public/ && cp frontend/public/index.html public/",
 		"postinstall": "yarn build && yarn deploy && echo 'Client built.'"
 	}
 }
