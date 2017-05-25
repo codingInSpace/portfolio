@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styles from './app.module.scss';
 
 import { AppHeader } from '../shared/containers/AppHeader'
-import AppFooter from '../shared/components/AppFooter'
+import AppFooter from '../shared/containers/AppFooter'
 import { AppToast } from '../shared/containers/AppToast'
 
 import { NewProject } from '../cms/containers/NewProject'

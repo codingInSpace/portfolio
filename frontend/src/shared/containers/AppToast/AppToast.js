@@ -15,7 +15,7 @@ class AppToast extends React.Component {
     const { status, msg } = this.props;
     const closeHandler = () => this.props.close();
 
-    return msg !== '' ? <Toast status={status} onClose={closeHandler}>{msg}</Toast> : null
+    return msg !== '' ? <Toast status={status} size="small" onClose={closeHandler}>{msg}</Toast> : null
   }
 }
 

@@ -16,7 +16,6 @@ let Login = (props) => {
       password: data.password
     }
 
-    console.log(payload)
     props.login(payload)
   }
 
