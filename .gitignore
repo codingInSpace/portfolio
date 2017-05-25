@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Node needs to be built at root level for Heroku deployment rails+react
+node_modules
+
 # Ignore bundler config.
 /.bundle
 
