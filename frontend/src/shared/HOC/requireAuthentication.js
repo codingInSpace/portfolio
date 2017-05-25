@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { toastThunks } from '../containers/AppToast'
 
 /**
  * HOC that redirects user away from page if not authenticated
@@ -18,9 +19,11 @@ const restrictAuthentication = (BaseComponent) => {
 
     checkAuth() {
       if (this.props.user.id === '') {
+        const triedPath = this.props.history.location.pathname
 
         // Push away from location
         this.props.history.push(`/`)
+        this.props.notify(triedPath)
       }
     }
 
@@ -34,7 +37,11 @@ const restrictAuthentication = (BaseComponent) => {
     user: state.user
   })
 
-  return connect(mapState, null)(ComponentWithAdminStatus)
+  const mapDispatch = dispatch => ({
+    notify: (path) => dispatch(toastThunks.showToast({status: 'critical', msg: `You are not authorized to view ${path}`}))
+  })
+
+  return connect(mapState, mapDispatch)(ComponentWithAdminStatus)
 }
 
 export default restrictAuthentication
