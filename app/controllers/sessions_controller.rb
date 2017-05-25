@@ -6,8 +6,8 @@ class SessionsController < Devise::SessionsController
 	def create
 		# Find user for given email
 		user = User.where(email: params[:email]).first
-		puts (User.where(email: params[:email]).first)
-
+		#puts #{(User.where(email: params[:email]).first)}
+		
 		# If no user found or password invalid, send unauthorized 
 		if user&.valid_password?(params[:password])
 			render json: user.as_json(only: [:id, :email, :authentication_token]), status: :created
@@ -28,6 +28,8 @@ class SessionsController < Devise::SessionsController
 
 	def destroy
 		sign_out(user)
+		current_user.authentication_token = nil
+		current_user.save
 		head :no_content
 	end
 	

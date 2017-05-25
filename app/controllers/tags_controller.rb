@@ -1,7 +1,9 @@
 class TagsController < ApplicationController
 	before_action :set_project
 	before_action :set_project_tag, only: [:show, :update, :destroy]
-	before_action :authenticate_user!, only: [:create, :update, :destroy]
+
+	acts_as_token_authentication_handler_for User, fallback: :none
+	before_action :require_auth!, only: [:create, :update, :destroy]
 
 	# GET /projects/:project_id/tags
 	# GET /tags
@@ -50,5 +52,9 @@ class TagsController < ApplicationController
 
 	def set_project_tag
     @tag = @project.tags.find_by!(id: params[:id]) if @project
+	end
+
+	def require_auth!
+		throw(:warden, scope: :user) unless current_user.presence
 	end
 end

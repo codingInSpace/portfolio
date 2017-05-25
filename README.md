@@ -35,6 +35,8 @@ Registrations are not enabled, [don't want people signing up on your portfolio a
 # rails console
 user = User.create!({:email => "homer.simpson@gmail.com", :password => "123456", :password_confirmation => "123456" })
 user.save
+
+# On user.save, a token is generated e.g. authentication_token => "aBcDeFgH"
 ```
 
 ### Sample requests to the api
@@ -46,7 +48,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 # for the user, stored to be included in request 
 # headers where authentication is required.
 
-curl -X POST -H "Accept: application/json" -H "X-User-Email: homer.simpson@gmail.com" -H "X-User-Token: aBcDeFgH" -d "some=data" http://localhost:3000/api/projects/
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -H "X-User-Email: homer.simpson@gmail.com" -H "X-User-Token: aBcDeFgH" --data '{"title": "Most Beers In A Minute", "short_desc": "mmmm beer", "tags": ["MOES"]}' http://localhost:3000/api/projects
 
 # Enjoy not getting 401
 ```
