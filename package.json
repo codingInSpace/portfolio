@@ -8,6 +8,6 @@
 	"scripts": {
 		"build": "cd frontend && yarn install && yarn build && cd ..",
 		"deploy": "cp -r frontend/public/* public/",
-		"postinstall": "yarn build && yarn deploy && echo 'Client built.'"
+		"postinstall": "yarn build && yarn deploy && echo 'Client built!'"
 	}
 }
