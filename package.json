@@ -1,0 +1,13 @@
+{
+	"name": "portfolio",
+	"author": "Jonathan Grangien <jonathan.grangien@gmail.com>",
+	"engines": {
+		"node": "7.10.0",
+		"yarn": "0.24.5"
+	},
+	"scripts": {
+		"build": "cd frontend && yarn install && yarn build && cd ..",
+		"deploy": "cp -a frontend/build/. public/",
+		"postinstall": "yarn build && yarn deploy && echo 'Client built.'"
+	}
+}

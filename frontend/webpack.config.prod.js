@@ -23,8 +23,6 @@ const styleLoaders = [{
 module.exports = {
 	devtool: '',
 	entry: [
-    'react-hot-loader/patch',
-		'webpack-hot-middleware/client',
     'babel-polyfill',
 		path.resolve(ROOT_PATH, 'src/index')
 	],
@@ -50,9 +48,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'styles.css',
       allChunks: true
-    }),
-		new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    })
 	],
 	module: {
 		rules: [
