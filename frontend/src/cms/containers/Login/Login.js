@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import LoginForm from 'grommet/components/LoginForm'
 import Section from 'grommet/components/Section'
-import Anchor from 'grommet/components/Anchor'
+import Label from 'grommet/components/Label'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { loginUserThunk } from './ducks'
@@ -24,7 +24,7 @@ let Login = (props) => {
     <Section pad="large"
              align="center">
       <LoginForm onSubmit={data => submitLogin(data)}
-                 logo={<Anchor label="JG" />} />
+                 logo={<Label size="large">JG</Label>} />
     </Section>
   )
 }

@@ -12,8 +12,10 @@ import DashboardIcon from 'grommet/components/icons/base/Dashboard'
 import cssModules from 'react-css-modules'
 import * as styles from './index.module.scss'
 
+import provideAuthenticadStatus from '../../HOC/provideAuthenticatedStatus'
+
 let AppHeader = (props) => {
-  const { adminView } = props
+  const { adminView, authenticated } = props
   const label = adminView ? 'JG ADMIN' : 'JG'
   const cIndex = adminView ? 'neutral-1' : 'grey-1'
   const icon = adminView ? <DashboardIcon /> : undefined
@@ -35,13 +37,15 @@ let AppHeader = (props) => {
               direction="row">
           <Anchor path="/" label="ABOUT"/>
           <Anchor path="/projects" label="PROJECTS"/>
-          <Menu inline={false}
-                label="ADMIN"
-                responsive>
-            <Anchor path="/admin/newproject" label="ADD PROJECT"/>
-            <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
-            <Anchor path="/admin/images" label="IMAGES"/>
-          </Menu>
+          { authenticated ? (
+            <Menu inline={false}
+                  label="ADMIN"
+                  responsive>
+              <Anchor path="/admin/newproject" label="ADD PROJECT"/>
+              <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
+              <Anchor path="/admin/images" label="IMAGES"/>
+            </Menu>
+          ) : null }
         </Menu>
       </Box>
     </Header>
@@ -61,4 +65,5 @@ const mapState = state => ({
 })
 
 AppHeader = cssModules(AppHeader, styles)
+AppHeader = provideAuthenticadStatus(AppHeader)
 export default connect(mapState, null)(AppHeader)

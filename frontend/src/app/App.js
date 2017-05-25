@@ -20,6 +20,8 @@ import About from '../client/components/About'
 import Portfolio from '../client/containers/Portfolio'
 import { ProjectView } from '../client/containers/ProjectView'
 
+import requireAuthentication from '../shared/HOC/requireAuthentication'
+
 let AppComponent = (props) => {
   const { bannerOffset } = props
 
@@ -34,10 +36,10 @@ let AppComponent = (props) => {
             <Route exact path="/projects" component={Portfolio}/>
             <Route exact path="/projects/:id" component={ProjectView}/>
             <Route exact path="/admin/login" component={Login}/>
-            <Route exact path="/admin/newproject" component={NewProject}/>
-            <Route exact path="/admin/manageprojects" component={ManageProjects}/>
-            <Route exact path="/admin/manageprojects/:id" component={EditProject}/>
-            <Route exact path="/admin/images" component={ManageImages}/>
+            <Route exact path="/admin/newproject" component={requireAuthentication(NewProject)}/>
+            <Route exact path="/admin/manageprojects" component={requireAuthentication(ManageProjects)}/>
+            <Route exact path="/admin/manageprojects/:id" component={requireAuthentication(EditProject)}/>
+            <Route exact path="/admin/images" component={requireAuthentication(ManageImages)}/>
           </Switch>
         </div>
         <AppFooter />
