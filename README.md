@@ -6,7 +6,8 @@ Rails API only back-end
 React+Redux frontend  
 
 Todo:  
-Make stuff cooler looking
+Make stuff cooler looking  
+Show more details on project pages
 
 ## Rails Environment
 Ruby 2.4.0   
