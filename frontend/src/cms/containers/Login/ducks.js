@@ -37,7 +37,7 @@ export function loginUserThunk(userData) {
   return (dispatch) => {
     dispatch({type: LOGIN_USER_WITH_CREDENTIALS})
 
-    const url = `${process.env.APP_URL}/users/sign_in`
+    const url = `${process.env.APP_URL}/login`
 
     try {
       axios.post(url, userData)
@@ -66,14 +66,16 @@ export function loginUserThunk(userData) {
 export function logoutUserThunk(userData) {
   return (dispatch, getState) => {
     dispatch({type: LOGOUT_USER})
-    const url = `${process.env.APP_URL}/users/sign_out`
+    const url = `${process.env.APP_URL}/logout`
     const data = {
       email: getState().user.email
     }
 
     const headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-User-Email': getState().user.email,
+      'X-User-Token': getState().user.token
     }
 
     try {

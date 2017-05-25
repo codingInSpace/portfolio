@@ -1,5 +1,6 @@
 import * as actions from './actions'
 import axios from 'axios'
+import { toastThunks } from '../../../../shared/containers/AppToast'
 
 export function submitNewProject(data) {
   return (dispatch, getState) => {
@@ -22,17 +23,35 @@ export function submitNewProject(data) {
       tags
     }
 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-User-Email': getState().user.email,
+      'X-User-Token': getState().user.token
+    }
+
+    console.log(headers)
+
     try {
-      axios.post(url, postPayload)
+      axios({
+        method: 'POST',
+        url,
+        data: postPayload,
+        headers
+      })
         .then(response => {
           console.log(response)
 
           dispatch({type: actions.SUCCEED_SUBMITTING_NEW_PROJECT_DATA})
           dispatch({type: actions.CLEAR_NEW_PROJECT_FORM})
         })
+        .catch(reason => {
+          console.error(reason)
+          dispatch(toastThunks.showToast({status: 'critical', msg: reason.toString()}))
+        })
     } catch (e) {
       console.error(e)
-      dispatch({type: actions.FAIL_SUBMITTING_NEW_PROJECT_DATA})
+      dispatch(toastThunks.showToast({status: 'critical', msg: e.toString()}))
     }
   }
 }

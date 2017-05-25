@@ -6,7 +6,7 @@ import { projectsEntityThunks } from '../../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../../shared/entities/Tags'
 
 export function updateProject(data) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({type: actions.UPDATE_PROJECT_DATA})
     const url = `${process.env.API_HOST}/projects/${data.id}`
 
@@ -26,10 +26,18 @@ export function updateProject(data) {
       tags
     }
 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-User-Email': getState().user.email,
+      'X-User-Token': getState().user.token
+    }
+
     try {
       axios({
         method: 'put',
         url: url,
+        headers,
         data: payload
       })
         .then(response => {
