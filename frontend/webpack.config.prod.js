@@ -39,6 +39,7 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
       'process.env':{
+        'APP_URL': JSON.stringify(process.env.APP_URL),
         'API_HOST': JSON.stringify(process.env.API_HOST),
         'IMGUR_API_ALBUM': JSON.stringify(process.env.IMGUR_API_ALBUM),
         'IMGUR_API_GET_ALBUM_URL': JSON.stringify(process.env.IMGUR_API_GET_ALBUM_URL),

@@ -16,6 +16,11 @@ const initialState = {
 	appBannerOffset: 0,
 
 	// data
+  user: {
+	  id: '',
+    email: '',
+    token: ''
+  },
 	projectsById: {},
   tagsByProjectId: {},
   imagesById: {},

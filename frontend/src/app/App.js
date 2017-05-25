@@ -14,6 +14,7 @@ import { NewProject } from '../cms/containers/NewProject'
 import ManageProjects from '../cms/containers/ManageProjects'
 import EditProject from '../cms/containers/EditProject'
 import ManageImages from '../cms/containers/ManageImages'
+import { Login } from '../cms/containers/Login'
 
 import About from '../client/components/About'
 import Portfolio from '../client/containers/Portfolio'
@@ -32,6 +33,7 @@ let AppComponent = (props) => {
             <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />
             <Route exact path="/projects" component={Portfolio}/>
             <Route exact path="/projects/:id" component={ProjectView}/>
+            <Route exact path="/admin/login" component={Login}/>
             <Route exact path="/admin/newproject" component={NewProject}/>
             <Route exact path="/admin/manageprojects" component={ManageProjects}/>
             <Route exact path="/admin/manageprojects/:id" component={EditProject}/>
