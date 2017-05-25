@@ -1,7 +1,10 @@
 class SessionsController < Devise::SessionsController
+	acts_as_token_authentication_handler_for User, fallback: :none
+
 	def create
 		# Find user for given email
 		user = User.where(email: params[:email]).first
+		puts (User.where(email: params[:email]).first)
 
 		# If no user found or password invalid, send unauthorized 
 		if user&.valid_password?(params[:password])
@@ -24,6 +27,13 @@ class SessionsController < Devise::SessionsController
 	def destroy
 		sign_out(user)
 		head :no_content
+	end
+	
+	private
+
+	def after_successful_token_authentication
+		# Make the authentication token disposable
+		renew_authentication_token!
 	end
 end
 

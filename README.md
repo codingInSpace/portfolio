@@ -39,11 +39,11 @@ user.save
 
 ### Sample requests to the api
 ```bash
-curl -X POST -d "email=homer.simpson@gmail.com&password=123456" http://localhost:3000/users/sign_in   
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" --data '{"email": "homer.simpson@gmail.com", "password": "123456"}' http://localhost:3000/users/sign_in
 
-# If password correct, this returns user info 
-# along with a valid authentication token for 
-# the user, stored to be included in request 
+# If email+password correct, this returns user  
+# info along with a valid authentication token
+# for the user, stored to be included in request 
 # headers where authentication is required.
 
 curl -X POST -H "Accept: application/json" -H "X-User-Email: homer.simpson@gmail.com" -H "X-User-Token: aBcDeFgH" -d "some=data" http://localhost:3000/api/projects/
