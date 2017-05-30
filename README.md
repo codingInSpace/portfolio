@@ -9,7 +9,7 @@ Todo:
 Make stuff cooler looking
 
 ## Rails Environment
-Ruby 2.4.0   
+Ruby 2.4.1   
 Rails 5.0.2  
 postgresql 9.6.1-3  
 
