@@ -13,7 +13,7 @@ import rose from 'violet-sine-rose'
 import cssModules from 'react-css-modules'
 import styles from './index.module.scss'
 
-import { mainActions } from '../../../app'
+import { SET_HEIGHT_OFFSET_OF_BANNER } from '../../../app'
 
 class AppBanner extends React.Component {
   constructor(props) {
@@ -89,7 +89,7 @@ AppBanner.defaultProps = {
 }
 
 const mapDispatch = dispatch => ({
-  setBannerOffset: offset => dispatch({type: mainActions.SET_HEIGHT_OFFSET_OF_BANNER, payload: offset})
+  setBannerOffset: offset => dispatch({type: SET_HEIGHT_OFFSET_OF_BANNER, payload: offset})
 })
 
 AppBanner = connect(null, mapDispatch)(AppBanner)

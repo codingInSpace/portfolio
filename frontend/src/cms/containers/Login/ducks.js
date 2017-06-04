@@ -49,6 +49,10 @@ export function loginUserThunk(userData) {
             token: data.authentication_token
           }
 
+          // Set local storage data
+          localStorage.setItem('token', payload.token)
+          localStorage.setItem('email', payload.email)
+
           dispatch(toastThunks.showToast({status: 'ok', msg: `Logged in as ${payload.email}`}))
           dispatch(receiveUserCredentials(payload))
         })
