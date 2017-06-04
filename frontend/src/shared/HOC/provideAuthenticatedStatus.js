@@ -13,7 +13,7 @@ const provideAuthenticatedStatus = (BaseComponent) => {
     }
 
     render() {
-      return <BaseComponent authenticated={this.props.user.id !== ''} {...this.props}/>
+      return <BaseComponent authenticated={this.props.user.token !== ''} {...this.props}/>
     }
   }
 

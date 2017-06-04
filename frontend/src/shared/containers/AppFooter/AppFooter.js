@@ -8,7 +8,7 @@ import Anchor from 'grommet/components/Anchor'
 import { logoutUserThunk } from '../../../cms/containers/Login'
 
 const AppFooter = (props) => {
-  const loggedIn = props.user.id !== ''
+  const loggedIn = props.user.token !== ''
 
 	return (
     <Footer size="large"

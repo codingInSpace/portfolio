@@ -18,7 +18,7 @@ const restrictAuthentication = (BaseComponent) => {
     }
 
     checkAuth() {
-      if (this.props.user.id === '') {
+      if (this.props.user.token === '') {
         const triedPath = this.props.history.location.pathname
 
         // Push away from location
@@ -28,7 +28,7 @@ const restrictAuthentication = (BaseComponent) => {
     }
 
     render() {
-      const authenticated = this.props.user.id !== ''
+      const authenticated = this.props.user.token !== ''
       return authenticated ? <BaseComponent {...this.props} /> : null
     }
   }
