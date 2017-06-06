@@ -13,5 +13,11 @@ Rails.application.routes.draw do
 		end
 
 		resources :tags, only: [:index]
+
 	end
+
+  get '*path', to: 'clienthandler#fallback_index_html',
+    contraints: -> (request) do
+      !request.xhr? && request.format.html?
+    end
 end
