@@ -1,7 +1,7 @@
 import * as actions from './actions'
 import axios from 'axios'
 
-import { projectsEntityThunks } from '../../../../shared/entities/Projects'
+import { getAllProjects } from '../../../../shared/entities/Projects'
 
 export function deleteProject(id) {
   return (dispatch, getState) => {
@@ -26,7 +26,7 @@ export function deleteProject(id) {
           const { data } = response
           console.log(data)
 
-          dispatch(projectsEntityThunks.getAllProjects())
+          dispatch(getAllProjects())
         })
     } catch(e) {
       console.error(e)

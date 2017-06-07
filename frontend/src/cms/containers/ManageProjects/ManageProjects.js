@@ -9,7 +9,7 @@ import Button from 'grommet/components/Button'
 import TrashIcon from 'grommet/components/icons/base/Trash'
 import EditIcon from 'grommet/components/icons/base/Edit'
 
-import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { getAllProjects } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { deleteProject } from './ducks/thunks'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
@@ -80,7 +80,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getProjects: id => dispatch(projectsEntityThunks.getAllProjects()),
+  getProjects: id => dispatch(getAllProjects()),
   getTags: id => dispatch(tagsEntityThunks.getAllTags()),
   delete: id => dispatch(deleteProject(id))
 })

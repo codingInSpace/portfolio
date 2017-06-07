@@ -13,7 +13,7 @@ import AppBanner from '../../containers/AppBanner'
 import Tag from '../../components/Tag'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
-import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { getOneProject } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { getAllImages } from '../../../shared/entities/Images'
 
@@ -80,7 +80,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getProject: id => dispatch(projectsEntityThunks.getOneProject(id)),
+  getProject: id => dispatch(getOneProject(id)),
   getTags: id => dispatch(tagsEntityThunks.getAllTags()),
   getImages: id => dispatch(getAllImages()),
 })

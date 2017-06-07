@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { headerColorReducer } from './shared/containers/AppHeader'
 import { loginReducer } from './cms/containers/Login'
 import { newProjectClearFormReducer } from './cms/containers/NewProject'
-import { projectsEntityReducer } from './shared/entities/Projects'
+import projectsEntityReducer from './shared/entities/Projects'
 import { tagsEntityReducer } from './shared/entities/Tags'
 import imagesEntityReducer from './shared/entities/Images'
 import { bannerOffsetReducer } from './app'

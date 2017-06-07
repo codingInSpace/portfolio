@@ -13,7 +13,7 @@ import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { updateProject } from './ducks/thunks'
-import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { getAllProjects } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { getAllImages } from '../../../shared/entities/Images'
 
@@ -224,7 +224,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   submitData: data => dispatch(updateProject(data)),
-  getAllProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
+  getAllProjects: () => dispatch(getAllProjects()),
   getAllTags: () => dispatch(tagsEntityThunks.getAllTags()),
   getAllImages: () => dispatch(getAllImages())
 })

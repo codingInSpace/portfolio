@@ -2,7 +2,7 @@ import * as actions from './actions'
 import axios from 'axios'
 import { toastThunks } from '../../../../shared/containers/AppToast'
 
-import { projectsEntityThunks } from '../../../../shared/entities/Projects'
+import { getAllProjects } from '../../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../../shared/entities/Tags'
 
 export function updateProject(data) {
@@ -46,7 +46,7 @@ export function updateProject(data) {
             // dispatch notification
           }
 
-          dispatch(projectsEntityThunks.getAllProjects())
+          dispatch(getAllProjects())
           dispatch(tagsEntityThunks.getAllTags())
           dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
         })

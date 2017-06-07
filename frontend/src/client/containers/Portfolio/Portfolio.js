@@ -10,7 +10,7 @@ import Section from 'grommet/components/Section'
 
 import { withRouter } from 'react-router-dom'
 
-import { projectsEntityThunks } from '../../../shared/entities/Projects'
+import { getAllProjects } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { getAllImages } from '../../../shared/entities/Images'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
@@ -86,7 +86,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
+  getProjects: () => dispatch(getAllProjects()),
   getTags: () => dispatch(tagsEntityThunks.getAllTags()),
   getImages: () => dispatch(getAllImages()),
 })
