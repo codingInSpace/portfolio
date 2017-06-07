@@ -1,6 +1,18 @@
 import * as actions from './actions'
 import axios from 'axios'
 
+/**
+ * Change the http part of the link to https
+ * Imgur api seemingly does not provide this but it works
+ * {string} link - The link to an image
+ */
+function secureLink(link) {
+  return link.replace('http', 'https')
+}
+
+/**
+ * Get all images from the Imgur album
+ */
 export function getAllImages() {
   return (dispatch) => {
     dispatch({type: actions.GET_ALL_IMAGES})
@@ -21,7 +33,7 @@ export function getAllImages() {
 
           for (let i in data) {
             const { id } = data[i]
-            results[id] = data[i]
+            results[id] = {...data[i], link: secureLink(data[i].link)}
           }
 
           dispatch({
