@@ -11,7 +11,7 @@ import Button from 'grommet/components/Button'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
-import { imagesEntityThunks } from '../../../shared/entities/Images'
+import { getAllImages } from '../../../shared/entities/Images'
 import ImageIdSelector from '../../components/ImageIdSelector'
 
 import { submitNewProject } from './ducks/thunks'
@@ -186,7 +186,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   submitData: data => dispatch(submitNewProject(data)),
   doneClearing: () => dispatch({type: FINISH_CLEAR_NEW_PROJECT_FORM}),
-  getAllImages: () => dispatch(imagesEntityThunks.getAllImages())
+  getAllImages: () => dispatch(getAllImages())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(NewProject, true))

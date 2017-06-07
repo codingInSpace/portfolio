@@ -10,7 +10,7 @@ import Tile from 'grommet/components/Tile'
 import Image from 'grommet/components/Image'
 import TextInput from 'grommet/components/TextInput'
 
-import { imagesEntityThunks } from '../../../shared/entities/Images'
+import { getAllImages } from '../../../shared/entities/Images'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 class ManageImages extends React.Component {
@@ -50,7 +50,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getImages: id => dispatch(imagesEntityThunks.getAllImages()),
+  getImages: id => dispatch(getAllImages()),
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(ManageImages, true))

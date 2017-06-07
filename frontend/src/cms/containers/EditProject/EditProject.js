@@ -15,7 +15,7 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { updateProject } from './ducks/thunks'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
-import { imagesEntityThunks } from '../../../shared/entities/Images'
+import { getAllImages } from '../../../shared/entities/Images'
 
 import ImageIdSelector from '../../components/ImageIdSelector'
 
@@ -226,7 +226,7 @@ const mapDispatch = dispatch => ({
   submitData: data => dispatch(updateProject(data)),
   getAllProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
   getAllTags: () => dispatch(tagsEntityThunks.getAllTags()),
-  getAllImages: () => dispatch(imagesEntityThunks.getAllImages())
+  getAllImages: () => dispatch(getAllImages())
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(EditProject, true))

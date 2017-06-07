@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
-import { imagesEntityThunks } from '../../../shared/entities/Images'
+import { getAllImages } from '../../../shared/entities/Images'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 
 import AppBanner from '../../containers/AppBanner'
@@ -88,7 +88,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getProjects: () => dispatch(projectsEntityThunks.getAllProjects()),
   getTags: () => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: () => dispatch(imagesEntityThunks.getAllImages()),
+  getImages: () => dispatch(getAllImages()),
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(withRouter(Portfolio), false))

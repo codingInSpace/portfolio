@@ -15,7 +15,7 @@ import Tag from '../../components/Tag'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { projectsEntityThunks } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
-import { imagesEntityThunks } from '../../../shared/entities/Images'
+import { getAllImages } from '../../../shared/entities/Images'
 
 class ProjectView extends React.Component {
 
@@ -82,7 +82,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getProject: id => dispatch(projectsEntityThunks.getOneProject(id)),
   getTags: id => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: id => dispatch(imagesEntityThunks.getAllImages()),
+  getImages: id => dispatch(getAllImages()),
 })
 
 export default connect(mapState, mapDispatch)(setHeaderView(ProjectView, false))
