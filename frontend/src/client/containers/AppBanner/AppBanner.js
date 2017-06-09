@@ -84,7 +84,7 @@ AppBanner.propTypes = {
 
 AppBanner.defaultProps = {
   primary: 'Jonathan Grangien',
-  secondary: ['Developer', 'Web fullstack-er', 'Comp graphics enthusiast', 'MSc engineering student'],
+  secondary: ['Developer', 'Web fullstack-aspirant', 'Comp graphics enthusiast', 'MSc engineering student'],
   large: false,
 }
 
