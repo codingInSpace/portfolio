@@ -85,7 +85,6 @@ export function logoutUserThunk(userData) {
     try {
       axios({method: 'DELETE', url, data, headers})
         .then(response => {
-          dispatch(clearUserDetails())
           dispatch(toastThunks.showToast({status: 'ok', msg: 'Logged out'}))
         })
         .catch(reason => {
@@ -96,5 +95,8 @@ export function logoutUserThunk(userData) {
       console.error(e)
       dispatch(toastThunks.showToast({status: 'critical', msg: e.toString()}))
     }
+
+    // Clear user data in state
+    dispatch(clearUserDetails())
   }
 }
