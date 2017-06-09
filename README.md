@@ -82,6 +82,8 @@ yarn eslint:fix
 ```
 
 ## TDDD27
+[Cringy screencast](https://www.youtube.com/watch?v=Pf9SmeyTMZg)   
+
 ### Functional specification
 A portfolio application, that serves as a personal page and a platform to showcase a person's projects. A user can be authenticated and manage projects in a CMS section. A project item consists of an image, description, relevant links, tags etc. Blog/news posts may be added to fill out more content.
 
