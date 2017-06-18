@@ -17,7 +17,7 @@ postgresql 9.6.1-3
 ## Usage and development
 ### Setup PosgreSQL
 Following the details in database.yml  
-```bash
+```sql
 # psql
 CREATE DATABASE portfolio_development;  
 CREATE DATABASE portfolio_test;   
