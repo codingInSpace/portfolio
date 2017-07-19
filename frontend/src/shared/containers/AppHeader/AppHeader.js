@@ -12,21 +12,22 @@ import DashboardIcon from 'grommet/components/icons/base/Dashboard'
 import cssModules from 'react-css-modules'
 import * as styles from './index.module.scss'
 
-import provideAuthenticadStatus from '../../HOC/provideAuthenticatedStatus'
+import provideAuthenticatedStatus from '../../HOC/provideAuthenticatedStatus'
 
 let AppHeader = (props) => {
   const { adminView, authenticated } = props
   const label = adminView ? 'JG ADMIN' : 'JG'
-  const cIndex = adminView ? 'neutral-1' : 'grey-1'
+  const cIndex = adminView ? 'neutral-1' : 'light-1'
   const icon = adminView ? <DashboardIcon /> : undefined
   const titlePath = adminView ? '/admin/newproject' : '/'
 
   return (
     <Header size="medium"
-            fixed
+            float
             colorIndex={cIndex}
             className={styles.header}
             justify="between"
+            style={ adminView ? null : {backgroundColor: 'rgba(0,0,0,0)'} }
             pad={{horizontal: 'medium', vertical: 'none'}}>
       <Title>
         <Anchor icon={icon} path={titlePath} label={label}/>
@@ -53,11 +54,13 @@ let AppHeader = (props) => {
 }
 
 AppHeader.propTypes = {
-	adminView: PropTypes.bool,
+  adminView: PropTypes.bool,
+  authenticated: PropTypes.bool,
 }
 
 AppHeader.defaultProps = {
   adminView: false,
+  authenticated: false,
 }
 
 const mapState = state => ({
@@ -65,5 +68,5 @@ const mapState = state => ({
 })
 
 AppHeader = cssModules(AppHeader, styles)
-AppHeader = provideAuthenticadStatus(AppHeader)
+AppHeader = provideAuthenticatedStatus(AppHeader)
 export default connect(mapState, null)(AppHeader)

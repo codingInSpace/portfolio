@@ -7,9 +7,7 @@ import Image from 'grommet/components/Image'
 import Label from 'grommet/components/Label'
 import Headline from 'grommet/components/Headline'
 
-// I made this https://github.com/codingInSpace/violet-sine-rose
 import rose from 'violet-sine-rose'
-
 import cssModules from 'react-css-modules'
 import styles from './index.module.scss'
 
@@ -24,10 +22,15 @@ class AppBanner extends React.Component {
 
   componentDidMount() {
     if (this.props.large) {
-      const width = window.innerWidth
-      const height = 700
-      this.canvasParentRef.appendChild(rose(width, height, true))
-      this.props.setBannerOffset(height)
+      const roseOpts = {
+        width: window.innerWidth,
+        height: 700,
+        respondToWidth: true,
+        bgColor: 'linear-gradient(20deg, #FFFEFF 0%, #ddf6ff 100%)',
+    }
+
+      this.canvasParentRef.appendChild(rose(roseOpts))
+      this.props.setBannerOffset(roseOpts.height)
     }
   }
 
@@ -36,17 +39,17 @@ class AppBanner extends React.Component {
   }
 
   render() {
-    const {primary, secondary, large} = this.props
+    const { primary, secondary, large } = this.props
 
     const HeadLine = () => (
-      <Box pad='medium'>
+      <Box pad="medium">
         <Headline size="small" className={styles.text}>{primary}</Headline>
       </Box>
     )
 
     return (
       <div>
-        { large ? <div style={{position: 'absolute', top: '72px', zIndex: 0, }} ref={el => this.canvasParentRef = el}></div> : null }
+        { large ? <div style={{position: 'absolute', zIndex: 0, }} ref={el => this.canvasParentRef = el}></div> : null }
         <Box pad={large ? 'large' : 'small'}
              className={ large ? styles.bannerLarge : styles.bannerSmall }
              align="center">
@@ -84,7 +87,7 @@ AppBanner.propTypes = {
 
 AppBanner.defaultProps = {
   primary: 'Jonathan Grangien',
-  secondary: ['Developer', 'Web fullstack-aspirant', 'Comp graphics enthusiast', 'MSc engineering student'],
+  secondary: [ 'Developer', 'MSc engineering student', 'Web fullstack-aspirant', 'Comp graphics enthusiast' ],
   large: false,
 }
 

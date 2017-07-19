@@ -39,13 +39,13 @@ class AppComponent extends React.Component {
           <div className={styles.container}>
             <Switch>
               <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />
-              <Route exact path="/projects" component={Portfolio}/>
-              <Route exact path="/projects/:id" component={ProjectView}/>
-              <Route exact path="/admin/login" component={Login}/>
-              <Route exact path="/admin/newproject" component={requireAuthentication(NewProject)}/>
-              <Route exact path="/admin/manageprojects" component={requireAuthentication(ManageProjects)}/>
-              <Route exact path="/admin/manageprojects/:id" component={requireAuthentication(EditProject)}/>
-              <Route exact path="/admin/images" component={requireAuthentication(ManageImages)}/>
+              <Route exact path="/projects" component={Portfolio} />
+              <Route exact path="/projects/:id" component={ProjectView} />
+              <Route exact path="/admin/login" component={Login} />
+              <Route exact path="/admin/newproject" component={requireAuthentication(NewProject)} />
+              <Route exact path="/admin/manageprojects" component={requireAuthentication(ManageProjects)} />
+              <Route exact path="/admin/manageprojects/:id" component={requireAuthentication(EditProject)} />
+              <Route exact path="/admin/images" component={requireAuthentication(ManageImages)} />
             </Switch>
           </div>
           <AppFooter />
