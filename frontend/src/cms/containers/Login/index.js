@@ -1,6 +1,5 @@
 import Login from './Login'
-import loginReducer from './ducks'
-import { logoutUserThunk } from './ducks'
+import loginReducer, { logoutUserThunk } from './ducks'
 
 export {
   Login,

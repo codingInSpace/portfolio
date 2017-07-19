@@ -97,6 +97,8 @@ export function logoutUserThunk(userData) {
     }
 
     // Clear user data in state
+    localStorage.setItem('token', '')
+    localStorage.setItem('email', '')
     dispatch(clearUserDetails())
   }
 }
