@@ -9,8 +9,7 @@
     "build": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.prod.js",
     "build:dev": "node_modules/.bin/webpack --config webpack.config.dev.js",
     "eslint": "./node_modules/.bin/eslint src/**",
-    "eslint:fix": "./node_modules/.bin/eslint --fix src/** ",
-    "postinstall": "npm rebuild node-sass"
+    "eslint:fix": "./node_modules/.bin/eslint --fix src/** "
   },
   "author": "Jonathan Grangien <jonathan.grangien@gmail.com>",
   "license": "ISC",
@@ -29,7 +28,7 @@
     "dotenv": "^4.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "grommet": "^1.4.0",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.5.3",
     "normalizr": "^3.2.2",
     "postcss-loader": "^1.3.3",
     "prop-types": "^15.5.8",
