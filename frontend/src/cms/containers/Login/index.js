@@ -4,5 +4,5 @@ import loginReducer, { logoutUserThunk } from './ducks'
 export {
   Login,
   loginReducer,
-  logoutUserThunk
+  logoutUserThunk,
 }
