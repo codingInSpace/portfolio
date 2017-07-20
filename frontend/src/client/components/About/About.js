@@ -13,6 +13,7 @@ import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 import cssModules from 'react-css-modules'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
+import provideWindowWidth from '../../../shared/HOC/provideWindowWidth'
 
 import AppBanner from '../../containers/AppBanner'
 import descMain from './text'
@@ -22,7 +23,7 @@ const SocialLink = (props) => {
   return (props.link === undefined) ? (
       <Box align="center" justify="start" direction="row">
         {props.icon}
-        <Box pad="small"><Label margin="none">{props.label}</Label></Box>
+        <Box pad="small"><Label truncate margin="none">{props.label}</Label></Box>
       </Box>
   ) : (
     <Anchor href={props.link}
@@ -33,8 +34,10 @@ const SocialLink = (props) => {
   )
 }
 
-const About = (props) => {
+let About = (props) => {
   const isOffset = props.bannerOffset > 0
+  const mobileBreak = props.width < 724
+  const largeHorPad = { horizontal: 'large', vertical: 'none' }
 
   const offsetStyle = {
     paddingTop: props.bannerOffset
@@ -56,8 +59,8 @@ const About = (props) => {
              direction="row"
              align="center"
              justify="center">
-          <Box pad="large"><Heading tag="h1">Recent Work</Heading></Box>
-          <Box pad="large"
+          <Box pad={largeHorPad}><Heading tag="h1">Recent Work</Heading></Box>
+          <Box pad={largeHorPad}
                align="center"
                size="medium">
             <Paragraph align="center" size="large">I list some of my experiences and work in courses or elsewhere.</Paragraph>
@@ -71,8 +74,9 @@ const About = (props) => {
              direction="row"
              align="center"
              justify="center">
-          <Box pad="large" align="start">
-            <SocialLink icon={<MailIcon />} label="jonathan.grangien@gmail.com" />
+          <Box align="start" pad={largeHorPad}>
+            <SocialLink icon={mobileBreak ? undefined : <MailIcon />}
+                        label="jonathan.grangien@gmail.com" />
             <SocialLink icon={<GithubIcon />}
                         link="https://github.com/codingInSpace/"
                         label="GitHub" />
@@ -80,13 +84,18 @@ const About = (props) => {
                         link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
                         label="LinkedIn" />
           </Box>
-          <Box pad="large">
-            <Heading tag="h1" margin="small">Follow</Heading>
-          </Box>
+          { mobileBreak ? undefined : (
+            <Box pad="large">
+              <Heading tag="h1" margin="small">Follow</Heading>
+            </Box>
+          )}
         </Box>
 			</div>
 		</div>
   )
 }
 
-export default setHeaderView(cssModules(About, styles), false)
+About = cssModules(About, styles)
+About = setHeaderView(About, false)
+About = provideWindowWidth(About)
+export default About
