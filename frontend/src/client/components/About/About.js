@@ -56,9 +56,8 @@ const About = (props) => {
              direction="row"
              align="center"
              justify="center">
-          <Box pad="large" margin="large"><Heading tag="h1">Recent Work</Heading></Box>
+          <Box pad="large"><Heading tag="h1">Recent Work</Heading></Box>
           <Box pad="large"
-               margin="large"
                align="center"
                size="medium">
             <Paragraph align="center" size="large">I list some of my experiences and work in courses or elsewhere.</Paragraph>
@@ -81,7 +80,7 @@ const About = (props) => {
                         link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
                         label="LinkedIn" />
           </Box>
-          <Box pad="large" margin="large">
+          <Box pad="large">
             <Heading tag="h1" margin="small">Follow</Heading>
           </Box>
         </Box>

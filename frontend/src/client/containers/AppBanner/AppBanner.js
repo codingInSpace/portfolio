@@ -21,13 +21,17 @@ class AppBanner extends React.Component {
   }
 
   componentDidMount() {
+    const optimizedWidth = window.innerWidth && document.documentElement.clientWidth ?
+      Math.min(window.innerWidth, document.documentElement.clientWidth) :
+      window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
+
     if (this.props.large) {
       const roseOpts = {
-        width: window.innerWidth,
+        width: optimizedWidth,
         height: 700,
         respondToWidth: true,
         bgColor: 'linear-gradient(20deg, #FFFEFF 0%, #ddf6ff 100%)',
-    }
+      }
 
       this.canvasParentRef.appendChild(rose(roseOpts))
       this.props.setBannerOffset(roseOpts.height)
