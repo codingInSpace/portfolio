@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { setProjectsLoading, clearProjectsLoading } from '../Loading'
 
 // Actions
 export const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS'
@@ -8,14 +9,16 @@ export const GET_ONE_PROJECT = 'GET_ONE_PROJECT'
 export const RECEIVE_ONE_PROJECT = 'RECEIVE_ONE_PROJECT'
 
 // Reducer
-export default function(state = {}, action) {
-  switch(action.type) {
+export default function (state = {}, action) {
+  switch (action.type) {
     case RECEIVE_ALL_PROJECTS:
       state = action.payload
       break;
     case RECEIVE_ONE_PROJECT:
       state = {...state}
       state[action.payload.id] = action.payload
+      break;
+    default:
       break;
   }
 
@@ -25,6 +28,7 @@ export default function(state = {}, action) {
 // Thunks
 export function getAllProjects() {
   return (dispatch) => {
+    dispatch(setProjectsLoading())
     dispatch({type: GET_ALL_PROJECTS})
     const url = `${process.env.API_HOST}/projects`
 
@@ -44,6 +48,8 @@ export function getAllProjects() {
             results[id] = data[i]
           }
 
+          dispatch(clearProjectsLoading())
+
           dispatch({
             type: RECEIVE_ALL_PROJECTS,
             payload: results
@@ -51,12 +57,14 @@ export function getAllProjects() {
         })
     } catch(e) {
       console.error(e)
+      dispatch(clearProjectsLoading())
     }
   }
 }
 
 export function getOneProject(id) {
   return (dispatch) => {
+    dispatch(setProjectsLoading())
     dispatch({type: GET_ONE_PROJECT})
     const url = `${process.env.API_HOST}/projects/${id}`
 
@@ -66,6 +74,8 @@ export function getOneProject(id) {
           const {data} = response
           console.log(data)
 
+          dispatch(clearProjectsLoading())
+
           dispatch({
             type: RECEIVE_ONE_PROJECT,
             payload: data
@@ -73,6 +83,7 @@ export function getOneProject(id) {
         })
     } catch (e) {
       console.error(e)
+      dispatch(clearProjectsLoading())
     }
   }
 }

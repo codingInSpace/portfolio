@@ -7,6 +7,7 @@ import Label from 'grommet/components/Label'
 import Tiles from 'grommet/components/Tiles'
 import Tile from 'grommet/components/Tile'
 import Section from 'grommet/components/Section'
+import Spinning from 'grommet/components/icons/Spinning'
 
 import { withRouter } from 'react-router-dom'
 
@@ -23,16 +24,16 @@ class Portfolio extends React.Component {
     this.getData()
   }
 
-  getData() {
-    this.props.getProjects()
-    this.props.getTags()
-    this.props.getImages()
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.projectsById !== this.props.projectsById) {
       this.setState({projects: nextProps.projectsById})
     }
+  }
+
+  getData() {
+    this.props.getProjects()
+    this.props.getTags()
+    this.props.getImages()
   }
 
   goToProject(seriesIdx) {
@@ -71,7 +72,9 @@ class Portfolio extends React.Component {
       </Section>
       ) : (
 					<Box pad="large" align="center" textAlign="center">
-						<Label>There are no projects in the database.</Label>
+            { this.props.projectsLoading ? <Spinning size="large"/> : (
+              <Label>There are no projects in the database.</Label>
+            ) }
 					</Box>
 				) }
 	</Box>
@@ -83,6 +86,7 @@ const mapState = state => ({
   projects: state.projectsById,
   tagsByProjectId: state.tagsByProjectId,
   imagesById: state.imagesById,
+  projectsLoading: state.projectsLoading,
 })
 
 const mapDispatch = dispatch => ({

@@ -24,6 +24,8 @@ const initialState = {
 	projectsById: {},
   tagsByProjectId: {},
   imagesById: {},
+
+  projectsLoading: false,
 }
 
 const prod = process.env.NODE_ENV === 'production'
