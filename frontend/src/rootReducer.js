@@ -10,14 +10,14 @@ import { bannerOffsetReducer } from './app'
 import { toastReducer } from './shared/containers/AppToast'
 
 const rootReducer = combineReducers({
-	appHeaderAdminView: headerColorReducer,
+  appHeaderAdminView: headerColorReducer,
   newProjectFormToBeCleared: newProjectClearFormReducer,
   user: loginReducer,
   projectsById: projectsEntityReducer,
   tagsByProjectId: tagsEntityReducer,
   imagesById: imagesEntityReducer,
   projectsLoading: projectsLoadingReducer,
-  appBannerOffset: bannerOffsetReducer,
+  //appBannerOffset: bannerOffsetReducer,
   appToast: toastReducer
 })
 

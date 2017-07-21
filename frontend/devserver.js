@@ -17,8 +17,6 @@ const config = require('./webpack.config.dev.js')
 const compiler = webpack(config)
 
 app.use(webpackDevMiddleware(compiler, {
-	lazy: false,
-	noInfo: true, 
 	publicPath: config.output.publicPath,
 	stats: {colors: true}
 }))

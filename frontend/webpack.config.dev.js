@@ -21,14 +21,14 @@ const styleLoaders = [{
 }];
 
 module.exports = {
-	devtool: 'source-map',
+	devtool: 'eval',
 	entry: [
-    'react-hot-loader/patch',
-	//	'webpack-dev-server/client?http://localhost:1337',
-	//	'webpack/hot/dev-server',
-		'webpack-hot-middleware/client',
     'babel-polyfill',
-		path.resolve(ROOT_PATH, 'src/index')
+    'react-hot-loader/patch',
+		//'webpack-dev-server/client?http://localhost:1337',
+		'webpack/hot/dev-server',
+		'webpack-hot-middleware/client',
+		path.resolve(ROOT_PATH, 'src/index.js')
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.json', '.scss', '.css']
@@ -64,7 +64,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: [/node_modules/, /public/],
-				loaders: 'babel-loader',
+				loaders: ['babel-loader'],
 			},
 			{
 				test: /\.module\.scss$/,
@@ -94,7 +94,7 @@ module.exports = {
 			},
       {
         test: /\.(jpg|png)$/,
-        loader: 'file?name=[path][name].[hash].[ext]'
+        loader: 'file-loader?name=[path][name].[hash].[ext]'
       }
 		]
 	}
