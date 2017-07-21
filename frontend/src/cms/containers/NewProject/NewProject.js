@@ -14,8 +14,7 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { getAllImages } from '../../../shared/entities/Images'
 import ImageIdSelector from '../../components/ImageIdSelector'
 
-import { submitNewProject } from './ducks/thunks'
-import { FINISH_CLEAR_NEW_PROJECT_FORM } from './ducks/actions'
+import { submitNewProject, FINISH_CLEAR_NEW_PROJECT_FORM } from './ducks'
 
 class NewProject extends React.Component {
   constructor(props) {
@@ -134,8 +133,10 @@ class NewProject extends React.Component {
                          value={shortDesc} />
             </FormField>
             <FormField label="Long description">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'longDesc')}
-                         value={longDesc} />
+              <textarea onChange={e => this.updateText(e.target.value, 'longDesc')}
+                        rows="5"
+                        type="text"
+                        value={longDesc} />
             </FormField>
             <FormField label="Source url">
               <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')}

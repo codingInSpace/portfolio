@@ -12,7 +12,7 @@ import Anchor from 'grommet/components/Anchor'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
-import { updateProject } from './ducks/thunks'
+import { updateProject } from './ducks'
 import { getAllProjects } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { getAllImages } from '../../../shared/entities/Images'
@@ -172,8 +172,10 @@ class EditProject extends React.Component {
                          value={shortDesc} />
             </FormField>
             <FormField label="Long description">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'longDesc')}
-                         value={longDesc} />
+              <textarea onChange={e => this.updateText(e.target.value, 'longDesc')}
+                        rows="5"
+                        type="text"
+                        value={longDesc} />
             </FormField>
             <FormField label="Source url">
               <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')}

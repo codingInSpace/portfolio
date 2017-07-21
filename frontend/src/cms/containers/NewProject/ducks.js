@@ -1,6 +1,27 @@
-import * as actions from './actions'
 import axios from 'axios'
-import { toastThunks } from '../../../../shared/containers/AppToast'
+import { toastThunks } from '../../../shared/containers/AppToast'
+
+export const SUBMIT_NEW_PROJECT_DATA = 'SUBMIT_NEW_PROJECT_DATA'
+export const SUCCEED_SUBMITTING_NEW_PROJECT_DATA = 'SUCCEED_SUBMITTING_NEW_PROJECT_DATA'
+export const FAIL_SUBMITTING_NEW_PROJECT_DATA = 'FAIL_SUBMITTING_NEW_PROJECT_DATA'
+
+export const CLEAR_NEW_PROJECT_FORM = 'CLEAR_NEW_PROJECT_FORM'
+export const FINISH_CLEAR_NEW_PROJECT_FORM = 'FINISH_CLEAR_NEW_PROJECT_FORM'
+
+export default function newProjectClearFormReducer(state = false, action) {
+  switch (action.type) {
+    case CLEAR_NEW_PROJECT_FORM:
+      state = true
+      break;
+    case FINISH_CLEAR_NEW_PROJECT_FORM:
+      state = false
+      break;
+    default:
+      break;
+  }
+
+  return state;
+}
 
 export function submitNewProject(data) {
   return (dispatch, getState) => {
@@ -8,8 +29,10 @@ export function submitNewProject(data) {
     const url = `${process.env.API_HOST}/projects`
 
     let tags = data.tagsString.split(',')
-    for (let i in tags)
+    console.log(tags)
+    for (let i in tags) {
       tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
+    }
 
     const postPayload = {
       title: data.title,
@@ -29,8 +52,6 @@ export function submitNewProject(data) {
       'X-User-Email': getState().user.email,
       'X-User-Token': getState().user.token
     }
-
-    console.log(headers)
 
     try {
       axios({
@@ -55,4 +76,3 @@ export function submitNewProject(data) {
     }
   }
 }
-

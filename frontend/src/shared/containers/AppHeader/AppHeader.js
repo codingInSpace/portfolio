@@ -23,7 +23,7 @@ let AppHeader = (props) => {
 
   return (
     <Header size="medium"
-            float
+            float={!adminView}
             colorIndex={cIndex}
             className={styles.header}
             justify="between"

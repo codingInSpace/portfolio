@@ -1,18 +1,20 @@
-import * as actions from './actions'
 import axios from 'axios'
-import { toastThunks } from '../../../../shared/containers/AppToast'
+import { toastThunks } from '../../../shared/containers/AppToast'
+import { getAllProjects } from '../../../shared/entities/Projects'
+import { tagsEntityThunks } from '../../../shared/entities/Tags'
 
-import { getAllProjects } from '../../../../shared/entities/Projects'
-import { tagsEntityThunks } from '../../../../shared/entities/Tags'
+export const UPDATE_PROJECT_DATA = 'UPDATE_PROJECT_DATA'
 
+// Thunks
 export function updateProject(data) {
   return (dispatch, getState) => {
-    dispatch({type: actions.UPDATE_PROJECT_DATA})
+    dispatch({type: UPDATE_PROJECT_DATA})
     const url = `${process.env.API_HOST}/projects/${data.id}`
 
     let tags = data.tagsString.split(',')
-    for (let i in tags)
+    for (let i in tags) {
       tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
+    }
 
     const payload = {
       title: data.title,
@@ -50,7 +52,7 @@ export function updateProject(data) {
           dispatch(tagsEntityThunks.getAllTags())
           dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
         })
-    } catch(e) {
+    } catch (e) {
       console.error(e)
       dispatch(toastThunks.showToast({msg: `Failed to update project ${payload.title}, ${e.toString()}`, status: 'critical'}))
     }
