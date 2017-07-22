@@ -25,7 +25,7 @@ export default function newProjectClearFormReducer(state = false, action) {
 
 export function submitNewProject(data) {
   return (dispatch, getState) => {
-    dispatch({type: actions.SUBMIT_NEW_PROJECT_DATA})
+    dispatch({type: SUBMIT_NEW_PROJECT_DATA})
     const url = `${process.env.API_HOST}/projects`
 
     let tags = data.tagsString.split(',')
@@ -63,8 +63,8 @@ export function submitNewProject(data) {
         .then(response => {
           console.log(response)
 
-          dispatch({type: actions.SUCCEED_SUBMITTING_NEW_PROJECT_DATA})
-          dispatch({type: actions.CLEAR_NEW_PROJECT_FORM})
+          dispatch({type: SUCCEED_SUBMITTING_NEW_PROJECT_DATA})
+          dispatch({type: CLEAR_NEW_PROJECT_FORM})
         })
         .catch(reason => {
           console.error(reason)
