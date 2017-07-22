@@ -26,12 +26,14 @@ let AppHeader = (props) => {
             float={!adminView}
             colorIndex={cIndex}
             className={styles.header}
-            justify="between"
+            justify={adminView ? 'between' : 'end'}
             style={ adminView ? null : {backgroundColor: 'rgba(0,0,0,0)'} }
             pad={{horizontal: 'medium', vertical: 'none'}}>
-      <Title>
-        <Anchor icon={icon} path={titlePath} label={label}/>
-      </Title>
+      { adminView ? (
+        <Title>
+          <Anchor icon={icon} path={titlePath} label={label}/>
+        </Title>
+      ) : null }
       <Box pad={{horizontal: 'small', vertical: 'none'}}>
         <Menu inline
               responsive
