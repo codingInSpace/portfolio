@@ -58,11 +58,15 @@ class AppComponent extends React.Component {
   }
 }
 
+const mapState = state => ({
+  bannerOffset: state.appBannerOffset
+})
+
 const mapDispatch = dispatch => ({
   getUserData: () => dispatch(getLocalStorage())
 })
 
-AppComponent = connect(null, mapDispatch)(AppComponent)
+AppComponent = connect(mapState, mapDispatch)(AppComponent)
 AppComponent = cssModules(AppComponent, styles)
 
 const AppWithStore = () => (

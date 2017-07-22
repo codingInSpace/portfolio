@@ -6,7 +6,7 @@ import projectsEntityReducer from './shared/entities/Projects'
 import { tagsEntityReducer } from './shared/entities/Tags'
 import imagesEntityReducer from './shared/entities/Images'
 import projectsLoadingReducer from './shared/entities/Loading'
-import { bannerOffsetReducer } from './app'
+import bannerOffsetReducer from './app/ducks'
 import { toastReducer } from './shared/containers/AppToast'
 
 const rootReducer = combineReducers({
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   tagsByProjectId: tagsEntityReducer,
   imagesById: imagesEntityReducer,
   projectsLoading: projectsLoadingReducer,
-  //appBannerOffset: bannerOffsetReducer,
+  appBannerOffset: bannerOffsetReducer,
   appToast: toastReducer
 })
 

@@ -13,7 +13,7 @@ const initialState = {
   },
 
   // config
-	//appBannerOffset: 0,
+	appBannerOffset: 0,
 
 	// data
   user: {

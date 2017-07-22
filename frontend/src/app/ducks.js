@@ -7,7 +7,7 @@ const CHECK_LOCALLY_STORED_DATA = 'CHECK_LOCALLY_STORED_DATA'
 
 // Reducer
 export default function bannerOffsetReducer(state = 0, action) {
-  switch(action.type) {
+  switch (action.type) {
     case SET_HEIGHT_OFFSET_OF_BANNER:
       state = action.payload
       break
