@@ -8,6 +8,8 @@ import Image from 'grommet/components/Image'
 import Anchor from 'grommet/components/Anchor'
 import Paragraph from 'grommet/components/Paragraph'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
+import GithubIcon from 'grommet/components/icons/base/SocialGithub'
+import ExternalLink from 'grommet/components/icons/base/Link'
 
 import AppBanner from '../../containers/AppBanner'
 import Tag from '../../components/Tag'
@@ -35,6 +37,7 @@ class ProjectView extends React.Component {
     const id = this.props.match.params.id
     const project = this.props.allProjects[id]
     const { tagsByProjectId, imagesById } = this.props
+    const hasLinks = project && (project.app_url || project.src_url)
 
     const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
 
@@ -68,6 +71,26 @@ class ProjectView extends React.Component {
           { project ? project.long_desc : null }
           </Paragraph>
         </Section>
+        { hasLinks ? (
+        <Section pad="large" justify="center" direction="row">
+          { project.app_url !== undefined ? (
+            <Box pad="small">
+              <Anchor label={project.app_link_label || 'Try it'}
+                      href={project.app_url}
+                      icon={<ExternalLink />}
+                      target="_blank" />
+            </Box>
+            ) : null }
+          { project.src_url !== undefined ? (
+            <Box pad="small">
+              <Anchor label="Source"
+                      href={project.src_url}
+                      icon={<GithubIcon />}
+                      target="_blank" />
+            </Box>
+          ) : null }
+        </Section>
+        ) : null }
       </div>
     )
   }
