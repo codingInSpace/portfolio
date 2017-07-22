@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import marked from 'marked'
+import cssModules from 'react-css-modules'
+
 import Heading from 'grommet/components/Heading'
 import Section from 'grommet/components/Section'
 import Box from 'grommet/components/Box'
 import Image from 'grommet/components/Image'
 import Anchor from 'grommet/components/Anchor'
-import Paragraph from 'grommet/components/Paragraph'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 import ExternalLink from 'grommet/components/icons/base/Link'
 
+import styles from './index.module.scss';
 import AppBanner from '../../containers/AppBanner'
 import Tag from '../../components/Tag'
 
@@ -67,9 +70,8 @@ class ProjectView extends React.Component {
           { project ? project.projectteam : null }
         </Section>
         <Section pad="large" align="center">
-          <Paragraph size="large">
-          { project ? project.long_desc : null }
-          </Paragraph>
+          <div className={styles.longDescOverride}
+               dangerouslySetInnerHTML={{ __html: project ? marked(project.long_desc) : null } } />
         </Section>
         { hasLinks ? (
         <Section pad="large" justify="center" direction="row">
@@ -104,8 +106,10 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   getProject: id => dispatch(getOneProject(id)),
-  getTags: id => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: id => dispatch(getAllImages()),
+  getTags: () => dispatch(tagsEntityThunks.getAllTags()),
+  getImages: () => dispatch(getAllImages()),
 })
 
-export default connect(mapState, mapDispatch)(setHeaderView(ProjectView, false))
+ProjectView = setHeaderView(ProjectView, false)
+ProjectView = cssModules(ProjectView, styles)
+export default connect(mapState, mapDispatch)(ProjectView)
