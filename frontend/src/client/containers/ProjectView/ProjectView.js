@@ -75,7 +75,7 @@ class ProjectView extends React.Component {
         </Section>
         { hasLinks ? (
         <Section pad="large" justify="center" direction="row">
-          { project.app_url !== undefined ? (
+          { project.app_url.length > 0 ? (
             <Box pad="small">
               <Anchor label={project.app_link_label || 'Try it'}
                       href={project.app_url}
@@ -83,7 +83,7 @@ class ProjectView extends React.Component {
                       target="_blank" />
             </Box>
             ) : null }
-          { project.src_url !== undefined ? (
+          { project.src_url.length > 0 ? (
             <Box pad="small">
               <Anchor label="Source"
                       href={project.src_url}
