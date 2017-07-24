@@ -36,7 +36,7 @@ let AppHeader = (props) => {
       ) : null }
       <Box pad={{horizontal: 'small', vertical: 'none'}}>
         <Menu inline
-              responsive
+              responsive={false}
               direction="row">
           <Anchor path="/" label="ABOUT"/>
           <Anchor path="/projects" label="PROJECTS"/>
