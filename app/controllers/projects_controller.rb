@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.create!(project_params)
+    puts params
 
 		@tags = params[:tags]
 		@tags.each do |tag|
@@ -50,7 +51,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     # whitelist params
-    params.permit(:title, :short_desc, :long_desc, :src_url, :app_url, :app_link_label, :primary_image_id, :projectteam)
+    params.permit(:title, :short_desc, :long_desc, :src_url, :app_url, :app_link_label, :primary_image_id, :projectteam, :other_images => [])
   end
 
   def set_project

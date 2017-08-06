@@ -7,6 +7,8 @@
 # Node needs to be built at root level for Heroku deployment rails+react
 node_modules
 
+.idea/
+
 # Ignore bundler config.
 /.bundle
 

@@ -16,6 +16,13 @@ export function updateProject(data) {
       tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
     }
 
+    let images = data.otherImages.split(',')
+    for (let i in images) {
+      images[i] = images[i].at(0) === ' ' ? images[i].substring(1) : images[i]
+    }
+
+    console.log(images)
+
     const payload = {
       title: data.title,
       short_desc: data.shortDesc,
@@ -25,6 +32,7 @@ export function updateProject(data) {
       app_link_label: data.appDemoLabel,
       projectteam: data.projectTeamDesc,
       primary_image_id: data.primaryImageId,
+      other_images: images,
       tags
     }
 

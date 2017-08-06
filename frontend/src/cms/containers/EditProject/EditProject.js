@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Section from 'grommet/components/Section'
 import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
@@ -11,11 +11,12 @@ import Button from 'grommet/components/Button'
 import Anchor from 'grommet/components/Anchor'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 
+import ImageIdsTable from '../../components/ImageIdsTable'
 import setHeaderView from '../../../shared/HOC/setHeaderView'
-import { updateProject } from './ducks'
-import { getAllProjects } from '../../../shared/entities/Projects'
-import { tagsEntityThunks } from '../../../shared/entities/Tags'
-import { getAllImages } from '../../../shared/entities/Images'
+import {updateProject} from './ducks'
+import {getAllProjects} from '../../../shared/entities/Projects'
+import {tagsEntityThunks} from '../../../shared/entities/Tags'
+import {getAllImages} from '../../../shared/entities/Images'
 
 import ImageIdSelector from '../../components/ImageIdSelector'
 
@@ -30,6 +31,7 @@ class EditProject extends React.Component {
     appDemoLabel: '',
     projectTeamDesc: '',
     primaryImageId: '',
+    otherImages: '',
     tagsString: '',
   }
 
@@ -54,7 +56,7 @@ class EditProject extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params
+    const {id} = this.props.match.params
     this.props.getAllImages()
 
     if (id && Object.keys(this.props.projects).length > 0) {
@@ -80,6 +82,7 @@ class EditProject extends React.Component {
       appDemoLabel: project.app_link_label || '',
       projectTeamDesc: project.projectteam || '',
       primaryImageId: project.primary_image_id,
+      otherImages: '',
       tagsString
     }
 
@@ -87,7 +90,7 @@ class EditProject extends React.Component {
   }
 
   updateText(value, attribute) {
-    switch(attribute) {
+    switch (attribute) {
       case 'title':
         this.setState({...this.state, title: value})
         break;
@@ -115,6 +118,9 @@ class EditProject extends React.Component {
       case 'tagsString':
         this.setState({...this.state, tagsString: value})
         break;
+      case 'otherImages':
+        this.setState({...this.state, otherImages: value})
+        break;
     }
   }
 
@@ -127,8 +133,8 @@ class EditProject extends React.Component {
   }
 
   render() {
-    const { title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, tagsString } = this.state
-    const { images } = this.props
+    const {title, shortDesc, longDesc, srcUrl, appDemoLabel, appDemoUrl, projectTeamDesc, primaryImageId, otherImages, tagsString} = this.state
+    const {images} = this.props
 
     const shouldDisableButton = !title || !shortDesc || !tagsString
     const buttonHandler = shouldDisableButton ? undefined : () => this.submit()
@@ -155,63 +161,73 @@ class EditProject extends React.Component {
       <Section pad="large">
         <Box align="start" pad="medium">
           <Anchor path="/admin/manageprojects"
-                  icon={<BackIcon />} />
+                  icon={<BackIcon/>}/>
         </Box>
         <Box align="center">
           <Heading tag="h2" margin="none">Edit {title}</Heading>
         </Box>
-        <Box align="center" pad="large">
-          <Form>
-            <FormField label="Title">
-              <TextInput placeHolder="Nice project"
-                         onDOMChange={e => this.updateText(e.target.value, 'title')}
-                         value={title} />
-            </FormField>
-            <FormField label="Short description">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'shortDesc')}
-                         value={shortDesc} />
-            </FormField>
-            <FormField label="Long description">
+        <Box direction="row" justify="center" full="horizontal">
+          <Box align="center" pad="large">
+            <Form>
+              <FormField label="Title">
+                <TextInput placeHolder="Nice project"
+                           onDOMChange={e => this.updateText(e.target.value, 'title')}
+                           value={title}/>
+              </FormField>
+              <FormField label="Short description">
+                <TextInput onDOMChange={e => this.updateText(e.target.value, 'shortDesc')}
+                           value={shortDesc}/>
+              </FormField>
+              <FormField label="Long description">
               <textarea onChange={e => this.updateText(e.target.value, 'longDesc')}
                         rows="5"
                         type="text"
-                        value={longDesc} />
-            </FormField>
-            <FormField label="Source url">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')}
-                         value={srcUrl} />
-            </FormField>
-            <FormField label="App demo url">
-              <TextInput onDOMChange={e => this.updateText(e.target.value, 'appDemoUrl')}
-                         value={appDemoUrl} />
-            </FormField>
-            <FormField label="Label for app demo url">
-              <TextInput placeHolder="Try it!"
-                         onDOMChange={e => this.updateText(e.target.value, 'appDemoLabel')}
-                         value={appDemoLabel} />
-            </FormField>
-            <FormField label="Project team description">
-              <TextInput placeHolder="Solo project"
-                         onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
-                         value={projectTeamDesc} />
-            </FormField>
-            <FormField label="Primary image id">
-              <ImageIdSelector images={selectableImages}
-                               onSelect={val => this.updateSelectedImageId(val)}
-                               value={primaryImageId} />
-            </FormField>
-            <FormField label="Tags" help="Separate by commas. Current tags overridden.">
-              <TextInput placeHolder="AI, Machine Learning"
-                         onDOMChange={e => this.updateText(e.target.value, 'tagsString')}
-                         value={tagsString} />
-            </FormField>
-            <Footer pad={{horizontal: 'none', vertical: 'medium'}}>
-              <Button primary={true}
-                      label="Update"
-                      fill={true}
-                      onClick={buttonHandler} />
-            </Footer>
-          </Form>
+                        value={longDesc}/>
+              </FormField>
+              <FormField label="Source url">
+                <TextInput onDOMChange={e => this.updateText(e.target.value, 'srcUrl')}
+                           value={srcUrl}/>
+              </FormField>
+              <FormField label="App demo url">
+                <TextInput onDOMChange={e => this.updateText(e.target.value, 'appDemoUrl')}
+                           value={appDemoUrl}/>
+              </FormField>
+              <FormField label="Label for app demo url">
+                <TextInput placeHolder="Try it!"
+                           onDOMChange={e => this.updateText(e.target.value, 'appDemoLabel')}
+                           value={appDemoLabel}/>
+              </FormField>
+              <FormField label="Project team description">
+                <TextInput placeHolder="Solo project"
+                           onDOMChange={e => this.updateText(e.target.value, 'projectTeamDesc')}
+                           value={projectTeamDesc}/>
+              </FormField>
+              <FormField label="Primary image id">
+                <ImageIdSelector images={selectableImages}
+                                 onSelect={val => this.updateSelectedImageId(val)}
+                                 value={primaryImageId}/>
+              </FormField>
+              <FormField label="Other images" help="Separate by commas. Current tags overridden.">
+                <TextInput placeHolder="abc123, def456"
+                           onDOMChange={e => this.updateText(e.target.value, 'otherImages')}
+                           value={otherImages}/>
+              </FormField>
+              <FormField label="Tags" help="Separate by commas. Current tags overridden.">
+                <TextInput placeHolder="AI, Machine Learning"
+                           onDOMChange={e => this.updateText(e.target.value, 'tagsString')}
+                           value={tagsString}/>
+              </FormField>
+              <Footer pad={{horizontal: 'none', vertical: 'medium'}}>
+                <Button primary={true}
+                        label="Update"
+                        fill={true}
+                        onClick={buttonHandler}/>
+              </Footer>
+            </Form>
+          </Box>
+          <Box pad="large" size="medium" justify="center">
+            <ImageIdsTable imagesById={images}/>
+          </Box>
         </Box>
       </Section>
     )

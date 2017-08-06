@@ -29,10 +29,16 @@ export function submitNewProject(data) {
     const url = `${process.env.API_HOST}/projects`
 
     let tags = data.tagsString.split(',')
-    console.log(tags)
     for (let i in tags) {
       tags[i] = tags[i].at(0) === ' ' ? tags[i].substring(1) : tags[i]
     }
+
+    console.log(data.otherImages)
+    const images = data.otherImages.split(',')
+    for (let i in images) {
+      images[i] = images[i].at(0) === ' ' ? images[i].substring(1) : images[i]
+    }
+    console.log(images)
 
     const postPayload = {
       title: data.title,
@@ -43,6 +49,7 @@ export function submitNewProject(data) {
       app_link_label: data.appDemoLabel,
       projectteam: data.projectTeamDesc,
       primary_image_id: data.primaryImageId,
+      other_images: images,
       tags
     }
 
