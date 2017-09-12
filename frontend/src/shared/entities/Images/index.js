@@ -56,7 +56,7 @@ export function getAllImages() {
 
           for (let i in data) {
             const { id } = data[i]
-            results[id] = {...data[i], link: secureLink(data[i].link)}
+            results[id] = {...data[i], link: data[i].link}
           }
 
           dispatch({
