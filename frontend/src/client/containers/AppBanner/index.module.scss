@@ -1,3 +1,10 @@
+.container {
+  canvas {
+    margin-top: -35px;
+    transform: rotate(-1.5deg);
+  }
+}
+
 .presentation {
   margin-top: 100px;
   img {
@@ -6,8 +13,12 @@
   }
 }
 
-.text {
+.text,
+.textSecondary {
   color: #000;
+}
+.textSecondary {
+  max-width: 213px;
 }
 
 .bannerSmall {

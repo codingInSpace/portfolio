@@ -48,7 +48,7 @@ class ProjectView extends React.Component {
       <div>
         <AppBanner large={false} />
         <Section pad="medium">
-          <Anchor path="/projects"
+          <Anchor path="/"
                   icon={<BackIcon />} />
         </Section>
         <Section pad="none" align="center" textAlign="center">

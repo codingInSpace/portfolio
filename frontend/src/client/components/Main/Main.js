@@ -16,6 +16,7 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import provideWindowWidth from '../../../shared/HOC/provideWindowWidth'
 
 import AppBanner from '../../containers/AppBanner'
+import Portfolio from '../../containers/Portfolio'
 import descMain from './text'
 import * as styles from './index.module.scss'
 
@@ -34,7 +35,7 @@ const SocialLink = (props) => {
   )
 }
 
-let About = (props) => {
+let Main = (props) => {
   const isOffset = props.bannerOffset > 0
   const mobileBreak = props.width < 724
   const largeHorPad = { horizontal: 'large', vertical: 'none' }
@@ -47,29 +48,7 @@ let About = (props) => {
 		<div>
 			<AppBanner large />
 			<div style={isOffset ? offsetStyle : {}}>
-        <Box pad="large"
-             align="center"
-             textAlign="center">
-          <Paragraph className={styles.mainText}
-                     size="large">
-            {descMain}
-          </Paragraph>
-        </Box>
-        <Box pad="large"
-             direction="row"
-             align="center"
-             justify="center">
-          <Box pad={largeHorPad}><Heading tag="h1">Recent Work</Heading></Box>
-          <Box pad={largeHorPad}
-               align="center"
-               size="medium">
-            <Paragraph align="center" size="large">I list some of my experiences and work in courses or elsewhere.</Paragraph>
-            <Button icon={<LinkNext />}
-                    plain
-                    label="Projects"
-                    path="/projects" />
-          </Box>
-        </Box>
+        <Portfolio />
         <Box pad="large"
              direction="row"
              align="center"
@@ -84,18 +63,13 @@ let About = (props) => {
                         link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
                         label="LinkedIn" />
           </Box>
-          { mobileBreak ? undefined : (
-            <Box pad="large">
-              <Heading tag="h1" margin="small">Follow</Heading>
-            </Box>
-          )}
         </Box>
 			</div>
 		</div>
   )
 }
 
-About = cssModules(About, styles)
-About = setHeaderView(About, false)
-About = provideWindowWidth(About)
-export default About
+Main = cssModules(Main, styles)
+Main = setHeaderView(Main, false)
+Main = provideWindowWidth(Main)
+export default Main

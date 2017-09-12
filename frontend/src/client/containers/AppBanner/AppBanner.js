@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Box from 'grommet/components/Box'
 import Image from 'grommet/components/Image'
-import Label from 'grommet/components/Label'
+import Paragraph from 'grommet/components/Paragraph'
 import Headline from 'grommet/components/Headline'
 
 import rose from 'violet-sine-rose'
@@ -45,14 +45,17 @@ class AppBanner extends React.Component {
   render() {
     const { primary, secondary, large } = this.props
 
-    const HeadLine = () => (
-      <Box pad="medium">
+    const TitleDetails = () => (
+      <Box pad="medium" align="center" textAlign="left">
         <Headline size="small" className={styles.text}>{primary}</Headline>
+        <Box className={styles.textSecondary}>
+          <Paragraph margin="none">{secondary}</Paragraph>
+        </Box>
       </Box>
     )
 
     return (
-      <div>
+      <div className={styles.container}>
         { large ? <div style={{position: 'absolute', zIndex: 0, }} ref={el => this.canvasParentRef = el}></div> : null }
         <Box pad={large ? 'large' : 'small'}
              className={ large ? styles.bannerLarge : styles.bannerSmall }
@@ -66,16 +69,11 @@ class AppBanner extends React.Component {
                   <Image src="assets/jonathan1.jpg"
                          size="small"
                          alt="jonathan"/>
-                  <HeadLine />
+                  <TitleDetails />
                 </Box>
               ) : (
-                <HeadLine />
+                <TitleDetails />
               ) }
-            <Box pad={large ? 'large' : 'medium'} className={styles.text}>
-              { secondary.map(text => (
-                <div key={text.length.toString()}><Label margin="none">{text}</Label><br /></div>
-              )) }
-            </Box>
           </Box>
         </Box>
       </div>
@@ -85,13 +83,13 @@ class AppBanner extends React.Component {
 
 AppBanner.propTypes = {
   primary: PropTypes.string,
-  secondary: PropTypes.arrayOf(PropTypes.string),
+  secondary: PropTypes.string,
   large: PropTypes.bool,
 }
 
 AppBanner.defaultProps = {
   primary: 'Jonathan Grangien',
-  secondary: [ 'Developer', 'MSc engineering student', 'Web fullstack-aspirant', 'Comp graphics enthusiast' ],
+  secondary: 'Developer based in Sweden with a passion for front end development, computer graphics, and innovative tech.',
   large: false,
 }
 

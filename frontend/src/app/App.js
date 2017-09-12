@@ -20,8 +20,7 @@ import EditProject from '../cms/containers/EditProject'
 import ManageImages from '../cms/containers/ManageImages'
 import { Login } from '../cms/containers/Login'
 
-import About from '../client/components/About'
-import Portfolio from '../client/containers/Portfolio'
+import Main from '../client/components/Main'
 import { ProjectView } from '../client/containers/ProjectView'
 
 import requireAuthentication from '../shared/HOC/requireAuthentication'
@@ -41,8 +40,7 @@ class AppComponent extends React.Component {
             <AppToast />
             <div className={styles.container}>
               <Switch>
-                <Route exact path="/" component={() => <About bannerOffset={bannerOffset} />} />
-                <Route exact path="/projects" component={Portfolio} />
+                <Route exact path="/" component={() => <Main bannerOffset={bannerOffset} />} />
                 <Route exact path="/projects/:id" component={ProjectView} />
                 <Route exact path="/admin/login" component={Login} />
                 <Route exact path="/admin/newproject" component={requireAuthentication(NewProject)} />

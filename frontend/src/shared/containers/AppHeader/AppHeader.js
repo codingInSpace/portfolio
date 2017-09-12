@@ -19,7 +19,10 @@ let AppHeader = (props) => {
   const label = adminView ? 'JG ADMIN' : 'JG'
   const cIndex = adminView ? 'neutral-1' : 'light-1'
   const icon = adminView ? <DashboardIcon /> : undefined
-  const titlePath = adminView ? '/admin/newproject' : '/'
+
+  if (!authenticated) {
+    return null
+  }
 
   return (
     <Header size="medium"
@@ -31,24 +34,16 @@ let AppHeader = (props) => {
             pad={{horizontal: 'medium', vertical: 'none'}}>
       { adminView ? (
         <Title>
-          <Anchor icon={icon} path={titlePath} label={label}/>
+          <Anchor icon={icon} path="/" label={label} />
         </Title>
       ) : null }
       <Box pad={{horizontal: 'small', vertical: 'none'}}>
-        <Menu inline
-              responsive={false}
+        <Menu inline={true}
+              label="ADMIN"
               direction="row">
-          <Anchor path="/" label="ABOUT"/>
-          <Anchor path="/projects" label="PROJECTS"/>
-          { authenticated ? (
-            <Menu inline={false}
-                  label="ADMIN"
-                  responsive>
-              <Anchor path="/admin/newproject" label="ADD PROJECT"/>
-              <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
-              <Anchor path="/admin/images" label="IMAGES"/>
-            </Menu>
-          ) : null }
+          <Anchor path="/admin/newproject" label="ADD PROJECT"/>
+          <Anchor path="/admin/manageprojects" label="MANAGE PROJECTS"/>
+          <Anchor path="/admin/images" label="IMAGES"/>
         </Menu>
       </Box>
     </Header>

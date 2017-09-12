@@ -53,9 +53,8 @@ class Portfolio extends React.Component {
 
     return (
 	<Box>
-		<AppBanner large={false} />
 		<Section pad="large" align="center" textAlign="center">
-			<Heading tag="h1" margin="none">Projects</Heading>
+			<Heading tag="h2" margin="none">Some work</Heading>
 		</Section>
 		{ Object.values(projects).length > 0 ? (
 		  <Section pad={largeHorPadding} margin={largeHorPadding} align="center" alignContent="center">
