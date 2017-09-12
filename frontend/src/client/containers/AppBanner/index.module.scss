@@ -1,6 +1,8 @@
 .container {
   canvas {
     margin-top: -35px;
+    -moz-transform: rotate(-1.5deg);
+    -webkit-transform: rotate(-1.5deg);
     transform: rotate(-1.5deg);
   }
 }
