@@ -1,14 +1,17 @@
 .container {
+  $n-rot: -1;
+
   canvas {
     margin-top: -35px;
-    -moz-transform: rotate(-1.5deg);
-    -webkit-transform: rotate(-1.5deg);
-    transform: rotate(-1.5deg);
+    -moz-transform: rotate($n-rot + deg);
+    -webkit-transform: rotate($n-rot + deg);
+    transform: rotate($n-rot + deg);
+    min-width: 100vw;
   }
 }
 
 .presentation {
-  margin-top: 100px;
+  margin-top: 20px;
   img {
       border-radius: 100%;
       border: 1px solid #000;

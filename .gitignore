@@ -26,6 +26,8 @@ node_modules
 # test
 .rspec
 
+.idea/
+
 .env
 
 public/bundle*
