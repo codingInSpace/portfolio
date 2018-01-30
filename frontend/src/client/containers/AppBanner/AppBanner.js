@@ -102,7 +102,7 @@ class AppBanner extends React.Component {
             <SocialLink icon={mobileBreak ? undefined : <MailIcon />}
                         label="jonathan.grangien@gmail.com" />
             <SocialLink icon={<GithubIcon />}
-                        link="https://github.com/codingInSpace/"
+                        link="https://github.com/jon-grangien/"
                         label="GitHub" />
             <SocialLink icon={<LinkedInIcon />}
                         link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
