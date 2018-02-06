@@ -22,7 +22,7 @@ gem 'puma', '~> 3.8.2'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Devise for user authorization and account management
-gem 'devise'
+gem 'devise', '~> 4.4.0'
 gem 'simple_token_authentication'
 
 # Use Capistrano for deployment
