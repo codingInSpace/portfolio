@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { setProjectsLoading, clearProjectsLoading } from '../Loading'
+import { toastThunks } from '../../../shared/containers/AppToast'
 
 // Actions
 export const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS'
@@ -24,6 +25,8 @@ export default function (state = {}, action) {
 
   return state
 }
+
+const fetchErrorThunk = () => toastThunks.showToast({status: 'critical', msg: `Couldn't fetch projects`})
 
 // Thunks
 export function getAllProjects() {
@@ -55,9 +58,15 @@ export function getAllProjects() {
             payload: results
           })
         })
+        .catch(reason => {
+          console.error(reason)
+          dispatch(clearProjectsLoading())
+          dispatch(fetchErrorThunk())
+        })
     } catch(e) {
       console.error(e)
       dispatch(clearProjectsLoading())
+      dispatch(fetchErrorThunk())
     }
   }
 }
@@ -81,9 +90,15 @@ export function getOneProject(id) {
             payload: data
           })
         })
+        .catch(reason => {
+          console.error(reason)
+          dispatch(clearProjectsLoading())
+          dispatch(fetchErrorThunk())
+        })
     } catch (e) {
       console.error(e)
       dispatch(clearProjectsLoading())
+      dispatch(fetchErrorThunk())
     }
   }
 }
