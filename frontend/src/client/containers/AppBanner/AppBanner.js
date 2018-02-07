@@ -8,11 +8,12 @@ import MailIcon from 'grommet/components/icons/base/Mail'
 import LinkedInIcon from 'grommet/components/icons/base/SocialLinkedinOption'
 import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 import Box from 'grommet/components/Box'
+import Section from 'grommet/components/Section'
 import Image from 'grommet/components/Image'
 import Paragraph from 'grommet/components/Paragraph'
 import Headline from 'grommet/components/Headline'
 
-import rose from 'violet-sine-rose'
+import graphicsBg from 'xyz-portfolio-bg'
 import cssModules from 'react-css-modules'
 import styles from './index.module.scss'
 import provideWindowWidth from '../../../shared/HOC/provideWindowWidth'
@@ -22,26 +23,27 @@ import { SET_HEIGHT_OFFSET_OF_BANNER } from '../../../app'
 class AppBanner extends React.Component {
   constructor(props) {
     super(props)
-    this.canvasParentRef = ''
+    this.canvasParentRef = undefined
     this.contentRef = ''
   }
 
   componentDidMount() {
-    const optimizedWidth = window.innerWidth && document.documentElement.clientWidth ?
-      Math.min(window.innerWidth, document.documentElement.clientWidth) :
-      window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
+    // const optimizedWidth = window.innerWidth && document.documentElement.clientWidth ?
+    //   Math.min(window.innerWidth, document.documentElement.clientWidth) :
+    //   window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
 
-    if (this.props.large) {
-      const roseOpts = {
-        width: optimizedWidth,
-        height: 700,
-        respondToWidth: true,
-        bgColor: 'linear-gradient(20deg, #FFFEFF 0%, #ddf6ff 100%)',
+//    if (this.props.large) {
+      const opts = {
+//        width: optimizedWidth,
+          height: 0.85 * window.innerHeight,
+//        respondToWidth: true,
+//        bgColor: 'linear-gradient(20deg, #FFFEFF 0%, #ddf6ff 100%)',
       }
-
-      this.canvasParentRef.appendChild(rose(roseOpts))
-      this.props.setBannerOffset(roseOpts.height)
-    }
+//
+console.log(this.canvasParentRef)
+        document.getElementById('canvasContainer').appendChild(graphicsBg(opts))
+        // this.props.setBannerOffset(700)
+//    }
   }
 
   componentWillUnmount() {
@@ -79,38 +81,33 @@ class AppBanner extends React.Component {
     }
 
     return (
-      <div className={styles.container}>
-        { large ? <div style={{position: 'absolute', zIndex: 0, }} ref={el => this.canvasParentRef = el}></div> : null }
-        <Box pad={large ? 'large' : 'small'}
-             className={ large ? styles.bannerLarge : styles.bannerSmall }
+      <Section className={styles.container} id="canvasContainer" ref={el => this.canvasParentRef = el}>
+        <Box pad="large"
+             className={ styles.presContainer }
              align="center">
-          <Box direction={large ? 'column' : 'row'}
+          <Box direction={'column'}
                align="center"
                pad="large">
-            { large ? (
-                <Box className={styles.presentation}
-                     align="center">
-                  <Image src="assets/jonathan1.jpg"
-                         size="small"
-                         alt="jonathan"/>
-                  <TitleDetails />
-                </Box>
-              ) : (
-                <TitleDetails />
-              ) }
-          <Box align="start" pad={large ? 'none' : largeHorPad}>
-            <SocialLink icon={mobileBreak ? undefined : <MailIcon />}
-                        label="jonathan.grangien@gmail.com" />
-            <SocialLink icon={<GithubIcon />}
-                        link="https://github.com/jon-grangien/"
-                        label="GitHub" />
-            <SocialLink icon={<LinkedInIcon />}
-                        link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
-                        label="LinkedIn" />
-          </Box>
+            <Box className={styles.presentation}
+                  align="center">
+              <Image src="assets/jonathan1.jpg"
+                      size="small"
+                      alt="jonathan"/>
+              <TitleDetails />
+            </Box>
+            <Box align="start" pad={'none'}>
+              <SocialLink icon={mobileBreak ? undefined : <MailIcon />}
+                          label="jonathan.grangien@gmail.com" />
+              <SocialLink icon={<GithubIcon />}
+                          link="https://github.com/jon-grangien/"
+                          label="GitHub" />
+              <SocialLink icon={<LinkedInIcon />}
+                          link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
+                          label="LinkedIn" />
+            </Box>
           </Box>
         </Box>
-      </div>
+      </Section>
     )
   }
 }

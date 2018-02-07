@@ -52,7 +52,7 @@ class Portfolio extends React.Component {
     const largeHorPadding = {horizontal: 'large', vertical: 'none'}
 
     return (
-	<Box>
+	<Section>
 		<Section pad="large" align="center" textAlign="center">
 			<Heading tag="h2" margin="none">Some work</Heading>
 		</Section>
@@ -76,7 +76,7 @@ class Portfolio extends React.Component {
             ) }
 					</Box>
 				) }
-	</Box>
+	</Section>
     )
   }
 }

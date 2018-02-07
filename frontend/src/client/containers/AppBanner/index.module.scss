@@ -1,13 +1,29 @@
 .container {
-  $n-rot: -1;
+  // $n-rot: -1;
+  $bottom-radius: 50%;
 
   canvas {
-    margin-top: -35px;
-    -moz-transform: rotate($n-rot + deg);
-    -webkit-transform: rotate($n-rot + deg);
-    transform: rotate($n-rot + deg);
-    min-width: 100vw;
+  //   margin-top: -35px;
+  //   -moz-transform: rotate($n-rot + deg);
+  //   -webkit-transform: rotate($n-rot + deg);
+  //   transform: rotate($n-rot + deg);
+  //   min-width: 100vw;
+    position: absolute;
+    top: 0;
   }
+
+  background-color: #A9C9FF;
+  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+    
+  // background-color: #4158D0;
+  // background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+  position: relative;
+  // z-index: 0;
+  // height: 80vh;
+  min-height: 85vh;
+  border-radius: 0 0 50% 50% / 10%;
+  box-shadow: inset 0 -10px 20px -20px rgb(80, 80, 80);
 }
 
 .presentation {
@@ -26,11 +42,7 @@
   max-width: 213px;
 }
 
-.bannerSmall {
-  background-color: #fff;
-}
-
-.bannerLarge {
+.presContainer {
   position: absolute;
   z-index: 20;
   left: 10%;

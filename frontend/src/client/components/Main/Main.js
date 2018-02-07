@@ -18,9 +18,9 @@ let Main = (props) => {
   return (
 		<div>
 			<AppBanner large />
-			<div style={isOffset ? offsetStyle : {}}>
+			{ /* <div style={isOffset ? offsetStyle : {}}> */ }
         <Portfolio />
-			</div>
+			{ /* </div> */ }
 		</div>
   )
 }
