@@ -34,13 +34,11 @@ class AppBanner extends React.Component {
 
 //    if (this.props.large) {
       const opts = {
-//        width: optimizedWidth,
           height: 0.85 * window.innerHeight,
-//        respondToWidth: true,
-//        bgColor: 'linear-gradient(20deg, #FFFEFF 0%, #ddf6ff 100%)',
+          colorA: 0xFBDA61,
+          colorB: 0xFF5ACD,
       }
 //
-console.log(this.canvasParentRef)
         document.getElementById('canvasContainer').appendChild(graphicsBg(opts))
         // this.props.setBannerOffset(700)
 //    }

@@ -1,36 +1,32 @@
 .container {
-  // $n-rot: -1;
   $bottom-radius: 50%;
 
   canvas {
-  //   margin-top: -35px;
-  //   -moz-transform: rotate($n-rot + deg);
-  //   -webkit-transform: rotate($n-rot + deg);
-  //   transform: rotate($n-rot + deg);
-  //   min-width: 100vw;
     position: absolute;
     top: 0;
   }
 
-  background-color: #A9C9FF;
-  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-    
-  // background-color: #4158D0;
-  // background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  background-color: #8EC5FC;
+  background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 74%);
+  background-size: 200% 200%;
+
+  $animation-speed: 30s;
+  -webkit-animation: bgPosChange $animation-speed ease infinite;
+  -moz-animation: bgPosChange $animation-speed ease infinite;
+  animation: bgPosChange $animation-speed ease infinite;
 
   position: relative;
-  // z-index: 0;
-  // height: 80vh;
   min-height: 85vh;
   border-radius: 0 0 50% 50% / 10%;
-  box-shadow: inset 0 -10px 20px -20px rgb(80, 80, 80);
+  box-shadow: inset 0 -3px 20px -20px rgb(80, 80, 80);
 }
 
 .presentation {
   margin-top: 20px;
   img {
       border-radius: 100%;
-      border: 1px solid #000;
+      border: 3px solid #fff;
+      box-shadow: 1px 1px 10px 0px rgb(30, 30, 30);
   }
 }
 
@@ -46,4 +42,24 @@
   position: absolute;
   z-index: 20;
   left: 10%;
+}
+
+$level1: 10% 40%;
+$level2: 80% 40%;
+$level3: 10% 40%;
+
+@-webkit-keyframes bgPosChange {
+  0%{background-position: $level1}
+  50%{background-position: $level2}
+  100%{background-position: $level3}
+}
+@-moz-keyframes bgPosChange {
+  0%{background-position: $level1}
+  50%{background-position: $level2}
+  100%{background-position: $level3}
+}
+@keyframes bgPosChange {
+  0%{background-position: $level1}
+  50%{background-position: $level2}
+  100%{background-position: $level3}
 }

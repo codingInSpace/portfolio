@@ -5914,8 +5914,8 @@ xtend@^4.0.0, xtend@^4.0.1:
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 "xyz-portfolio-bg@git://github.com/jon-grangien/portfolio-bg.git":
-  version "0.0.1"
-  resolved "git://github.com/jon-grangien/portfolio-bg.git#eeebc4471c5e81f8ebac249e11211d0050726a63"
+  version "0.0.2"
+  resolved "git://github.com/jon-grangien/portfolio-bg.git#edb69b12f9ebd73b2f5e7a68163b4ccaa130069a"
 
 y18n@^3.2.1:
   version "3.2.1"
