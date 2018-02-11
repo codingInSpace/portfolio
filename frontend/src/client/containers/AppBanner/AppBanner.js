@@ -53,55 +53,53 @@ class AppBanner extends React.Component {
 
     const mobileBreak = this.props.width < 724
     const largeHorPad = { horizontal: 'large', vertical: 'none' }
+    const medHorPad = { horizontal: 'medium', vertical: 'none' }
 
-    const TitleDetails = () => (
-      <Box pad="medium" align="center" textAlign="left">
-        <Headline size="small" className={styles.text}>{primary}</Headline>
-        <Box className={styles.textSecondary}>
-          <Paragraph margin="none">{secondary}</Paragraph>
+    const Title = () => (
+      <Headline size="large" strong className={styles.text}>{primary}</Headline>
+    )
+
+    const SocialLink = (props) => (
+      <Anchor href={props.link}
+              target="_blank"
+              align="center"
+              animateIcon={false}
+              icon={props.icon} />
+    )
+
+    const iconColorIndex = 'light-2'
+
+    const Details = () => (
+      <Box pad="small" direction="row" justify="start" textAlign="left">
+        <Image src="assets/jonathan1.jpg"
+                size="small"
+                alt="jonathan"/>
+        <Box pad={medHorPad} className={styles.textSecondary}>
+          <Paragraph size="large">{secondary}</Paragraph>
+          <Box align="start" direction="row" pad="none">
+            <SocialLink icon={<MailIcon colorIndex={iconColorIndex}/>}
+                        link="mailto:jonathan.grangien@gmail.com" />
+            <SocialLink icon={<GithubIcon colorIndex={iconColorIndex} />}
+                        link="https://github.com/jon-grangien/" />
+            <SocialLink icon={<LinkedInIcon colorIndex={iconColorIndex} />}
+                        link="https://www.linkedin.com/in/jonathan-grangien-630859104/" />
+          </Box>
         </Box>
       </Box>
     )
-
-    const SocialLink = (props) => {
-      return (props.link === undefined) ? (
-        <Box align="center" justify="start" direction="row">
-          {props.icon}
-          <Box pad="small"><Label truncate margin="none">{props.label}</Label></Box>
-        </Box>
-      ) : (
-        <Anchor href={props.link}
-                target="_blank"
-                align="center"
-                label={<Label margin="none">{props.label}</Label>}
-                icon={props.icon} />
-      )
-    }
 
     return (
       <Section className={styles.container} id="canvasContainer" ref={el => this.canvasParentRef = el}>
         <Box pad="large"
              className={ styles.presContainer }
-             align="center">
+             align="start">
           <Box direction={'column'}
-               align="center"
-               pad="large">
+               align="start"
+               pad="small">
             <Box className={styles.presentation}
-                  align="center">
-              <Image src="assets/jonathan1.jpg"
-                      size="small"
-                      alt="jonathan"/>
-              <TitleDetails />
-            </Box>
-            <Box align="start" pad={'none'}>
-              <SocialLink icon={mobileBreak ? undefined : <MailIcon />}
-                          label="jonathan.grangien@gmail.com" />
-              <SocialLink icon={<GithubIcon />}
-                          link="https://github.com/jon-grangien/"
-                          label="GitHub" />
-              <SocialLink icon={<LinkedInIcon />}
-                          link="https://www.linkedin.com/in/jonathan-grangien-630859104/"
-                          label="LinkedIn" />
+                  align="start">
+              <Title />
+              <Details />
             </Box>
           </Box>
         </Box>
@@ -117,7 +115,8 @@ AppBanner.propTypes = {
 }
 
 AppBanner.defaultProps = {
-  primary: 'Jonathan Grangien',
+  primary: `Jonathan 
+  Grangien`,
   secondary: 'Developer based in Sweden with a passion for front end development, computer graphics, visualization and innovative tech.',
   large: false,
 }
