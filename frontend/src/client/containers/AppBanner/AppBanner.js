@@ -70,7 +70,7 @@ class AppBanner extends React.Component {
     const iconColorIndex = 'light-2'
 
     const Details = () => (
-      <Box pad="small" direction="row" justify="start" textAlign="left">
+      <Box direction="row" justify="start" textAlign="left">
         <Image src="assets/jonathan1.jpg"
                 size="small"
                 alt="jonathan"/>
