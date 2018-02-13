@@ -42,6 +42,7 @@ class AppBanner extends React.Component {
         document.getElementById('canvasContainer').appendChild(graphicsBg(opts))
         // this.props.setBannerOffset(700)
 //    }
+    window.dispatchEvent(new Event('resize')) // For canvas to adjust
   }
 
   componentWillUnmount() {
