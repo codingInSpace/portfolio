@@ -8,7 +8,7 @@ import Tag from '../../../components/Tag'
 const Content = props => (
   <Box>
     <Label margin="none">{props.shortText}</Label>
-    <Box pad={{horizontal: 'none', vertical: 'small'}} direction="row">
+    <Box pad="none" direction="row">
       { props.tags.length > 0 && props.tags.map(tag => (
         <Tag key={tag.id} label={tag.label} />
       ))}

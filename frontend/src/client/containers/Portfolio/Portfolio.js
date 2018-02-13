@@ -60,7 +60,7 @@ class Portfolio extends React.Component {
 		  <Section pad={largeHorPadding} margin={largeHorPadding} align="center" alignContent="center">
         <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) } fill={true}>
           { Object.values(projects).map(project => (
-            <Tile key={project.id} pad="small">
+            <Tile key={project.id} size="medium" pad="none">
               <Project img={imagesById[project.primary_image_id] ? imagesById[project.primary_image_id].link : undefined}
                        heading={project.title}
                        shortText={project.short_desc}

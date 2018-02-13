@@ -76,7 +76,7 @@ class AppBanner extends React.Component {
                 alt="jonathan"/>
         <Box pad={medHorPad} className={styles.textSecondary}>
           <Paragraph size="large">{secondary}</Paragraph>
-          <Box align="start" direction="row" pad="none">
+          <Box align="start" direction="row" pad="none" responsive={false}>
             <SocialLink icon={<MailIcon colorIndex={iconColorIndex}/>}
                         link="mailto:jonathan.grangien@gmail.com" />
             <SocialLink icon={<GithubIcon colorIndex={iconColorIndex} />}
@@ -103,6 +103,14 @@ class AppBanner extends React.Component {
             </Box>
           </Box>
         </Box>
+        <svg style={{zIndex: '-1', position: 'absolute', width: '100%', height: '85vh'}}>
+          <defs>
+            <clipPath id="bannerClip">
+              <ellipse rx="75%" ry="20%" cx="50%" cy="73%"/>
+              <rect x="0" y="0" width="100%" height="80%" />
+            </clipPath>
+          </defs>
+        </svg>
       </Section>
     )
   }
