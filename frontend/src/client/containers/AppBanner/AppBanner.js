@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Label from 'grommet/components/Label'
-import Anchor from 'grommet/components/Anchor'
-import MailIcon from 'grommet/components/icons/base/Mail'
-import LinkedInIcon from 'grommet/components/icons/base/SocialLinkedinOption'
-import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 import Box from 'grommet/components/Box'
 import Section from 'grommet/components/Section'
 import Image from 'grommet/components/Image'
 import Paragraph from 'grommet/components/Paragraph'
 import Headline from 'grommet/components/Headline'
+
+import SocialIcons from '../../../shared/components/SocialIcons'
 
 import graphicsBg from 'xyz-portfolio-bg'
 import cssModules from 'react-css-modules'
@@ -60,16 +58,6 @@ class AppBanner extends React.Component {
       <Headline size="large" strong className={styles.text}>{primary}</Headline>
     )
 
-    const SocialLink = (props) => (
-      <Anchor href={props.link}
-              target="_blank"
-              align="center"
-              animateIcon={false}
-              icon={props.icon} />
-    )
-
-    const iconColorIndex = 'light-2'
-
     const Details = () => (
       <Box direction="row" justify="start" textAlign="left">
         <Image src="assets/jonathan1.jpg"
@@ -77,14 +65,7 @@ class AppBanner extends React.Component {
                 alt="jonathan"/>
         <Box pad={medHorPad} className={styles.textSecondary}>
           <Paragraph size="large">{secondary}</Paragraph>
-          <Box align="start" direction="row" pad="none" responsive={false}>
-            <SocialLink icon={<MailIcon colorIndex={iconColorIndex}/>}
-                        link="mailto:jonathan.grangien@gmail.com" />
-            <SocialLink icon={<GithubIcon colorIndex={iconColorIndex} />}
-                        link="https://github.com/jon-grangien/" />
-            <SocialLink icon={<LinkedInIcon colorIndex={iconColorIndex} />}
-                        link="https://www.linkedin.com/in/jonathan-grangien-630859104/" />
-          </Box>
+          <SocialIcons iconColorIndex='light-2' />
         </Box>
       </Box>
     )

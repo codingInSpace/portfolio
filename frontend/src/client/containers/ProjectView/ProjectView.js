@@ -12,10 +12,14 @@ import Anchor from 'grommet/components/Anchor'
 import BackIcon from 'grommet/components/icons/base/LinkPrevious'
 import GithubIcon from 'grommet/components/icons/base/SocialGithub'
 import ExternalLink from 'grommet/components/icons/base/Link'
+import Sidebar from 'grommet/components/Sidebar'
+import Header from 'grommet/components/Header'
+import Title from 'grommet/components/Title'
+import Paragraph from 'grommet/components/Paragraph'
 
 import styles from './index.module.scss';
-import AppBanner from '../../containers/AppBanner'
 import Tag from '../../components/Tag'
+import SocialIcons from '../../../shared/components/SocialIcons'
 
 import setHeaderView from '../../../shared/HOC/setHeaderView'
 import { getOneProject } from '../../../shared/entities/Projects'
@@ -44,14 +48,37 @@ class ProjectView extends React.Component {
 
     const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
 
-    return (
-      <div>
-        <AppBanner large={false} />
-        <Section pad="medium">
+    const PageSideBar = () => (
+      <Sidebar fixed={false}
+               full={false}>
+        <Header pad='medium'
+          justify='start'>
           <Anchor path="/"
                   icon={<BackIcon />} />
+          <Title>Jonathan's site</Title>
+        </Header>
+        <Box flex='grow'
+          justify='start'
+          align='start'>
+          <Box pad={{horizontal: 'medium', vertical: 'none'}}>
+            <Paragraph size="large" margin="none">I'm a developer from Sweden with a passion for front end development, computer graphics and visualization.</Paragraph>
+            <Paragraph size="large">Feel free to contact me about anything except snakes.</Paragraph>
+          </Box>
+          <Box pad={{horizontal: 'small', vertical: 'none'}}>
+            <SocialIcons />
+          </Box>
+        </Box>
+      </Sidebar>
+    )
+
+    return (
+      <div>
+        <Box direction="row">
+        <PageSideBar />
+        <Box full="horizontal">
+        <Section pad="small" direction="row" className={styles.header}>
         </Section>
-        <Section pad="none" align="center" textAlign="center">
+        <Section pad="medium" align="center" textAlign="center">
           <Heading tag="h1" margin="none"> { project ? project.title : '???' } </Heading>
           <Box pad="small" direction="row">
             { project && hasTags(project.id) && tagsByProjectId[project.id].map(tag => (
@@ -93,6 +120,8 @@ class ProjectView extends React.Component {
           ) : null }
         </Section>
         ) : null }
+        </Box>
+        </Box>
       </div>
     )
   }

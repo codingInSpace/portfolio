@@ -34,11 +34,10 @@ class AppFooter extends React.Component {
               <Heading style={{color: '#fff'}} tag="h2">jonathan.grangien@gmail.com</Heading>
             )}
           </Box>
-          { loggedIn ? (
-            <Anchor style={{color: '#fff'}} label="logout" path="/" onClick={() => props.logout()} />
-          ) : (
-            <Anchor style={{color: '#fff'}} label="login" path="/admin/login" />
-          ) }
+          <Anchor style={{color: '#fff', textDecoration: 'none'}}
+                  label={loggedIn ? 'logout' : 'login'}
+                  path={loggedIn ? '/' : '/admin/login'}
+                  onClick={loggedIn ? () => this.props.logout() : null} />
         </Box>
         <svg style={{zIndex: '-1', position: 'absolute', width: '100%', height: '15vh'}}>
           <defs>
