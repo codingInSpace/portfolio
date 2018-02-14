@@ -35,7 +35,8 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(ROOT_PATH, 'public'),
-		filename: 'bundle.js',
+    filename: 'bundle.js',
+    chunkFilename: '[name].bundle.js',
 		publicPath: '/'
 	},
   devServer: {

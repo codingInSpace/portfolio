@@ -11,7 +11,6 @@ import Headline from 'grommet/components/Headline'
 
 import SocialIcons from '../../../shared/components/SocialIcons'
 
-import graphicsBg from 'xyz-portfolio-bg'
 import cssModules from 'react-css-modules'
 import styles from './index.module.scss'
 import provideWindowWidth from '../../../shared/HOC/provideWindowWidth'
@@ -21,38 +20,48 @@ import { SET_HEIGHT_OFFSET_OF_BANNER } from '../../../app'
 class AppBanner extends React.Component {
   constructor(props) {
     super(props)
-    this.canvasParentRef = undefined
-    this.contentRef = ''
+    this.state = {
+      graphicsLoaded: false,
+      mounted: false
+    }
   }
 
   componentDidMount() {
-    // const optimizedWidth = window.innerWidth && document.documentElement.clientWidth ?
-    //   Math.min(window.innerWidth, document.documentElement.clientWidth) :
-    //   window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
+    this.setState({ mounted: true })
 
-//    if (this.props.large) {
+    // if (this.props.width > 724) {
+    //   this.loadGraphicsChunk()
+    // }
+  }
+
+  loadGraphicsChunk() {
+    if (this.state.graphicsLoaded) {
+      return
+    }
+
+    import(/* webpackChunkName: "graphics" */ 'xyz-portfolio-bg').then(bg => {
       const opts = {
           height: 0.85 * window.innerHeight,
           colorA: 0xFBDA61,
           colorB: 0xFF5ACD,
       }
-//
-        document.getElementById('canvasContainer').appendChild(graphicsBg(opts))
-        // this.props.setBannerOffset(700)
-//    }
-    window.dispatchEvent(new Event('resize')) // For canvas to adjust
-  }
-
-  componentWillUnmount() {
-    this.canvasParentRef = null
+      document.getElementById('canvasContainer').appendChild(bg.default(opts))
+      window.dispatchEvent(new Event('resize')) // For canvas to adjust
+      this.setState({ graphicsLoaded: true })
+    })
   }
 
   render() {
     const { primary, secondary, large } = this.props
+    const { mounted, graphicsLoaded } = this.state
 
     const mobileBreak = this.props.width < 724
     const largeHorPad = { horizontal: 'large', vertical: 'none' }
     const medHorPad = { horizontal: 'medium', vertical: 'none' }
+
+    if (!mobileBreak && mounted && !graphicsLoaded) {
+      this.loadGraphicsChunk()
+    }
 
     const Title = () => (
       <Headline size="large" strong className={styles.text}>{primary}</Headline>
@@ -71,7 +80,7 @@ class AppBanner extends React.Component {
     )
 
     return (
-      <Section className={styles.container} id="canvasContainer" ref={el => this.canvasParentRef = el}>
+      <Section className={styles.container} id="canvasContainer">
         <Box pad="large"
              className={ styles.presContainer }
              align="start">

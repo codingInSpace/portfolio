@@ -1,4 +1,4 @@
 {
-  "plugins": ["transform-runtime", "react-hot-loader/babel"],
+  "plugins": ["transform-runtime", "react-hot-loader/babel", "syntax-dynamic-import"],
   "presets": [ ["es2015", { "modules": false }], "stage-0", "react"]
 }
