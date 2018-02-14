@@ -60,9 +60,9 @@ class AppBanner extends React.Component {
 
     const Details = () => (
       <Box direction="row" justify="start" textAlign="left">
-        <Image src="assets/jonathan1.jpg"
+        { !mobileBreak && ( <Image src="assets/jonathan1.jpg"
                 size="small"
-                alt="jonathan"/>
+                alt="jonathan"/> ) }
         <Box pad={medHorPad} className={styles.textSecondary}>
           <Paragraph size="large">{secondary}</Paragraph>
           <SocialIcons iconColorIndex='light-2' />
