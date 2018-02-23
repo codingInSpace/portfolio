@@ -31,7 +31,7 @@
 .presContainer {
   // position: absolute;
   z-index: 20;
-  // left: 10px;
+  margin-left: 8%;
 }
 
 .presentation {
@@ -83,4 +83,11 @@ $level3: 10% 40%;
   0%{background-position: $level1}
   50%{background-position: $level2}
   100%{background-position: $level3}
+}
+
+@media (max-width: 724px) {
+  .presContainer {
+    margin-left: 0;
+  }
+
 }
