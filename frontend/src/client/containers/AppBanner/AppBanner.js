@@ -28,10 +28,10 @@ class AppBanner extends React.Component {
 
   componentDidMount() {
     this.setState({ mounted: true })
+  }
 
-    // if (this.props.width > 724) {
-    //   this.loadGraphicsChunk()
-    // }
+  componentWillUnmount() {
+    this.setState({ mounted: false })
   }
 
   loadGraphicsChunk() {
