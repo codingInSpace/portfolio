@@ -21,8 +21,6 @@ export function updateProject(data) {
       images[i] = images[i].at(0) === ' ' ? images[i].substring(1) : images[i]
     }
 
-    console.log(images)
-
     const payload = {
       title: data.title,
       short_desc: data.shortDesc,
@@ -51,14 +49,17 @@ export function updateProject(data) {
         data: payload
       })
         .then(response => {
-          console.log(response)
           if (response.status === 204) {
-            // dispatch notification
+            console.log('204:', response)
           }
 
+          dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
           dispatch(getAllProjects())
           dispatch(tagsEntityThunks.getAllTags())
-          dispatch(toastThunks.showToast({msg: `Updated project ${payload.title}`, status: 'ok'}))
+        })
+        .catch(reason => {
+          console.error(reason)
+          dispatch(toastThunks.showToast({msg: `Failed to update project ${payload.title}, ${reason.toString()}`, status: 'critical'}))
         })
     } catch (e) {
       console.error(e)
