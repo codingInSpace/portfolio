@@ -20,12 +20,6 @@
   // border-radius: 0 0 50% 50% / 10%;
   // box-shadow: inset 0 -3px 30px -30px rgb(80, 80, 80);
 
-  // -webkit-clip-path: ellipse(50% 26% at 50% 73%);
-  // clip-path: ellipse(50% 26% at 50% 73%);
-  // -webkit-clip-path: inset(0 0 26% 0);
-  // clip-path: inset(0 0 26% 0);
-  -webkit-clip-path: url(#bannerClip);
-  clip-path: url(#bannerClip);
 }
 
 .presContainer {
@@ -63,6 +57,17 @@
 }
 .textSecondary {
   max-width: 500px;
+}
+
+@media (min-width: 750px) {
+  .container {
+    // -webkit-clip-path: ellipse(50% 26% at 50% 73%);
+    // clip-path: ellipse(50% 26% at 50% 73%);
+    // -webkit-clip-path: inset(0 0 26% 0);
+    // clip-path: inset(0 0 26% 0);
+    -webkit-clip-path: url(#bannerClip);
+    clip-path: url(#bannerClip);
+  }
 }
 
 $level1: 10% 40%;
