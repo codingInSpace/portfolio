@@ -1,0 +1,15 @@
+endpoint: ${env:ENDPOINT}
+datamodel: datamodel.graphql
+
+generate:
+  - generator: javascript-client
+    output: ../generated/
+
+secret: ${env:SECRET}
+
+hooks:
+  post-deploy:
+    - prisma generate
+    - graphql get-schema --project database -e dev
+      # - graphql prepare
+      # - graphql codegen

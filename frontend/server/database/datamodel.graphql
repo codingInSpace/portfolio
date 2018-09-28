@@ -1,0 +1,31 @@
+type Project {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  shortDesc: String!
+  longDesc: String!
+  srcUrl: String
+  deployedUrl: String
+  deployedLinkLabel: String
+  teamInfo: String
+}
+
+type Post {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  slug: String! @unique
+  content: String!
+}
+
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String! @unique
+  password: String!
+}
+

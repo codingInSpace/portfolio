@@ -31,6 +31,8 @@ node_modules
 .idea/
 
 .env
+frontend/server/.env
+frontend/server/generated
 
 public/bundle*
 public/assets

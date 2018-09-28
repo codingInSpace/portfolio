@@ -1,0 +1,83 @@
+type Project {
+  id: ID!
+  title: String!
+  shortDesc: String!
+  longDesc: String!
+  srcUrl: String
+  deployedUrl: String
+  deployedLinkLabel: String
+  teamInfo: String
+}
+
+type Post {
+  id: ID!
+  title: String!
+  slug: String! 
+  content: String!
+}
+
+type User {
+  id: ID! 
+  name: String!
+  email: String! 
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: ID, slug: String): Post
+  projects: [Project!]!
+  project(id: ID!): Project
+  users: [User!]!
+}
+
+type Mutation {
+  createPost(title: String!, content: String!, slug: String!): Post
+  deletePost(id: ID!): Post
+
+  createProject(
+    title: String!, 
+    shortDesc: String!, 
+    longDesc: String!,
+    srcUrl: String,
+    deployedUrl: String,
+    deployedLinkLabel: String,
+    teamInfo: String,
+  ): Project
+  deleteProject(id: ID!): Project
+
+  signup(name: String!, email: String!, password: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+# type User {
+#   id: ID!
+#   name: String!
+#   email: String!
+# }
+
+# type Mutation {
+#   post(url: String!, description: String!): Link!
+#   signup(email: String!, password: String!, name: String!): AuthPayload
+#   login(email: String!, password: String!): AuthPayload
+#   vote(linkId: ID!): Vote
+# }
+
+# type Query {
+#   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+# }
+# 
+# type Feed {
+#   links: [Link!]!
+#   count: Int!
+# }
+# 
+# 
+# type Subscription {
+#   newLink: LinkSubscriptionPayload
+#   newVote: VoteSubscriptionPayload
+# }
