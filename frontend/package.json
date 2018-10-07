@@ -9,7 +9,8 @@
     "build": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.prod.js",
     "build:dev": "node_modules/.bin/webpack --config webpack.config.dev.js",
     "start:graphql:dev": "cd server && env-cmd .env babel-node index.js --presets es2015,stage-2",
-    "prisma:deploy": "cd server && prisma deploy -e .env"
+    "prisma:deploy": "cd server && prisma deploy -e .env",
+    "server:generate": "cd server && prisma generate -e .env && graphql get-schema --project database -e dev"
   },
   "author": "Jonathan Grangien <jonathan.grangien@gmail.com>",
   "license": "ISC",
