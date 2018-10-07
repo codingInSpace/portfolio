@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jonathan-grangien-d368c7/test/dev
-# timestamp: Sun Oct 07 2018 13:29:13 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Oct 07 2018 20:00:21 GMT+0200 (Central European Summer Time)
 
 type AggregatePost {
   count: Int!
@@ -408,6 +408,7 @@ type Project implements Node {
   deployedUrl: String
   deployedLinkLabel: String
   teamInfo: String
+  tags: [String!]!
 }
 
 """A connection to a list of items."""
@@ -428,6 +429,11 @@ input ProjectCreateInput {
   deployedUrl: String
   deployedLinkLabel: String
   teamInfo: String
+  tags: ProjectCreatetagsInput
+}
+
+input ProjectCreatetagsInput {
+  set: [String!]
 }
 
 """An edge in a connection."""
@@ -473,6 +479,7 @@ type ProjectPreviousValues {
   deployedUrl: String
   deployedLinkLabel: String
   teamInfo: String
+  tags: [String!]!
 }
 
 type ProjectSubscriptionPayload {
@@ -522,6 +529,11 @@ input ProjectUpdateInput {
   deployedUrl: String
   deployedLinkLabel: String
   teamInfo: String
+  tags: ProjectUpdatetagsInput
+}
+
+input ProjectUpdatetagsInput {
+  set: [String!]
 }
 
 input ProjectWhereInput {

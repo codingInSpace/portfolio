@@ -9,6 +9,7 @@ type Project {
   deployedUrl: String
   deployedLinkLabel: String
   teamInfo: String
+  tags: [String!]
 }
 
 type Post {
