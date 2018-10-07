@@ -54,30 +54,3 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload
 }
 
-# type User {
-#   id: ID!
-#   name: String!
-#   email: String!
-# }
-
-# type Mutation {
-#   post(url: String!, description: String!): Link!
-#   signup(email: String!, password: String!, name: String!): AuthPayload
-#   login(email: String!, password: String!): AuthPayload
-#   vote(linkId: ID!): Vote
-# }
-
-# type Query {
-#   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
-# }
-# 
-# type Feed {
-#   links: [Link!]!
-#   count: Int!
-# }
-# 
-# 
-# type Subscription {
-#   newLink: LinkSubscriptionPayload
-#   newVote: VoteSubscriptionPayload
-# }
