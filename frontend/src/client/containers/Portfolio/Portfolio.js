@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
@@ -10,6 +11,7 @@ import Section from 'grommet/components/Section'
 import Spinning from 'grommet/components/icons/Spinning'
 
 import { withRouter } from 'react-router-dom'
+import withProjects from './withProjects'
 
 import { getAllProjects } from '../../../shared/entities/Projects'
 import { tagsEntityThunks } from '../../../shared/entities/Tags'
@@ -19,34 +21,21 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import AppBanner from '../../containers/AppBanner'
 import Project from './components/Project'
 
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-
-const POSTS_QUERY = gql`
-  {
-    posts {
-      id
-      title
-      content
-      slug
-    }
-  }
-`
 class Portfolio extends React.Component {
   componentWillMount() {
-    this.getData()
+    // this.getData()
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.projectsById !== this.props.projectsById) {
-      this.setState({ projects: nextProps.projectsById })
-    }
+    // if (nextProps.projectsById !== this.props.projectsById) {
+    //   this.setState({ projects: nextProps.projectsById })
+    // }
   }
 
   getData() {
-    this.props.getProjects()
-    this.props.getTags()
-    this.props.getImages()
+    // this.props.getProjects()
+    // this.props.getTags()
+    // this.props.getImages()
   }
 
   goToProject(seriesIdx) {
@@ -65,24 +54,16 @@ class Portfolio extends React.Component {
       tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
     const largeHorPadding = { horizontal: 'large', vertical: 'none' }
 
+    console.log(this.props.fetchStatus)
+    console.log(projects)
+
     return (
-	<Query query={POSTS_QUERY}>
-		{({ loading, error, data }) => {
-  if (loading) return <div>Fetching</div>
-  if (error) return <div>Error</div>
-
-  const posts = data.posts
-  console.log(posts)
-
-  return (
 	<div>
-		{posts.map(post => (
-			<div key={post.id}> {post.title} </div>
-              ))}
+        status: {this.props.fetchStatus}
+		{projects.length > 0
+          ? projects.map(project => <div key={project.id}>{project.title}</div>)
+          : null}
 	</div>
-  )
-}}
-	</Query>
     )
 
     /* return (
@@ -128,7 +109,12 @@ const mapDispatch = dispatch => ({
   getImages: () => dispatch(getAllImages())
 })
 
+// Portfolio.propTypes = {
+//   fetchStatus: PropTypes.string.isRequired,
+//   projects: PropTypes.Object
+// }
+
 export default connect(
   mapState,
   mapDispatch
-)(setHeaderView(withRouter(Portfolio), false))
+)(setHeaderView(withRouter(withProjects(Portfolio)), false))
