@@ -30,6 +30,7 @@
     "css-loader": "^0.28.0",
     "dotenv": "^4.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
+    "graphql-tag": "^2.10.0",
     "graphql-yoga": "^1.16.2",
     "grommet": "^1.4.0",
     "jsonwebtoken": "^8.3.0",

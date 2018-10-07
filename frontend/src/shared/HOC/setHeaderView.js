@@ -9,35 +9,38 @@ import { adminHeaderActions } from '../containers/AppHeader'
  * @returns {*}
  */
 const setHeaderView = (BaseComponent, cmsView) => {
-	class ComponentThatUpdatesHeader extends React.Component {
-		constructor(props) {
-			super(props)
-		}
+  class ComponentThatUpdatesHeader extends React.Component {
+    constructor(props) {
+      super(props)
+    }
 
-		componentWillMount() {
-			const { headerIsCmsView } = this.props
+    componentWillMount() {
+      const { headerIsCmsView } = this.props
 
-		  if (cmsView && !headerIsCmsView)
-		  	this.props.setAdminView()
-			else if (!cmsView && headerIsCmsView)
-				this.props.setNormalView()
-		}
+      if (cmsView && !headerIsCmsView) this.props.setAdminView()
+      else if (!cmsView && headerIsCmsView) this.props.setNormalView()
+    }
 
-		render() {
-			return <BaseComponent {...this.props}/>
-		}
-	}
+    render() {
+      return <BaseComponent {...this.props} />
+    }
+  }
 
-	const mapState = state => ({
-		headerIsCmsView: state.appHeaderAdminView
-	})
+  const mapState = state => ({
+    headerIsCmsView: state.appHeaderAdminView
+  })
 
-	const mapDispatch = dispatch => ({
-		setAdminView: () => dispatch({type: adminHeaderActions.SET_ADMIN_HEADER_COLOR}),
-		setNormalView: () => dispatch({type: adminHeaderActions.SET_NORMAL_HEADER_COLOR}),
-	})
+  const mapDispatch = dispatch => ({
+    setAdminView: () =>
+      dispatch({ type: adminHeaderActions.SET_ADMIN_HEADER_COLOR }),
+    setNormalView: () =>
+      dispatch({ type: adminHeaderActions.SET_NORMAL_HEADER_COLOR })
+  })
 
-	return connect(mapState, mapDispatch)(ComponentThatUpdatesHeader)
+  return connect(
+    mapState,
+    mapDispatch
+  )(ComponentThatUpdatesHeader)
 }
 
 export default setHeaderView

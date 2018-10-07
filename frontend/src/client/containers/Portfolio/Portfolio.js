@@ -1,72 +1,36 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Box from 'grommet/components/Box'
 import Heading from 'grommet/components/Heading'
-import Label from 'grommet/components/Label'
-import Tiles from 'grommet/components/Tiles'
-import Tile from 'grommet/components/Tile'
 import Section from 'grommet/components/Section'
-import Spinning from 'grommet/components/icons/Spinning'
-
-import { withRouter } from 'react-router-dom'
+import Project from './components/Project'
 import withProjects from './withProjects'
 
-import { getAllProjects } from '../../../shared/entities/Projects'
-import { tagsEntityThunks } from '../../../shared/entities/Tags'
-import { getAllImages } from '../../../shared/entities/Images'
-import setHeaderView from '../../../shared/HOC/setHeaderView'
+const Portfolio = (props) => {
+  const { projects, fetchStatus } = props
 
-import AppBanner from '../../containers/AppBanner'
-import Project from './components/Project'
+  return (
+    <div>
+      <Section pad="large" align="center" textAlign="center">
+        <Heading tag="h2" margin="none">
+          Some work
+        </Heading>
+      </Section>
+      status: {fetchStatus}
+      {projects.length > 0
+        ? projects.map(project => (
+          <Project key={project.id}
+              heading={project.title}
+              shortText={project.shortDesc}
+              tags={['test']}>
+            {project.title}
+          </Project>
+          ))
+        : null}
+    </div>
+  )
 
-class Portfolio extends React.Component {
-  componentWillMount() {
-    // this.getData()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.projectsById !== this.props.projectsById) {
-    //   this.setState({ projects: nextProps.projectsById })
-    // }
-  }
-
-  getData() {
-    // this.props.getProjects()
-    // this.props.getTags()
-    // this.props.getImages()
-  }
-
-  goToProject(seriesIdx) {
-    // Get corresponding project id
-    const { projects } = this.props
-    const id = Object.values(projects)[seriesIdx].id
-
-    // Redirect
-    this.props.history.push(`/projects/${id}`)
-  }
-
-  render() {
-    const { projects, tagsByProjectId, imagesById } = this.props
-
-    const hasTags = pId =>
-      tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
-    const largeHorPadding = { horizontal: 'large', vertical: 'none' }
-
-    console.log(this.props.fetchStatus)
-    console.log(projects)
-
-    return (
-	<div>
-        status: {this.props.fetchStatus}
-		{projects.length > 0
-          ? projects.map(project => <div key={project.id}>{project.title}</div>)
-          : null}
-	</div>
-    )
-
-    /* return (
+  /* return (
 	<Section>
 		<Section pad="large" align="center" textAlign="center">
 			<Heading tag="h2" margin="none">Some work</Heading>
@@ -76,7 +40,8 @@ class Portfolio extends React.Component {
         <Tiles selectable={true} onSelect={ idx => this.goToProject(idx) } fill={true}>
           { Object.values(projects).map(project => (
             <Tile key={project.id} size="medium" pad="none">
-              <Project img={imagesById[project.primary_image_id] ? imagesById[project.primary_image_id].link : undefined}
+              <Project img={imagesById[project.primary_image_id] ?
+              imagesById[project.primary_image_id].link : undefined}
                        heading={project.title}
                        shortText={project.short_desc}
                        tags={ hasTags(project.id) ? tagsByProjectId[project.id] : [] } />
@@ -93,28 +58,15 @@ class Portfolio extends React.Component {
 				) }
 	</Section>
     )*/
-  }
 }
 
-const mapState = state => ({
-  projects: state.projectsById,
-  tagsByProjectId: state.tagsByProjectId,
-  imagesById: state.imagesById,
-  projectsLoading: state.projectsLoading
-})
+Portfolio.propTypes = {
+  fetchStatus: PropTypes.string.isRequired,
+  projects: PropTypes.arrayOf(PropTypes.object)
+}
 
-const mapDispatch = dispatch => ({
-  getProjects: () => dispatch(getAllProjects()),
-  getTags: () => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: () => dispatch(getAllImages())
-})
+Portfolio.defaultProps = {
+  projects: [{}]
+}
 
-// Portfolio.propTypes = {
-//   fetchStatus: PropTypes.string.isRequired,
-//   projects: PropTypes.Object
-// }
-
-export default connect(
-  mapState,
-  mapDispatch
-)(setHeaderView(withRouter(withProjects(Portfolio)), false))
+export default withProjects(Portfolio)

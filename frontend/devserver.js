@@ -1,44 +1,44 @@
-import 'dotenv/config'
-import express from 'express'
-import { Server } from 'http'
-import path from 'path'
-import webpack from 'webpack'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import cors from 'cors'
+import "dotenv/config";
+import express from "express";
+import { Server } from "http";
+import path from "path";
+import webpack from "webpack";
+import webpackHotMiddleware from "webpack-hot-middleware";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import cors from "cors";
 
-const app = express()
-app.use(cors())
+const app = express();
+app.use(cors());
 
 // const developing = process.env.NODE_ENV !== 'production'
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 
-const config = require('./webpack.config.dev.js')
-const compiler = webpack(config)
+const config = require("./webpack.config.dev.js");
+const compiler = webpack(config);
 
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: { colors: true }
   })
-)
+);
 
 // static files
-app.use(express.static(`${__dirname}/public/`))
+app.use(express.static(`${__dirname}/public/`));
 
 app.use(
   webpackHotMiddleware(compiler, {
     log: console.log,
-    path: '/__webpack_hmr',
+    path: "/__webpack_hmr",
     heartbeat: 10 * 1000
   })
-)
+);
 
-app.get('*', (req, res) =>
-  res.sendFile(path.resolve(config.output.path, 'index.html'))
-)
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve(config.output.path, "index.html"))
+);
 
-const server = new Server(app)
+const server = new Server(app);
 server.listen(port || 1337, () => {
-  console.log('Listening on %j', server.address())
-})
+  console.log("Listening on %j", server.address());
+});
