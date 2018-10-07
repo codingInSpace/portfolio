@@ -10,29 +10,35 @@ import cors from 'cors'
 const app = express()
 app.use(cors())
 
-const developing = process.env.NODE_ENV !== 'production'
-const port =  process.env.PORT || 8080
+// const developing = process.env.NODE_ENV !== 'production'
+const port = process.env.PORT || 8080
 
 const config = require('./webpack.config.dev.js')
 const compiler = webpack(config)
 
-app.use(webpackDevMiddleware(compiler, {
-	publicPath: config.output.publicPath,
-	stats: {colors: true}
-}))
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    stats: { colors: true }
+  })
+)
 
 // static files
-app.use(express.static(__dirname + "/public/"))
+app.use(express.static(`${__dirname}/public/`))
 
-app.use(webpackHotMiddleware(compiler, {
-	log: console.log, 
-	path: '/__webpack_hmr', 
-	heartbeat: 10 * 1000
-}))
+app.use(
+  webpackHotMiddleware(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
+  })
+)
 
-app.get("*", (req, res) => res.sendFile(path.resolve(config.output.path, 'index.html') ))
+app.get('*', (req, res) =>
+  res.sendFile(path.resolve(config.output.path, 'index.html'))
+)
 
 const server = new Server(app)
-server.listen(process.env.PORT || 1337, () => {
-	console.log("Listening on %j", server.address());
+server.listen(port || 1337, () => {
+  console.log('Listening on %j', server.address())
 })

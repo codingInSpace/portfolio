@@ -19,6 +19,19 @@ import setHeaderView from '../../../shared/HOC/setHeaderView'
 import AppBanner from '../../containers/AppBanner'
 import Project from './components/Project'
 
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const POSTS_QUERY = gql`
+  {
+    posts {
+      id
+      title
+      content
+      slug
+    }
+  }
+`
 class Portfolio extends React.Component {
   componentWillMount() {
     this.getData()
@@ -26,7 +39,7 @@ class Portfolio extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.projectsById !== this.props.projectsById) {
-      this.setState({projects: nextProps.projectsById})
+      this.setState({ projects: nextProps.projectsById })
     }
   }
 
@@ -48,10 +61,31 @@ class Portfolio extends React.Component {
   render() {
     const { projects, tagsByProjectId, imagesById } = this.props
 
-    const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
-    const largeHorPadding = {horizontal: 'large', vertical: 'none'}
+    const hasTags = pId =>
+      tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
+    const largeHorPadding = { horizontal: 'large', vertical: 'none' }
 
     return (
+	<Query query={POSTS_QUERY}>
+		{({ loading, error, data }) => {
+  if (loading) return <div>Fetching</div>
+  if (error) return <div>Error</div>
+
+  const posts = data.posts
+  console.log(posts)
+
+  return (
+	<div>
+		{posts.map(post => (
+			<div key={post.id}> {post.title} </div>
+              ))}
+	</div>
+  )
+}}
+	</Query>
+    )
+
+    /* return (
 	<Section>
 		<Section pad="large" align="center" textAlign="center">
 			<Heading tag="h2" margin="none">Some work</Heading>
@@ -77,7 +111,7 @@ class Portfolio extends React.Component {
 					</Box>
 				) }
 	</Section>
-    )
+    )*/
   }
 }
 
@@ -85,14 +119,16 @@ const mapState = state => ({
   projects: state.projectsById,
   tagsByProjectId: state.tagsByProjectId,
   imagesById: state.imagesById,
-  projectsLoading: state.projectsLoading,
+  projectsLoading: state.projectsLoading
 })
 
 const mapDispatch = dispatch => ({
   getProjects: () => dispatch(getAllProjects()),
   getTags: () => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: () => dispatch(getAllImages()),
+  getImages: () => dispatch(getAllImages())
 })
 
-export default connect(mapState, mapDispatch)(setHeaderView(withRouter(Portfolio), false))
-
+export default connect(
+  mapState,
+  mapDispatch
+)(setHeaderView(withRouter(Portfolio), false))

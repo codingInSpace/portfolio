@@ -4,7 +4,7 @@ import App from 'grommet/components/App'
 import cssModules from 'react-css-modules'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import styles from './app.module.scss';
+import styles from './app.module.scss'
 import { getLocalStorage } from './ducks'
 
 import { Provider } from 'react-redux'
@@ -34,24 +34,39 @@ class AppComponent extends React.Component {
     const { bannerOffset } = this.props
 
     return (
-        <BrowserRouter>
-          <App centered={false}>
-            <AppHeader />
-            <AppToast />
-            <div className={styles.container}>
-              <Switch>
-                <Route exact path="/" component={() => <Main bannerOffset={bannerOffset} />} />
-                <Route exact path="/projects/:id" component={ProjectView} />
-                <Route exact path="/admin/login" component={Login} />
-                <Route exact path="/admin/newproject" component={requireAuthentication(NewProject)} />
-                <Route exact path="/admin/manageprojects" component={requireAuthentication(ManageProjects)} />
-                <Route exact path="/admin/manageprojects/:id" component={requireAuthentication(EditProject)} />
-                <Route exact path="/admin/images" component={requireAuthentication(ManageImages)} />
-              </Switch>
-            </div>
-            <AppFooter />
-          </App>
-        </BrowserRouter>
+	<BrowserRouter>
+		<App centered={false}>
+			<AppHeader />
+			<AppToast />
+			<div className={styles.container}>
+				<Switch>
+					<Route
+                exact
+                path="/"
+                component={() => <Main bannerOffset={bannerOffset} />} />
+					<Route exact path="/projects/:id" component={ProjectView} />
+					<Route exact path="/admin/login" component={Login} />
+					<Route
+                exact
+                path="/admin/newproject"
+                component={requireAuthentication(NewProject)} />
+					<Route
+                exact
+                path="/admin/manageprojects"
+                component={requireAuthentication(ManageProjects)} />
+					<Route
+                exact
+                path="/admin/manageprojects/:id"
+                component={requireAuthentication(EditProject)} />
+					<Route
+                exact
+                path="/admin/images"
+                component={requireAuthentication(ManageImages)} />
+				</Switch>
+			</div>
+			<AppFooter />
+		</App>
+	</BrowserRouter>
     )
   }
 }
@@ -64,13 +79,16 @@ const mapDispatch = dispatch => ({
   getUserData: () => dispatch(getLocalStorage())
 })
 
-AppComponent = connect(mapState, mapDispatch)(AppComponent)
+AppComponent = connect(
+  mapState,
+  mapDispatch
+)(AppComponent)
 AppComponent = cssModules(AppComponent, styles)
 
 const AppWithStore = () => (
-  <Provider store={store}>
-    <AppComponent />
-  </Provider>
+	<Provider store={store}>
+		<AppComponent />
+	</Provider>
 )
 
 export default AppWithStore
