@@ -13,7 +13,7 @@ const Portfolio = (props) => {
   return (
     <div>
       <div className={`${styles.section} ${styles.centered}`}>
-        <Heading strong centered>
+        <Heading tag="h2" centered>
           Some work
         </Heading>
       </div>

@@ -19,7 +19,7 @@ const getComponent = (props) => {
     classes += ` ${styles.centered}`
   }
 
-  switch (props.lvl) {
+  switch (String(props.tag)) {
     case H1:
       component = (
         <h1 className={`${classes} ${styles.heading1}`}>{props.children}</h1>
@@ -27,6 +27,7 @@ const getComponent = (props) => {
       break
     case H2:
     default:
+      console.log('default case')
       component = (
         <h2 className={`${classes} ${styles.heading2}`}>{props.children}</h2>
       )
@@ -61,4 +62,3 @@ Heading.defaultProps = {
 }
 
 export default Heading
-
