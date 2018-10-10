@@ -1,26 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Card from 'grommet/components/Card'
-import Box from 'grommet/components/Box'
-import Label from 'grommet/components/Label'
-
-import Tag from '../../../components/Tag'
-
-const Content = props => (
-  <Box>
-    <Label margin="none">{props.shortText}</Label>
-    <Box pad="none" direction="row">
-      {props.tags.length > 0 &&
-        props.tags.map(tag => <Tag key={tag} label={tag} />)}
-    </Box>
-  </Box>
-)
+// import Tag from '../../../components/Tag'
+import Heading from '../../../../shared/layout/Heading'
+import styles from './project.module.scss'
 
 const Project = props => (
-  <Card thumbnail={props.img}
-      heading={props.heading}
-      description={<Content shortText={props.shortText} tags={props.tags} />}
-      />
+  <div className={styles.project}>
+    <Heading strong>{props.heading}</Heading>
+    <p className={styles.desc}>{props.shortText}</p>
+  </div>
 )
 
 Project.propTypes = {
@@ -35,11 +23,6 @@ Project.defaultProps = {
   heading: '',
   shortText: '',
   tags: []
-}
-
-Content.propTypes = {
-  shortText: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default Project

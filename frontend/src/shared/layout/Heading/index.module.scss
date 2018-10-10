@@ -1,0 +1,27 @@
+.heading {
+  display: flex;
+  color: #333;
+
+  &.strong {
+    font-weight: 500;
+  }
+
+  &.centered {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+.heading1 {
+  font-size: 48px;
+}
+.heading2 {
+  font-size: 36px;
+}
+.heading3 {
+  font-size: 32px;
+}
+.heading4 {
+  font-size: 24px;
+}
+

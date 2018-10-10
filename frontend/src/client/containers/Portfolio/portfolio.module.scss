@@ -1,0 +1,31 @@
+$sectionPadding: 48px;
+
+.section {
+  display: flex;
+
+  padding: $sectionPadding;
+  width: 100%;
+
+  // ???
+  // background-position: center center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+
+  &.centered {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.projectsHeading {
+  font-size: 36px;
+}
+
+.projectsContainer {
+  display: flex;
+  flex-flow: row wrap;
+
+  padding: $sectionPadding;
+}
+

@@ -1,32 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Heading from 'grommet/components/Heading'
-import Section from 'grommet/components/Section'
+import Heading from '../../../shared/layout/Heading'
 import Project from './components/Project'
 import withProjects from './withProjects'
+
+import styles from './portfolio.module.scss'
 
 const Portfolio = (props) => {
   const { projects, fetchStatus } = props
 
   return (
     <div>
-      <Section pad="large" align="center" textAlign="center">
-        <Heading tag="h2" margin="none">
+      <div className={`${styles.section} ${styles.centered}`}>
+        <Heading strong centered>
           Some work
         </Heading>
-      </Section>
+      </div>
       status: {fetchStatus}
-      {projects.length > 0
-        ? projects.map(project => (
-          <Project key={project.id}
-              heading={project.title}
-              shortText={project.shortDesc}
-              tags={['test']}>
-            {project.title}
-          </Project>
-          ))
-        : null}
+      <div className={styles.projectsContainer}>
+        {projects.length > 0
+          ? projects.map(project => (
+            <Project key={project.id}
+                heading={project.title}
+                shortText={project.shortDesc}
+                tags={['test']}>
+              {project.title}
+            </Project>
+            ))
+          : null}
+      </div>
     </div>
   )
 
@@ -66,7 +69,7 @@ Portfolio.propTypes = {
 }
 
 Portfolio.defaultProps = {
-  projects: [{}]
+  projects: []
 }
 
 export default withProjects(Portfolio)
