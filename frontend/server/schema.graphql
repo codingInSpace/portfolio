@@ -48,6 +48,7 @@ type Mutation {
     deployedUrl: String,
     deployedLinkLabel: String,
     teamInfo: String,
+    tags: [String!]
   ): Project
   deleteProject(id: ID!): Project
 

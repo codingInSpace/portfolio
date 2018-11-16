@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jonathan-grangien-d368c7/test/dev
-# timestamp: Sun Oct 07 2018 20:00:21 GMT+0200 (Central European Summer Time)
+# timestamp: Fri Nov 16 2018 15:54:13 GMT+0100 (Central European Standard Time)
 
 type AggregatePost {
   count: Int!
@@ -39,9 +39,9 @@ type Mutation {
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
-  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
+  updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -172,6 +172,12 @@ input PostSubscriptionWhereInput {
 }
 
 input PostUpdateInput {
+  title: String
+  slug: String
+  content: String
+}
+
+input PostUpdateManyMutationInput {
   title: String
   slug: String
   content: String
@@ -522,6 +528,17 @@ input ProjectSubscriptionWhereInput {
 }
 
 input ProjectUpdateInput {
+  title: String
+  shortDesc: String
+  longDesc: String
+  srcUrl: String
+  deployedUrl: String
+  deployedLinkLabel: String
+  teamInfo: String
+  tags: ProjectUpdatetagsInput
+}
+
+input ProjectUpdateManyMutationInput {
   title: String
   shortDesc: String
   longDesc: String
@@ -1037,6 +1054,12 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String

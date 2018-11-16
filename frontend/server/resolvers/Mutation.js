@@ -23,10 +23,20 @@ function deletePost(parent, { id }, ctx, info) {
 
 function createProject(parent, args, ctx, info) {
   getAndAuthUserId(ctx)
+
   return ctx.db.mutation.createProject(
     {
       data: {
-        ...args
+        title: args.title,
+        shortDesc: args.shortDesc,
+        longDesc: args.longDesc,
+        srcUrl: args.srcUrl,
+        deployedUrl: args.deployedUrl,
+        deployedLinkLabel: args.deployedLinkLabel,
+        teamInfo: args.teamInfo,
+        tags: {
+          set: [...args.tags]
+        }
       }
     },
     info
@@ -38,7 +48,7 @@ function deleteProject(parent, { id }, ctx, info) {
   return ctx.db.mutation.deleteProject({ where: { id } }, info)
 }
 
-async function signup(parent, args, ctx, info) {
+async function signup(parent, args, ctx, _) {
   const password = await bcrypt.hash(
     args.password,
     Number(process.env.SALTROUNDS)
@@ -55,7 +65,7 @@ async function signup(parent, args, ctx, info) {
   }
 }
 
-async function login(parent, args, ctx, info) {
+async function login(parent, args, ctx, _) {
   const user = await ctx.db.query.user({ where: { email: args.email } })
   if (!user) {
     throw new Error('No such user found')
