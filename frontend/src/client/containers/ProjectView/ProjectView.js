@@ -17,7 +17,7 @@ import Header from 'grommet/components/Header'
 import Title from 'grommet/components/Title'
 import Paragraph from 'grommet/components/Paragraph'
 
-import styles from './index.module.scss';
+import styles from './index.module.scss'
 import Tag from '../../components/Tag'
 import SocialIcons from '../../../shared/components/SocialIcons'
 
@@ -27,17 +27,17 @@ import { tagsEntityThunks } from '../../../shared/entities/Tags'
 import { getAllImages } from '../../../shared/entities/Images'
 
 class ProjectView extends React.Component {
-
   componentDidMount() {
-    if (Object.keys(this.props.allProjects).length === 0)
+    if (Object.keys(this.props.allProjects).length === 0) {
       this.props.getProject(this.props.match.params.id)
+    }
 
     // TODO: Implement single image
-    if (Object.keys(this.props.imagesById).length === 0)
-      this.props.getImages()
+    if (Object.keys(this.props.imagesById).length === 0) this.props.getImages()
 
-    if (!this.props.tagsByProjectId[this.props.match.params.id])
+    if (!this.props.tagsByProjectId[this.props.match.params.id]) {
       this.props.getTags()
+    }
   }
 
   render() {
@@ -46,25 +46,26 @@ class ProjectView extends React.Component {
     const { tagsByProjectId, imagesById } = this.props
     const hasLinks = project && (project.app_url || project.src_url)
 
-    const hasTags = (pId) => tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
+    const hasTags = pId =>
+      tagsByProjectId[pId] && tagsByProjectId[pId].length > 0
 
     const PageSideBar = () => (
-      <Sidebar fixed={false}
-               full={false}>
-        <Header pad='medium'
-          justify='start'>
-          <Anchor path="/"
-                  icon={<BackIcon />} />
+      <Sidebar fixed={false} full={false}>
+        <Header pad="medium" justify="start">
+          <Anchor path="/" icon={<BackIcon />} />
           <Title>Jonathan's site</Title>
         </Header>
-        <Box flex='grow'
-          justify='start'
-          align='start'>
-          <Box pad={{horizontal: 'medium', vertical: 'none'}}>
-            <Paragraph size="large" margin="none">I'm a developer from Sweden with a passion for front end development, computer graphics and visualization.</Paragraph>
-            <Paragraph size="large">Feel free to contact me about anything except snakes.</Paragraph>
+        <Box flex="grow" justify="start" align="start">
+          <Box pad={{ horizontal: 'medium', vertical: 'none' }}>
+            <Paragraph size="large" margin="none">
+              I'm a developer from Sweden with a passion for front end
+              development, computer graphics and visualization.
+            </Paragraph>
+            <Paragraph size="large">
+              Feel free to contact me about anything except snakes.
+            </Paragraph>
           </Box>
-          <Box pad={{horizontal: 'small', vertical: 'none'}}>
+          <Box pad={{ horizontal: 'small', vertical: 'none' }}>
             <SocialIcons />
           </Box>
         </Box>
@@ -74,53 +75,64 @@ class ProjectView extends React.Component {
     return (
       <div>
         <Box direction="row">
-        <PageSideBar />
-        <Box full="horizontal">
-        <Section pad="small" direction="row" className={styles.header}>
-        </Section>
-        <Section pad="medium" align="center" textAlign="center">
-          <Heading tag="h1" margin="none"> { project ? project.title : '???' } </Heading>
-          <Box pad="small" direction="row">
-            { project && hasTags(project.id) && tagsByProjectId[project.id].map(tag => (
-              <Tag key={tag.id} label={tag.label} />
-            ))}
+          <PageSideBar />
+          <Box full="horizontal">
+            <Section pad="small" direction="row" className={styles.header} />
+            <Section pad="medium" align="center" textAlign="center">
+              <Heading tag="h1" margin="none">
+                {' '}
+                {project ? project.title : '???'}{' '}
+              </Heading>
+              <Box pad="small" direction="row">
+                {project &&
+                  hasTags(project.id) &&
+                  tagsByProjectId[project.id].map(tag => (
+                    <Tag key={tag.id} label={tag.label} />
+                  ))}
+              </Box>
+            </Section>
+            <Section pad="large" align="center">
+              {project &&
+                imagesById[project.primary_image_id] && (
+                  <Image src={imagesById[project.primary_image_id].link}
+                      size="large"
+                      alt="Project image"
+                      />
+                )}
+            </Section>
+            <Section pad="small" align="center">
+              {project ? project.projectteam : null}
+            </Section>
+            <Section pad="large" align="center">
+              <div className={styles.longDescOverride}
+                  dangerouslySetInnerHTML={{
+                    __html: project ? marked(project.long_desc) : null
+                  }}
+                  />
+            </Section>
+            {hasLinks ? (
+              <Section pad="large" justify="center" direction="row">
+                {project.app_url.length > 0 ? (
+                  <Box pad="small">
+                    <Anchor label={project.app_link_label || 'Try it'}
+                        href={project.app_url}
+                        icon={<ExternalLink />}
+                        target="_blank"
+                        />
+                  </Box>
+                ) : null}
+                {project.src_url.length > 0 ? (
+                  <Box pad="small">
+                    <Anchor label="Source"
+                        href={project.src_url}
+                        icon={<GithubIcon />}
+                        target="_blank"
+                        />
+                  </Box>
+                ) : null}
+              </Section>
+            ) : null}
           </Box>
-        </Section>
-        <Section pad="large" align="center">
-          { project && imagesById[project.primary_image_id] && (
-            <Image src={imagesById[project.primary_image_id].link}
-                   size='large'
-                   alt="Project image" />
-          ) }
-        </Section>
-        <Section pad="small" align="center">
-          { project ? project.projectteam : null }
-        </Section>
-        <Section pad="large" align="center">
-          <div className={styles.longDescOverride}
-               dangerouslySetInnerHTML={{ __html: project ? marked(project.long_desc) : null } } />
-        </Section>
-        { hasLinks ? (
-        <Section pad="large" justify="center" direction="row">
-          { project.app_url.length > 0 ? (
-            <Box pad="small">
-              <Anchor label={project.app_link_label || 'Try it'}
-                      href={project.app_url}
-                      icon={<ExternalLink />}
-                      target="_blank" />
-            </Box>
-            ) : null }
-          { project.src_url.length > 0 ? (
-            <Box pad="small">
-              <Anchor label="Source"
-                      href={project.src_url}
-                      icon={<GithubIcon />}
-                      target="_blank" />
-            </Box>
-          ) : null }
-        </Section>
-        ) : null }
-        </Box>
         </Box>
       </div>
     )
@@ -136,9 +148,12 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getProject: id => dispatch(getOneProject(id)),
   getTags: () => dispatch(tagsEntityThunks.getAllTags()),
-  getImages: () => dispatch(getAllImages()),
+  getImages: () => dispatch(getAllImages())
 })
 
 ProjectView = setHeaderView(ProjectView, false)
 ProjectView = cssModules(ProjectView, styles)
-export default connect(mapState, mapDispatch)(ProjectView)
+export default connect(
+  mapState,
+  mapDispatch
+)(ProjectView)
