@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Heading from '../../../shared/layout/Heading'
 import Project from './components/Project'
-import withProjects from './withProjects'
+import withAllProjectsForCards from './withAllProjectsForCards'
 
 import styles from './portfolio.module.scss'
 
@@ -25,7 +25,7 @@ const Portfolio = (props) => {
             <Project key={project.id}
                 heading={project.title}
                 shortText={project.shortDesc}
-                tags={['test']}>
+                tags={project.tags}>
               {project.title}
             </Project>
             ))
@@ -44,4 +44,4 @@ Portfolio.defaultProps = {
   projects: []
 }
 
-export default withProjects(Portfolio)
+export default withAllProjectsForCards(Portfolio)

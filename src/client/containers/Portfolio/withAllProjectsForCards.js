@@ -8,11 +8,12 @@ const PROJECTS_QUERY = gql`
       id
       title
       shortDesc
+      tags
     }
   }
 `
 
-const withProjects = BaseComponent => () => (
+const withAllProjectsForCards = BaseComponent => () => (
   <Query query={PROJECTS_QUERY}>
     {({ loading, error, data }) => {
       if (loading) {
@@ -27,4 +28,4 @@ const withProjects = BaseComponent => () => (
   </Query>
 )
 
-export default withProjects
+export default withAllProjectsForCards
